@@ -30,7 +30,7 @@ public class TextureDrawer : MonoBehaviour
 
 	protected Color[] colors;
 
-	// Control script flow
+	// Control script flow 
 	protected Vector2Int drawBoxUpperLeft;
 	protected Vector2Int drawBoxResize;
 	protected bool isSaving = false;
