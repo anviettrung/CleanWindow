@@ -63,7 +63,7 @@ Material:
     - PixelSnap: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _CutoutThresh: 0.1
+    - _CutoutThresh: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1

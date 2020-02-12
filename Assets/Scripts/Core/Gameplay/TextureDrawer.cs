@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Collider2D))]
 public class TextureDrawer : MonoBehaviour
 {
-
 	#region DATA
 	[Header("General")]
 	public string affectedTextureName = "_MainTex";
 	public string maskTextureName = "_MaskTex";
+	public float savingTime = 0.02f;
 
 	[Header("Brush")]
 	public Texture2D brushTexture;
-	public float brushSize;
 
 	protected int brushWidth;  // Get from brush texture
 	protected int brushHeight; // Get from brush texture
 
-	protected Color[] brushPixels;
+	protected Color[] brushPixels; // convert brush texture into array of pixels
 
 	// Texture
 	protected Texture2D dynamicMaskTexture;
-	protected SpriteRenderer sr;
 	protected float spriteWidth;
 	protected float spriteHeight;
 
 	protected Texture2D affectedTexture;
 
 	protected Color[] colors;
+
+	// Tracking
+	protected SpriteRenderer sr;
+	protected Collider2D collider2d;
 
 	// Control script flow 
 	protected Vector2Int drawBoxUpperLeft;
@@ -46,9 +49,11 @@ public class TextureDrawer : MonoBehaviour
 
 	#endregion
 
+	#region UNITY_CALLBACK
 	private void Awake()
 	{
 		sr = GetComponent<SpriteRenderer>();
+		collider2d = GetComponent<Collider2D>();
 	}
 
 	private void Start()
@@ -56,47 +61,62 @@ public class TextureDrawer : MonoBehaviour
 		Init();
 	}
 
-	private void Update()
-	{
-		if (Input.GetMouseButton(0)) {
-			DrawAt(Input.mousePosition);
-		}
-	}
+	#endregion
 
+	#region INITIALIZATION
 	public void Init()
 	{
 		ResetMask();
-		brushWidth = brushTexture.width;
-		brushHeight = brushTexture.height;
+		InitBrush();
 		spriteWidth = sr.sprite.rect.width;
 		spriteHeight = sr.sprite.rect.height;
+	}
 
-		colors = new Color[brushHeight * brushWidth];
+	public void InitBrush()
+	{
+		brushWidth = brushTexture.width;
+		brushHeight = brushTexture.height;
+
 		brushPixels = new Color[brushHeight * brushWidth];
 		for (int y = 0; y < brushHeight; y++) {
 			for (int x = 0; x < brushWidth; x++) {
 				brushPixels[y * brushWidth + x] = brushTexture.GetPixel(x, y);
 			}
 		}
+
+		colors = new Color[brushHeight * brushWidth];
 	}
+	#endregion
 
 	#region FUNCTION
 	public void DrawAt(Vector2 targetPosition)
 	{
-		if (isSaving)
+		if (isSaving) {
 			return;
-
+		}
 
 		Ray ray = Camera.main.ScreenPointToRay(targetPosition);
-		RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+		RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-		if (hit.collider == null) return;
+		RaycastHit2D hit = new RaycastHit2D();
+		foreach (RaycastHit2D h in hits) {
+			if (h.collider == this.collider2d) {
+				hit = h;
+				break;
+			}
+		}
+
+		if (hit.collider == null) {
+			// EVENT CALL
+			onDrawFail.Invoke();
+			return;
+		}
 
 		// Convert hit point world space to texture UV
 		Vector2 localpos = hit.point - (Vector2)(sr.transform.position + sr.sprite.bounds.min);
-		Debug.Log("hit" + hit.point);
-		Debug.Log("bound" + sr.sprite.bounds.min);
 		Vector2 pixelUV = new Vector2(localpos.x / sr.sprite.bounds.size.x, localpos.y / sr.sprite.bounds.size.y);
+
+		// Recaculate affected region
 		int startX = (int)(pixelUV.x * dynamicMaskTexture.width - brushWidth * 0.5f);
 		int startY = (int)(pixelUV.y * dynamicMaskTexture.height - brushHeight * 0.5f);
 		int brWidthResize = brushWidth;
@@ -150,16 +170,20 @@ public class TextureDrawer : MonoBehaviour
 		//		isFillAnything = true;
 		//}
 
+		isSaving = true;
+
+		// EVENT CALL
+		onDrawStart.Invoke();
+
 		for (int i = 0; i < drawBoxResize.y; i++) {
 			for (int j = 0; j < drawBoxResize.x; j++) {
 				int vpcoord = i * drawBoxResize.x + j; // viewportcoord
 				int bxcoord = (i - deltaY) * brushWidth + (j - deltaX);
-				colors[vpcoord] = curTexViewport[vpcoord] - brushPixels[bxcoord];
+				colors[vpcoord].a = curTexViewport[vpcoord].a - brushPixels[bxcoord].a;
 			}
 		}
 
-		isSaving = true;
-		Invoke("SaveTexture", 0.01f);
+		SaveTexture();
 	}
 
 	//Sets the base material with a our canvas texture, then removes all our brushes
@@ -172,14 +196,20 @@ public class TextureDrawer : MonoBehaviour
 		);
 
 		dynamicMaskTexture.Apply();
+
+		// EVENT CALL
 		onDrawFinish.Invoke();
 
+		Invoke("SavingDone", savingTime);
+	}
+
+	void SavingDone()
+	{
 		isSaving = false;
 	}
 
 	public void ResetMask()
 	{
-		//affectedTexture = sr.material.GetTexture(affectedTextureName);
 		Texture2D blankTex = new Texture2D((int)sr.sprite.rect.width, (int)sr.sprite.rect.height, TextureFormat.Alpha8, true);
 		dynamicMaskTexture = Instantiate(blankTex) as Texture2D;
 

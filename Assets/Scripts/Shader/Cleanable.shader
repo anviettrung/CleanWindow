@@ -95,7 +95,8 @@
                     c.rgb = 0;
                     c.a = 0;
                 } else {
-                    c.rgb *= c.a;
+                    c.rgb *= w;
+                    c.a = w;
                 }
                 
                 return c;
