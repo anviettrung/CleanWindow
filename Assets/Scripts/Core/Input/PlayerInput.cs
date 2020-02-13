@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerInput : Singleton<PlayerInput>
 {
-	public TextureDrawer drawer;
+	public Window window;
 
-    // Update is called once per frame
     void Update()
     {
-        if (drawer != null && Input.GetMouseButton(0)) {
-			drawer.DrawAt(Input.mousePosition);
+        if (window != null && Input.GetMouseButton(0)) {
+			if (window.GetCurrentTextureDrawer() != null)
+				window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
 		}
 	}
 }

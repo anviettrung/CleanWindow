@@ -8,7 +8,7 @@ public class TextureDrawer : MonoBehaviour
 {
 	#region DATA
 	[Header("General")]
-	public string affectedTextureName = "_MainTex";
+	//public string affectedTextureName = "_MainTex";
 	public string maskTextureName = "_MaskTex";
 	public float savingTime = 0.02f;
 
@@ -20,12 +20,16 @@ public class TextureDrawer : MonoBehaviour
 
 	protected Color[] brushPixels; // convert brush texture into array of pixels
 
+	[Header("Pixel Counter")]
+	public int totalPixel;
+	public int whitePixel;
+	public int blackPixel;
+	public float cutoutThresh = 0.2f; // if alpha go under this value, pixel will be black
+
 	// Texture
 	protected Texture2D dynamicMaskTexture;
-	protected float spriteWidth;
-	protected float spriteHeight;
-
-	protected Texture2D affectedTexture;
+	protected float textureWidth;
+	protected float textureHeight;
 
 	protected Color[] colors;
 
@@ -37,7 +41,7 @@ public class TextureDrawer : MonoBehaviour
 	protected Vector2Int drawBoxUpperLeft;
 	protected Vector2Int drawBoxResize;
 	protected bool isSaving = false;
-	[HideInInspector]public bool isFillAnything;
+	[HideInInspector] public bool isFillAnything;
 
 	#endregion
 
@@ -66,10 +70,20 @@ public class TextureDrawer : MonoBehaviour
 	#region INITIALIZATION
 	public void Init()
 	{
-		ResetMask();
+		InitMask();
 		InitBrush();
-		spriteWidth = sr.sprite.rect.width;
-		spriteHeight = sr.sprite.rect.height;
+		textureWidth = sr.sprite.rect.width;
+		textureHeight = sr.sprite.rect.height;
+	}
+
+	public void InitMask()
+	{
+		Texture2D blankTex = new Texture2D((int)sr.sprite.rect.width, (int)sr.sprite.rect.height, TextureFormat.Alpha8, true);
+		dynamicMaskTexture = Instantiate(blankTex) as Texture2D;
+
+		sr.material.SetTexture(maskTextureName, dynamicMaskTexture);
+
+		UpdateCounter();
 	}
 
 	public void InitBrush()
@@ -161,15 +175,6 @@ public class TextureDrawer : MonoBehaviour
 			drawBoxResize.x, drawBoxResize.y
 		);
 
-
-
-		//isFillAnything = false;
-		//for (int i = 0; i < curTexViewport.Length; i++) {
-		//	colors[i] = curTexViewport[i] - brushPixels[i];
-		//	if (curTexViewport[i].a < 1 && brushPixels[i].a > 0)
-		//		isFillAnything = true;
-		//}
-
 		isSaving = true;
 
 		// EVENT CALL
@@ -197,6 +202,8 @@ public class TextureDrawer : MonoBehaviour
 
 		dynamicMaskTexture.Apply();
 
+		UpdateCounter();
+
 		// EVENT CALL
 		onDrawFinish.Invoke();
 
@@ -208,12 +215,20 @@ public class TextureDrawer : MonoBehaviour
 		isSaving = false;
 	}
 
-	public void ResetMask()
+	void UpdateCounter()
 	{
-		Texture2D blankTex = new Texture2D((int)sr.sprite.rect.width, (int)sr.sprite.rect.height, TextureFormat.Alpha8, true);
-		dynamicMaskTexture = Instantiate(blankTex) as Texture2D;
+		Color[] texmap = dynamicMaskTexture.GetPixels();
+		totalPixel = texmap.Length;
+		blackPixel = 0;
+		for (int i = 0; i < totalPixel; i++)
+			if (texmap[i].a < cutoutThresh)
+				blackPixel++;
+		whitePixel = totalPixel - blackPixel;
+	}
 
-		sr.material.SetTexture(maskTextureName, dynamicMaskTexture);
+	public void SetMaskTexture(Texture2D tex)
+	{
+		sr.material.SetTexture(maskTextureName, tex);
 	}
 
 	#endregion
