@@ -10,11 +10,16 @@ public class CameraFitArea : MonoBehaviour
 
 	void Start()
 	{
+		Align();
+	}
+
+	public void Align()
+	{
 		if (isVerticalFit) {
 			verticalFit();
 		} else if (isHorizontalFit) {
 			horizontalFit();
-		} 
+		}
 
 		AlignVerticalMiddle();
 	}
@@ -22,14 +27,15 @@ public class CameraFitArea : MonoBehaviour
 	// Top and bottom edges of the area touch the camera edges
 	void verticalFit()
 	{
-		Camera.main.orthographicSize = rink.bounds.size.y / 2;
+		Camera.main.orthographicSize = rink.bounds.size.y * 0.5f;
 
 	}
 
 	// Left and right edges of the area touch the camera edges
 	void horizontalFit()
 	{
-		Camera.main.orthographicSize = rink.bounds.size.x * Screen.height / Screen.width * 0.5f;
+		Debug.Log(Screen.height + " " + Screen.width);
+		Camera.main.orthographicSize = ((float)rink.bounds.size.x * 0.5f) * ((float)Screen.height / (float)Screen.width);
 	}
 
 	void AlignLeft()

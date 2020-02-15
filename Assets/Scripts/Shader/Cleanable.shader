@@ -95,8 +95,12 @@
                     c.rgb = 0;
                     c.a = 0;
                 } else {
-                    c.rgb *= w;
-                    c.a = w;
+                    if (w < c.a) {
+                        c.rgb *= w;
+                        c.a = w;
+                    } else {
+                        c.rgb *= c.a;
+                    }
                 }
                 
                 return c;
