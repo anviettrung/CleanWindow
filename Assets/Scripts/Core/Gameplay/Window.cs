@@ -47,8 +47,18 @@ public class Window : MonoBehaviour
 		if (data == null) return;
 
 		srMainPicture.sprite = data.Picture;
+		srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
+		tdDirty.Init();
+		tdWet.Init();
+
+		state = State.DIRTY;
 
 		UpdateUI();
+	}
+
+	public void Reset()
+	{
+		Init();
 	}
 
 	protected void UpdateUI()
@@ -95,8 +105,12 @@ public class Window : MonoBehaviour
 				state = State.COMPLETE;
 				break;
 			case State.COMPLETE:
-				if (isLoop)
+				if (isLoop) {
 					state = State.DIRTY;
+				} else {
+					PlayEndGameAnimation();
+				}
+
 				break;
 		}
 	}
@@ -110,6 +124,14 @@ public class Window : MonoBehaviour
 		if (drawer.totalPixel == 0) return 0;
 
 		return ((float)drawer.blackPixel / (float)drawer.totalPixel);
+	}
+
+	public void PlayEndGameAnimation()
+	{
+		PlayerInput.Instance.LockInput();
+		srWindow.sprite = GameManager.Instance.GeneralResources.OpenWindowSprite;
+		// Congrat
+		UIManager.Instance.ShowEndgameUI();
 	}
 
 }

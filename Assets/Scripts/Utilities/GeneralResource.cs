@@ -6,4 +6,6 @@ using UnityEngine;
 public class GeneralResource : ScriptableObject
 {
 	public Texture2D TransparentPixel;
+	public Sprite CloseWindowSprite;
+	public Sprite OpenWindowSprite;
 }

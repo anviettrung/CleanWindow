@@ -18,6 +18,16 @@ public class GameManager : Singleton<GameManager>
 		// Open level
 	}
 
+	public void StartLevel()
+	{
+		PlayerInput.Instance.UnlockInput();
+	}
+
+	public void ResetLevel()
+	{
+		//PlayerInput.Instance.LockInput();
+	}
+
 	private void OnApplicationQuit()
 	{
 		// Save game

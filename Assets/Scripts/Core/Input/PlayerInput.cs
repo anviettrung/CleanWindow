@@ -5,12 +5,25 @@ using UnityEngine;
 public class PlayerInput : Singleton<PlayerInput>
 {
 	public Window window;
+	public bool lockInput = true;
 
     void Update()
     {
-        if (window != null && Input.GetMouseButton(0)) {
-			if (window.GetCurrentTextureDrawer() != null)
-				window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
+		if (lockInput == false) {
+			if (window != null && Input.GetMouseButton(0)) {
+				if (window.GetCurrentTextureDrawer() != null)
+					window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
+			}
 		}
+	}
+
+	public void LockInput()
+	{
+		lockInput = true;
+	}
+
+	public void UnlockInput()
+	{
+		lockInput = false;
 	}
 }

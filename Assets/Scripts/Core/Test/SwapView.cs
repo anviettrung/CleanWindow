@@ -16,6 +16,7 @@ public class SwapView : MonoBehaviour
 			track = 0;
 
 		fitter.rink = rinks[track];
-		fitter.Align();
+		fitter.FlexibleAlign();
 	}
+
 }

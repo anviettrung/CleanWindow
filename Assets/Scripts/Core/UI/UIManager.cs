@@ -20,6 +20,16 @@ public class UIManager : Singleton<UIManager>
 	public Text labelLevelName;
 	public Slider progressBar;
 
+	[Header("Bot UI elements")]
+	public Button startButton;
+
+	[Header("Shop UI elements")]
+	public GameObject shopButton;
+
+	[Header("Navigator button")]
+	public Button nextButton;
+	public Button watchAdsButton;
+
 	#endregion
 
 	#region FUNCTION
@@ -33,6 +43,35 @@ public class UIManager : Singleton<UIManager>
 	{
 		v = Mathf.Clamp01(v);
 		progressBar.value = v;
+	}
+
+	public void SetActiveStartButton(bool s)
+	{
+		startButton.gameObject.SetActive(s);
+	}
+
+	public void ShowShopButton()
+	{
+		shopButton.SetActive(true);
+	}
+
+	public void HideShopButton()
+	{
+		shopButton.SetActive(false);
+	}
+
+	public void ShowEndgameUI()
+	{
+		ShowShopButton();
+		nextButton.gameObject.SetActive(true);
+		watchAdsButton.gameObject.SetActive(true);
+	}
+
+	public void HideEndgameUI()
+	{
+		HideShopButton();
+		nextButton.gameObject.SetActive(false);
+		watchAdsButton.gameObject.SetActive(false);
 	}
 
 	#endregion

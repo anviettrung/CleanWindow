@@ -18,7 +18,7 @@ public class CameraFitAreaEditor : Editor
 		base.OnInspectorGUI();
 
 		if (GUILayout.Button("Align")) {
-			mTarget.Align();
+			mTarget.ForceAlign();
 		}
 	}
 }
