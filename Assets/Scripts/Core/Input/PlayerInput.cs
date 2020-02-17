@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class PlayerInput : Singleton<PlayerInput>
 {
+	#region DATA
 	public Window window;
-	public bool lockInput = true;
+	public bool IsLockInput {
+		get {
+			return lockChain.Count > 0;
+		}
+	}
+	protected HashSet<string> lockChain;
 
-    void Update()
+	#endregion
+
+	#region UNITY_CALLBACK
+	private void Awake()
+	{
+		lockChain = new HashSet<string>();
+	}
+
+	void Update()
     {
-		if (lockInput == false) {
+		if (IsLockInput == false) {
 			if (window != null && Input.GetMouseButton(0)) {
 				if (window.GetCurrentTextureDrawer() != null)
 					window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
@@ -17,13 +31,19 @@ public class PlayerInput : Singleton<PlayerInput>
 		}
 	}
 
-	public void LockInput()
+	#endregion
+
+	#region FUNCTION
+	public void LockInput(string key)
 	{
-		lockInput = true;
+		if (lockChain.Contains(key) == false)
+			lockChain.Add(key);
 	}
 
-	public void UnlockInput()
+	public void UnlockInput(string key)
 	{
-		lockInput = false;
+		if (lockChain.Contains(key))
+			lockChain.Remove(key);
 	}
+	#endregion
 }

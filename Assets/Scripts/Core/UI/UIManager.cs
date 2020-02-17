@@ -7,8 +7,14 @@ public class UIManager : Singleton<UIManager>
 {
 	#region REFERENCE
 
-	[Header("Main layout")]
+	[Header("All layout elements")]
 	public GameObject layoutTopUI;
+	public GameObject layoutProgress;
+	public GameObject layoutShopButton;
+	public GameObject layoutLevelEnd;
+	public GameObject layoutWindowShop;
+	public GameObject layoutToolShop;
+	public GameObject layoutSettingPanel;
 
 	[Header("Top UI elements")]
 	public GameObject panelMoney;
@@ -24,7 +30,10 @@ public class UIManager : Singleton<UIManager>
 	public Button startButton;
 
 	[Header("Shop UI elements")]
-	public GameObject shopButton;
+	public UIWindowShop windowShop;
+
+	[Header("Setting elements")]
+
 
 	[Header("Navigator button")]
 	public Button nextButton;
@@ -45,33 +54,61 @@ public class UIManager : Singleton<UIManager>
 		progressBar.value = v;
 	}
 
-	public void SetActiveStartButton(bool s)
+	#endregion
+
+	#region SHOW/HIDE
+	public void ShowAll(bool s)
 	{
+		layoutTopUI.SetActive(s);
+		layoutProgress.SetActive(s);
+		layoutShopButton.SetActive(s);
+		layoutLevelEnd.SetActive(s);
+		layoutWindowShop.SetActive(s);
+		layoutToolShop.SetActive(s);
+		layoutSettingPanel.SetActive(s);
 		startButton.gameObject.SetActive(s);
 	}
 
-	public void ShowShopButton()
+	public void ShowWindowShop(bool s)
 	{
-		shopButton.SetActive(true);
+		layoutWindowShop.SetActive(s);
+
+		if (s == true) {
+			windowShop.UpdateUI();
+		}
 	}
 
-	public void HideShopButton()
+	#endregion
+
+	#region LAYOUT MANAGER
+	[System.Serializable]
+	public class UILayoutInfo
 	{
-		shopButton.SetActive(false);
+		public string layoutName;
+		public GameObject[] elements;
 	}
 
-	public void ShowEndgameUI()
+	[Header("UI Layouts")]
+	public List<UILayoutInfo> layouts;
+
+	public UILayoutInfo GetLayout(string name)
 	{
-		ShowShopButton();
-		nextButton.gameObject.SetActive(true);
-		watchAdsButton.gameObject.SetActive(true);
+		foreach (UILayoutInfo layout in layouts)
+			if (layout.layoutName == name)
+				return layout;
+
+		return null;
 	}
 
-	public void HideEndgameUI()
+	public void CallLayout(string name)
 	{
-		HideShopButton();
-		nextButton.gameObject.SetActive(false);
-		watchAdsButton.gameObject.SetActive(false);
+		UILayoutInfo layoutInf = GetLayout(name);
+		if (layoutInf == null) return;
+
+		ShowAll(false);
+		for (int i = 0; i < layoutInf.elements.Length; i++) {
+			layoutInf.elements[i].SetActive(true);
+		}
 	}
 
 	#endregion

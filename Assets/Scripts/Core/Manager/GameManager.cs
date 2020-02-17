@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-	[SerializeField] private GeneralResource generalResources;
+	#region DATA
+	[Header("Resources")]
+	[SerializeField] private GeneralResource generalResources = null;
 	public GeneralResource GeneralResources { get { return generalResources; } }
 
+	#endregion
+
+	#region UNITY_CALLBACK
 	protected void Start()
 	{
 		// Load game data
-
+		LevelManager.Instance.Load();
 		// Initialization
 
 		// Game Intro
 
 		// Open level
-	}
-
-	public void StartLevel()
-	{
-		PlayerInput.Instance.UnlockInput();
-	}
-
-	public void ResetLevel()
-	{
-		//PlayerInput.Instance.LockInput();
+		LevelManager.Instance.OpenLastestLevel();
 	}
 
 	private void OnApplicationQuit()
 	{
 		// Save game
+		LevelManager.Instance.Save();
 	}
+	#endregion
+
+	#region FUNCTION
+
+	#endregion
 }

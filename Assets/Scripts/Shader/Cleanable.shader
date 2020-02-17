@@ -4,6 +4,7 @@
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _MaskTex ("Mask Texture (A)", 2D) = "white" {}
+        _MaskColor ("Mask Color", Color) = (1,1,1,1)
         _Color ("Tint", Color) = (1,1,1,1)
         _CutoutThresh("Cutout Threshold", Range(0.0, 1.0)) = 0.2
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
@@ -65,9 +66,9 @@
             }
 
             sampler2D _MainTex;
-            sampler2D _AlphaTex;
             sampler2D _MaskTex;
             float4 _MaskTex_ST;
+            fixed4 _MaskColor;
             
             float _CutoutThresh;
             
@@ -88,8 +89,10 @@
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
+                fixed4 mainCol = SampleSpriteTexture (IN.texcoord) * IN.color;
                 float w = tex2D(_MaskTex, IN.texcoord).a;
+                
+                fixed4 c = lerp(_MaskColor, mainCol, mainCol.a);
 
                 if (w < _CutoutThresh) {
                     c.rgb = 0;
