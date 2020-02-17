@@ -6,11 +6,13 @@ using UnityEngine;
 public class WindowData : ScriptableObject
 {
 	// Data
+	[SerializeField] protected string keyName;
 	[SerializeField] protected string windowName;
 	[SerializeField] protected Sprite picture;
 	[SerializeField] protected Color mainColor;
 
 	// Access
+	public string KeyName { get { return keyName; } }
 	public string WindowName { get { return windowName;  } }
 	public Sprite Picture { get { return picture;  } }
 	public Color MainColor { get { return mainColor;  } }

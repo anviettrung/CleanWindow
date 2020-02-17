@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e9ef2b6595544c6aafed07758f1ac44, type: 3}
-  m_Name: Rome
+  m_Name: Paris
   m_EditorClassIdentifier: 
-  windowName: Rome
-  picture: {fileID: 0}
+  keyName: paris
+  windowName: Paris
+  picture: {fileID: 21300000, guid: 141411c9e54b942a4a41a89a0154a27a, type: 3}
   mainColor: {r: 0, g: 0, b: 0, a: 0}
