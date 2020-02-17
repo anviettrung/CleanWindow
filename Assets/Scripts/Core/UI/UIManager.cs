@@ -9,6 +9,10 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Main layout")]
 	public GameObject layoutTopUI;
+	public GameObject layoutShopButton;
+	public GameObject layoutLevelEnd;
+	public GameObject layoutWindowShop;
+	public GameObject layoutToolShop;
 
 	[Header("Top UI elements")]
 	public GameObject panelMoney;
@@ -24,7 +28,6 @@ public class UIManager : Singleton<UIManager>
 	public Button startButton;
 
 	[Header("Shop UI elements")]
-	public GameObject shopButton;
 
 	[Header("Navigator button")]
 	public Button nextButton;
@@ -45,33 +48,37 @@ public class UIManager : Singleton<UIManager>
 		progressBar.value = v;
 	}
 
-	public void SetActiveStartButton(bool s)
+	#endregion
+
+	#region SHOW/HIDE
+	public void ShowAll(bool s)
+	{
+		layoutTopUI.SetActive(s);
+		layoutShopButton.SetActive(s);
+		layoutLevelEnd.SetActive(s);
+		layoutWindowShop.SetActive(s);
+		layoutToolShop.SetActive(s);
+	}
+
+	public void ShowTopUI(bool s)
+	{
+		layoutTopUI.SetActive(s);
+	}
+
+	public void ShowShopButton(bool s)
+	{
+		layoutShopButton.SetActive(s);
+	}
+
+	public void ShowEndgameUI(bool s)
+	{
+		ShowShopButton(s);
+		layoutLevelEnd.SetActive(s);
+	}
+
+	public void ShowStartButton(bool s)
 	{
 		startButton.gameObject.SetActive(s);
-	}
-
-	public void ShowShopButton()
-	{
-		shopButton.SetActive(true);
-	}
-
-	public void HideShopButton()
-	{
-		shopButton.SetActive(false);
-	}
-
-	public void ShowEndgameUI()
-	{
-		ShowShopButton();
-		nextButton.gameObject.SetActive(true);
-		watchAdsButton.gameObject.SetActive(true);
-	}
-
-	public void HideEndgameUI()
-	{
-		HideShopButton();
-		nextButton.gameObject.SetActive(false);
-		watchAdsButton.gameObject.SetActive(false);
 	}
 
 	#endregion

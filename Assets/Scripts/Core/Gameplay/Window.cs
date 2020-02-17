@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Window : MonoBehaviour
 {
+	#region DATA
 	[Header("Data")]
 	[SerializeField] protected WindowData data;
 	public WindowData Data {
@@ -37,11 +39,37 @@ public class Window : MonoBehaviour
 		COMPLETE
 	}
 
+	#endregion
+
+	#region EVENT
+	[Header("Events")]
+	public UnityEvent onComplete = new UnityEvent();
+
+	#endregion
+
+	#region UNITY_CALLBACK
 	private void Start()
 	{
 		Init();
 	}
 
+	private void Update()
+	{
+		float progress = GetDrawerProcess(); // get current progress
+		if (progress > targetProgress) {
+			TextureDrawer drawer = GetCurrentTextureDrawer();
+			if (drawer != null)
+				drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
+			NextState(false);
+			progress = GetDrawerProcess(); // get new progress
+		}
+
+		UIManager.Instance.SetProgressBar(progress);
+	}
+
+	#endregion
+
+	#region INITIALIZATION
 	protected void Init()
 	{
 		if (data == null) return;
@@ -61,26 +89,46 @@ public class Window : MonoBehaviour
 		Init();
 	}
 
+	#endregion
+
+	#region FUNCTION
+	public void NextState(bool isLoop)
+	{
+		switch (state) {
+			case State.DIRTY:
+				state = State.WET;
+				break;
+			case State.WET:
+				state = State.COMPLETE;
+				break;
+			case State.COMPLETE:
+				LevelManager.Instance.LevelCompleted(data.KeyName);
+				if (isLoop) {
+					state = State.DIRTY;
+				} else {
+					PlayEndGameAnimation();
+				}
+
+				break;
+		}
+	}
+
 	protected void UpdateUI()
 	{
 		UIManager.Instance.SetLabelLevelName(data.WindowName);
 		UIManager.Instance.SetProgressBar(GetDrawerProcess());
 	}
 
-	private void Update()
+	public void PlayEndGameAnimation()
 	{
-		float progress = GetDrawerProcess(); // get current progress
-		if (progress > targetProgress) {
-			TextureDrawer drawer = GetCurrentTextureDrawer();
-			if (drawer != null)
-				drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
-			NextState(false);
-			progress = GetDrawerProcess(); // get new progress
-		}
-
-		UIManager.Instance.SetProgressBar(progress);
+		PlayerInput.Instance.LockInput();
+		srWindow.sprite = GameManager.Instance.GeneralResources.OpenWindowSprite;
+		// Congrat
+		UIManager.Instance.ShowEndgameUI(true);
 	}
+	#endregion
 
+	#region GET/SET
 	public TextureDrawer GetCurrentTextureDrawer()
 	{
 		switch (state) {
@@ -95,26 +143,6 @@ public class Window : MonoBehaviour
 		return null;
 	}
 
-	public void NextState(bool isLoop)
-	{
-		switch (state) {
-			case State.DIRTY:
-				state = State.WET;
-				break;
-			case State.WET:
-				state = State.COMPLETE;
-				break;
-			case State.COMPLETE:
-				if (isLoop) {
-					state = State.DIRTY;
-				} else {
-					PlayEndGameAnimation();
-				}
-
-				break;
-		}
-	}
-
 	public float GetDrawerProcess()
 	{
 		if (state == State.COMPLETE) return 1;
@@ -126,12 +154,5 @@ public class Window : MonoBehaviour
 		return ((float)drawer.blackPixel / (float)drawer.totalPixel);
 	}
 
-	public void PlayEndGameAnimation()
-	{
-		PlayerInput.Instance.LockInput();
-		srWindow.sprite = GameManager.Instance.GeneralResources.OpenWindowSprite;
-		// Congrat
-		UIManager.Instance.ShowEndgameUI();
-	}
-
+	#endregion
 }

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerInput : Singleton<PlayerInput>
 {
+	#region DATA
 	public Window window;
 	public bool lockInput = true;
 
-    void Update()
+	#endregion
+
+	#region UNITY_CALLBACK
+	void Update()
     {
 		if (lockInput == false) {
 			if (window != null && Input.GetMouseButton(0)) {
@@ -17,6 +21,9 @@ public class PlayerInput : Singleton<PlayerInput>
 		}
 	}
 
+	#endregion
+
+	#region FUNCTION
 	public void LockInput()
 	{
 		lockInput = true;
@@ -26,4 +33,5 @@ public class PlayerInput : Singleton<PlayerInput>
 	{
 		lockInput = false;
 	}
+	#endregion
 }
