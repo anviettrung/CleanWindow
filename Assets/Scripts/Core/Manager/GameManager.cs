@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
 	#region UNITY_CALLBACK
 	protected void Start()
 	{
+		PlayerInput.Instance.LockInput("manager");
 		// Load game data
 		LevelManager.Instance.Load();
 		// Initialization
@@ -34,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 	#region FUNCTION
 	public void StartLevel()
 	{
-		PlayerInput.Instance.UnlockInput();
+		PlayerInput.Instance.UnlockInput("manager");
 	}
 
 	public void ResetLevel()

@@ -6,14 +6,24 @@ public class PlayerInput : Singleton<PlayerInput>
 {
 	#region DATA
 	public Window window;
-	public bool lockInput = true;
+	public bool IsLockInput {
+		get {
+			return lockChain.Count > 0;
+		}
+	}
+	protected HashSet<string> lockChain;
 
 	#endregion
 
 	#region UNITY_CALLBACK
+	private void Awake()
+	{
+		lockChain = new HashSet<string>();
+	}
+
 	void Update()
     {
-		if (lockInput == false) {
+		if (IsLockInput == false) {
 			if (window != null && Input.GetMouseButton(0)) {
 				if (window.GetCurrentTextureDrawer() != null)
 					window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
@@ -24,14 +34,15 @@ public class PlayerInput : Singleton<PlayerInput>
 	#endregion
 
 	#region FUNCTION
-	public void LockInput()
+	public void LockInput(string key)
 	{
-		lockInput = true;
+		if (lockChain.Contains(key) == false)
+			lockChain.Add(key);
 	}
 
-	public void UnlockInput()
+	public void UnlockInput(string key)
 	{
-		lockInput = false;
+		lockChain.Remove(key);
 	}
 	#endregion
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-//[RequireComponent(typeof(Collider2D))]
 public class TextureDrawer : MonoBehaviour
 {
 	#region DATA
@@ -34,7 +33,7 @@ public class TextureDrawer : MonoBehaviour
 	protected Color[] colors;
 
 	// Tracking
-	protected SpriteRenderer sr;
+	public SpriteRenderer sr;
 	protected Collider2D collider2d;
 
 	// Control script flow 
