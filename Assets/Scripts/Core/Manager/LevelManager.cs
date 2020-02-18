@@ -5,19 +5,28 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
 	#region DATA
+	[Header("Resources")]
 	public LevelsData levelsData;
+	[Header("Working data generated from resources")]
 	public List<Level> levels;
+
+	[Header("Prefab")]
+	public GameObject windowPrefab;
+
+	// tracking
+	protected Window currentWindow;
+
 	#endregion
 
 	#region UNITY_CALLBACK
 	public void Awake()
 	{
-		InitLevel();
+		Init();
 	}
 	#endregion
 
 	#region INITIALIZATION
-	public void InitLevel()
+	public void Init()
 	{
 		levels = new List<Level>();
 		for (int i = 0; i < levelsData.Windows.Length; i++) {
@@ -30,6 +39,29 @@ public class LevelManager : Singleton<LevelManager>
 	#endregion
 
 	#region FUNCTION
+	public void GenLevel(WindowData data)
+	{
+		if (currentWindow != null)
+			Destroy(currentWindow.gameObject);
+
+		GameObject clone = Instantiate(windowPrefab);
+		Window w = clone.GetComponent<Window>();
+
+		w.Data = data; // window will automatic re-init
+		PlayerInput.Instance.window = w;// set player input target to new window
+		currentWindow = w; // track
+	}
+
+	public void GenLevel(int x)
+	{
+		GenLevel(levels[x].data);
+	}
+
+	public void UnlockLevel(string levelKeyName)
+	{
+
+	}
+
 	public void LevelCompleted(string levelKeyName)
 	{
 		for (int i = 0; i < levels.Count; i++)

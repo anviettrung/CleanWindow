@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
 	#region DATA
-	[SerializeField] private GeneralResource generalResources;
+	[Header("Resources")]
+	[SerializeField] private GeneralResource generalResources = null;
 	public GeneralResource GeneralResources { get { return generalResources; } }
+
 	#endregion
 
 	#region UNITY_CALLBACK
@@ -23,6 +25,7 @@ public class GameManager : Singleton<GameManager>
 		// Game Intro
 
 		// Open level
+		LevelManager.Instance.GenLevel(0);
 	}
 
 	private void OnApplicationQuit()
@@ -40,6 +43,7 @@ public class GameManager : Singleton<GameManager>
 
 	public void ResetLevel()
 	{
+		LevelManager.Instance.GenLevel(0);
 		//PlayerInput.Instance.LockInput();
 	}
 	#endregion
