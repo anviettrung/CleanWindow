@@ -28,6 +28,7 @@ public class UIManager : Singleton<UIManager>
 	public Button startButton;
 
 	[Header("Shop UI elements")]
+	public UIWindowShop windowShop;
 
 	[Header("Navigator button")]
 	public Button nextButton;
@@ -79,6 +80,15 @@ public class UIManager : Singleton<UIManager>
 	public void ShowStartButton(bool s)
 	{
 		startButton.gameObject.SetActive(s);
+	}
+
+	public void ShowWindowShop(bool s)
+	{
+		layoutWindowShop.SetActive(s);
+
+		if (s == true) {
+			windowShop.UpdateUI();
+		}
 	}
 
 	#endregion

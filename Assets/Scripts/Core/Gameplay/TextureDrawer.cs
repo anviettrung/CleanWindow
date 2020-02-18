@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
+//[RequireComponent(typeof(Collider2D))]
 public class TextureDrawer : MonoBehaviour
 {
 	#region DATA
@@ -78,8 +78,8 @@ public class TextureDrawer : MonoBehaviour
 
 	public void InitMask()
 	{
-		Texture2D blankTex = new Texture2D((int)sr.sprite.rect.width, (int)sr.sprite.rect.height, TextureFormat.Alpha8, true);
-		dynamicMaskTexture = Instantiate(blankTex) as Texture2D;
+		//Texture2D blankTex = new Texture2D((int)sr.sprite.rect.width, (int)sr.sprite.rect.height, TextureFormat.Alpha8, true);
+		dynamicMaskTexture = Instantiate(sr.material.GetTexture(maskTextureName)) as Texture2D;
 
 		sr.material.SetTexture(maskTextureName, dynamicMaskTexture);
 

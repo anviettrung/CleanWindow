@@ -24,6 +24,8 @@ public class LevelManager : Singleton<LevelManager>
 			Level lvl = new Level(levelsData.Windows[i]);
 			levels.Add(lvl);
 		}
+
+		UIManager.Instance.windowShop.SetData(levels);
 	}
 	#endregion
 
