@@ -43,7 +43,6 @@ public class LevelManager : Singleton<LevelManager>
 	public void OpenLevel(int x)
 	{
 		UIManager.Instance.CallLayout("Main Menu");
-		PlayerInput.Instance.LockInput("WaitingStart");
 
 		WindowData data = levels[x].data;
 		lastestLevelIndex = x;
@@ -81,7 +80,6 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void PlayLevel()
 	{
-		PlayerInput.Instance.UnlockInput("WaitingStart");
 		UIManager.Instance.CallLayout("Playing");
 	}
 

@@ -42,7 +42,8 @@ public class PlayerInput : Singleton<PlayerInput>
 
 	public void UnlockInput(string key)
 	{
-		lockChain.Remove(key);
+		if (lockChain.Contains(key))
+			lockChain.Remove(key);
 	}
 	#endregion
 }

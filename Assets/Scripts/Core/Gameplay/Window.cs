@@ -36,7 +36,8 @@ public class Window : MonoBehaviour
 	{
 		DIRTY,
 		WET,
-		COMPLETE
+		COMPLETE,
+		NONE
 	}
 
 	#endregion
@@ -60,7 +61,7 @@ public class Window : MonoBehaviour
 			TextureDrawer drawer = GetCurrentTextureDrawer();
 			if (drawer != null)
 				drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
-			NextState(false);
+			NextState();
 			progress = GetDrawerProcess(); // get new progress
 		}
 
@@ -94,7 +95,7 @@ public class Window : MonoBehaviour
 	#endregion
 
 	#region FUNCTION
-	public void NextState(bool isLoop)
+	public void NextState()
 	{
 		switch (state) {
 			case State.DIRTY:
@@ -105,12 +106,10 @@ public class Window : MonoBehaviour
 				break;
 			case State.COMPLETE:
 				LevelManager.Instance.LevelCompleted(data.KeyName);
-				if (isLoop) {
-					state = State.DIRTY;
-				} else {
-					PlayEndGameAnimation();
-				}
-
+				PlayEndGameAnimation();
+				state = State.NONE;
+				break;
+			case State.NONE:
 				break;
 		}
 	}
@@ -138,19 +137,17 @@ public class Window : MonoBehaviour
 				return tdDirty;
 			case State.WET:
 				return tdWet;
-			case State.COMPLETE:
+			default:
 				return null;
 		}
-
-		return null;
 	}
 
 	public float GetDrawerProcess()
 	{
-		if (state == State.COMPLETE) return 1;
+		if (state == State.COMPLETE || state == State.NONE) return 1;
 
 		TextureDrawer drawer = GetCurrentTextureDrawer();
-		if (drawer == null) return -1;
+		if (drawer == null) return 0;
 		if (drawer.totalPixel == 0) return 0;
 
 		return ((float)drawer.blackPixel / (float)drawer.totalPixel);
