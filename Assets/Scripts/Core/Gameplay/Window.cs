@@ -76,7 +76,7 @@ public class Window : MonoBehaviour
 
 		srMainPicture.sprite = data.Picture;
 		srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
-		tdDirty.sr.material.SetColor("_MaskColor", data.MainColor);
+		tdDirty.sr.material.SetColor("_MaskColor", data.DirtyColor);
 
 		tdDirty.Init();
 		tdWet.Init();
@@ -126,7 +126,7 @@ public class Window : MonoBehaviour
 		//PlayerInput.Instance.LockInput("window");
 		srWindow.sprite = GameManager.Instance.GeneralResources.OpenWindowSprite;
 		// Congrat
-		UIManager.Instance.ShowEndgameUI(true);
+		UIManager.Instance.CallLayout("End Game");
 	}
 	#endregion
 

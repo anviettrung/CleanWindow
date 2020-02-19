@@ -9,6 +9,7 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Main layout")]
 	public GameObject layoutTopUI;
+	public GameObject layoutProgress;
 	public GameObject layoutShopButton;
 	public GameObject layoutLevelEnd;
 	public GameObject layoutWindowShop;
@@ -55,6 +56,7 @@ public class UIManager : Singleton<UIManager>
 	public void ShowAll(bool s)
 	{
 		layoutTopUI.SetActive(s);
+		layoutProgress.SetActive(s);
 		layoutShopButton.SetActive(s);
 		layoutLevelEnd.SetActive(s);
 		layoutWindowShop.SetActive(s);
@@ -88,6 +90,39 @@ public class UIManager : Singleton<UIManager>
 
 		if (s == true) {
 			windowShop.UpdateUI();
+		}
+	}
+
+	#endregion
+
+	#region LAYOUT MANAGER
+	[System.Serializable]
+	public class UILayoutInfo
+	{
+		public string layoutName;
+		public GameObject[] elements;
+	}
+
+	[Header("UI Layouts")]
+	public List<UILayoutInfo> layouts;
+
+	public UILayoutInfo GetLayout(string name)
+	{
+		foreach (UILayoutInfo layout in layouts)
+			if (layout.layoutName == name)
+				return layout;
+
+		return null;
+	}
+
+	public void CallLayout(string name)
+	{
+		UILayoutInfo layoutInf = GetLayout(name);
+		if (layoutInf == null) return;
+
+		ShowAll(false);
+		for (int i = 0; i < layoutInf.elements.Length; i++) {
+			layoutInf.elements[i].SetActive(true);
 		}
 	}
 

@@ -15,6 +15,7 @@ public class LevelManager : Singleton<LevelManager>
 
 	// tracking
 	protected Window currentWindow;
+	protected int lastestLevelIndex;
 
 	#endregion
 
@@ -38,23 +39,50 @@ public class LevelManager : Singleton<LevelManager>
 	}
 	#endregion
 
-	#region FUNCTION
-	public void GenLevel(WindowData data)
+	#region OPEN_LEVEL
+	public void OpenLevel(int x)
 	{
+		UIManager.Instance.CallLayout("Main Menu");
+		PlayerInput.Instance.LockInput("WaitingStart");
+
+		WindowData data = levels[x].data;
+		lastestLevelIndex = x;
+
 		if (currentWindow != null)
 			Destroy(currentWindow.gameObject);
 
-		GameObject clone = Instantiate(windowPrefab);
-		Window w = clone.GetComponent<Window>();
+		Window w = Instantiate(windowPrefab).GetComponent<Window>();
 
 		w.Data = data; // window will automatic re-init
 		PlayerInput.Instance.window = w;// set player input target to new window
 		currentWindow = w; // track
 	}
 
-	public void GenLevel(int x)
+	public void OpenLevel(WindowData data)
 	{
-		GenLevel(levels[x].data);
+		int x = GetLevelIndex(data);
+		if (x != -1)
+			OpenLevel(x);
+	}
+
+	public void OpenLastestLevel()
+	{
+		OpenLevel(lastestLevelIndex);
+	}
+
+	public void OpenNextLevel()
+	{
+		OpenLevel((lastestLevelIndex + 1) % levels.Count);
+	}
+
+	#endregion
+
+	#region FUNCTION
+
+	public void PlayLevel()
+	{
+		PlayerInput.Instance.UnlockInput("WaitingStart");
+		UIManager.Instance.CallLayout("Playing");
 	}
 
 	public void UnlockLevel(string levelKeyName)
@@ -71,6 +99,20 @@ public class LevelManager : Singleton<LevelManager>
 			}
 
 	}
+	#endregion
+
+	#region GET/SET
+	public int GetLevelIndex(WindowData data)
+	{
+		for (int i = 0; i < levels.Count; i++) {
+			if (levels[i].data.KeyName == data.KeyName)
+				return i;
+		}
+
+		return -1; // error 404
+	}
+
+
 	#endregion
 
 	#region SAVE/LOAD
