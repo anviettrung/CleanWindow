@@ -7,13 +7,14 @@ public class UIManager : Singleton<UIManager>
 {
 	#region REFERENCE
 
-	[Header("Main layout")]
+	[Header("All layout elements")]
 	public GameObject layoutTopUI;
 	public GameObject layoutProgress;
 	public GameObject layoutShopButton;
 	public GameObject layoutLevelEnd;
 	public GameObject layoutWindowShop;
 	public GameObject layoutToolShop;
+	public GameObject layoutSettingPanel;
 
 	[Header("Top UI elements")]
 	public GameObject panelMoney;
@@ -30,6 +31,9 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Shop UI elements")]
 	public UIWindowShop windowShop;
+
+	[Header("Setting elements")]
+
 
 	[Header("Navigator button")]
 	public Button nextButton;
@@ -61,26 +65,7 @@ public class UIManager : Singleton<UIManager>
 		layoutLevelEnd.SetActive(s);
 		layoutWindowShop.SetActive(s);
 		layoutToolShop.SetActive(s);
-	}
-
-	public void ShowTopUI(bool s)
-	{
-		layoutTopUI.SetActive(s);
-	}
-
-	public void ShowShopButton(bool s)
-	{
-		layoutShopButton.SetActive(s);
-	}
-
-	public void ShowEndgameUI(bool s)
-	{
-		ShowShopButton(s);
-		layoutLevelEnd.SetActive(s);
-	}
-
-	public void ShowStartButton(bool s)
-	{
+		layoutSettingPanel.SetActive(s);
 		startButton.gameObject.SetActive(s);
 	}
 
