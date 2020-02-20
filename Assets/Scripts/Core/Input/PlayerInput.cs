@@ -6,6 +6,8 @@ public class PlayerInput : Singleton<PlayerInput>
 {
 	#region DATA
 	public Window window;
+	public Tool tool;
+
 	public bool IsLockInput {
 		get {
 			return lockChain.Count > 0;
@@ -26,7 +28,9 @@ public class PlayerInput : Singleton<PlayerInput>
 		if (IsLockInput == false) {
 			if (window != null && Input.GetMouseButton(0)) {
 				if (window.GetCurrentTextureDrawer() != null)
-					window.GetCurrentTextureDrawer().DrawAt(Input.mousePosition);
+					window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
+
+				tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
 			}
 		}
 	}
