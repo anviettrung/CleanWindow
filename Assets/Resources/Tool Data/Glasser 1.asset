@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72e744e82935142aebaa90627845095e, type: 3}
-  m_Name: Cleaner 1
+  m_Name: Glasser 1
   m_EditorClassIdentifier: 
-  keyName: cleaner1
-  toolName: Blue cleaner
-  art: {fileID: 21300000, guid: 7335cfabf29214f2fb473e72ca6ac08d, type: 3}
+  keyName: glasser1
+  toolName: Red Glasser
+  art: {fileID: 21300000, guid: 7267cb11b0ee74192a5e19567fd1bea1, type: 3}

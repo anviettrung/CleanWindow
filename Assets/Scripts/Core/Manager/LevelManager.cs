@@ -42,8 +42,10 @@ public class LevelManager : Singleton<LevelManager>
 	#region OPEN_LEVEL
 	public void OpenLevel(int x)
 	{
+		// UI
 		UIManager.Instance.CallLayout("Main Menu");
 
+		// Instantiate
 		WindowData data = levels[x].data;
 		lastestLevelIndex = x;
 
@@ -52,8 +54,16 @@ public class LevelManager : Singleton<LevelManager>
 
 		Window w = Instantiate(windowPrefab).GetComponent<Window>();
 
+		// Setting
 		w.Data = data; // window will automatic re-init
 		PlayerInput.Instance.window = w;// set player input target to new window
+
+		// Setting events
+		w.onEnterStateDirty.AddListener(UsingGlasserTool);
+		w.onEnterStateWet.AddListener(DestroyGlasserTool);
+		w.onEnterStateWet.AddListener(UsingCleanerTool);
+		w.onEnterStateComplete.AddListener(DestroyCleanerTool);
+
 		currentWindow = w; // track
 	}
 
@@ -78,20 +88,45 @@ public class LevelManager : Singleton<LevelManager>
 
 	#region FUNCTION
 
+	protected void UsingCleanerTool()
+	{
+		ToolManager.Instance.cleaner.CreateTool();
+		PlayerInput.Instance.tool = ToolManager.Instance.cleaner.GetTool();
+	}
+
+	protected void DestroyCleanerTool()
+	{
+		if (ToolManager.Instance.cleaner.GetTool() != null)
+			Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
+	}
+
+	protected void UsingGlasserTool()
+	{
+		ToolManager.Instance.glasser.CreateTool();
+		PlayerInput.Instance.tool = ToolManager.Instance.glasser.GetTool();
+	}
+
+	protected void DestroyGlasserTool()
+	{
+		if (ToolManager.Instance.glasser.GetTool() != null)
+			Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
+	}
+
 	public void PlayLevel()
 	{
 		UIManager.Instance.CallLayout("Playing");
+		currentWindow.ChangeState(Window.State.DIRTY);
 	}
 
-	public void UnlockLevel(string levelKeyName)
+	public void UnlockLevel(string keyName)
 	{
 
 	}
 
-	public void LevelCompleted(string levelKeyName)
+	public void LevelCompleted(string keyName)
 	{
 		for (int i = 0; i < levels.Count; i++)
-			if (levels[i].data.KeyName == levelKeyName) {
+			if (levels[i].data.KeyName == keyName) {
 				levels[i].status = Level.Status.COMPLETE;
 				return;
 			}

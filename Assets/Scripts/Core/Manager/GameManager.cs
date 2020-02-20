@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void OnApplicationQuit()
 	{
+		UIManager.Instance.ShowAll(false);
 		// Save game
 		LevelManager.Instance.Save();
 	}

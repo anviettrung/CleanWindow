@@ -44,7 +44,9 @@ public class Window : MonoBehaviour
 
 	#region EVENT
 	[Header("Events")]
-	public UnityEvent onComplete = new UnityEvent();
+	public UnityEvent onEnterStateDirty = new UnityEvent();
+	public UnityEvent onEnterStateWet = new UnityEvent();
+	public UnityEvent onEnterStateComplete = new UnityEvent();
 
 	#endregion
 
@@ -95,20 +97,42 @@ public class Window : MonoBehaviour
 	#endregion
 
 	#region FUNCTION
+	public void ChangeState(Window.State s)
+	{
+		state = s;
+
+		switch (s) {
+			case State.DIRTY:
+				onEnterStateDirty.Invoke();
+				break;
+			case State.WET:
+				onEnterStateWet.Invoke();
+				break;
+			case State.COMPLETE:
+				onEnterStateComplete.Invoke();
+				break;
+		}
+	}
+
 	public void NextState()
 	{
 		switch (state) {
+
 			case State.DIRTY:
-				state = State.WET;
+				ChangeState(State.WET);
 				break;
+
 			case State.WET:
-				state = State.COMPLETE;
+				ChangeState(State.COMPLETE);
 				break;
+
 			case State.COMPLETE:
 				LevelManager.Instance.LevelCompleted(data.KeyName);
 				PlayEndGameAnimation();
-				state = State.NONE;
+
+				ChangeState(State.NONE);
 				break;
+
 			case State.NONE:
 				break;
 		}

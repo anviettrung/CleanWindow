@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b70c0ab9216144c6fb0bc5b899d5f202, type: 2}
-  targetProgress: 0.9
+  targetProgress: 0.95
   srMainPicture: {fileID: 7240903670052092304}
   srWet: {fileID: 7240903669983327965}
   srDirty: {fileID: 7240903670756791137}
@@ -579,6 +579,12 @@ MonoBehaviour:
   tdDirty: {fileID: 7240903670756791140}
   tdWet: {fileID: 7240903669983327936}
   state: 0
-  onComplete:
+  onEnterStateDirty:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterStateWet:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterStateComplete:
     m_PersistentCalls:
       m_Calls: []
