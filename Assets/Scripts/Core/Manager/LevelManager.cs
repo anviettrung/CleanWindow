@@ -120,29 +120,39 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void UnlockLevel(string keyName)
 	{
-
+		int x = GetLevelIndex(keyName);
+		levels[x].status = Level.Status.UNLOCK;
+		Save();
 	}
 
 	public void LevelCompleted(string keyName)
 	{
-		for (int i = 0; i < levels.Count; i++)
+		for (int i = 0; i < levels.Count; i++) {
 			if (levels[i].data.KeyName == keyName) {
 				levels[i].status = Level.Status.COMPLETE;
+
+				Save();
 				return;
 			}
+		}
 
 	}
 	#endregion
 
 	#region GET/SET
-	public int GetLevelIndex(WindowData data)
+	public int GetLevelIndex(string keyName)
 	{
 		for (int i = 0; i < levels.Count; i++) {
-			if (levels[i].data.KeyName == data.KeyName)
+			if (levels[i].data.KeyName == keyName)
 				return i;
 		}
 
 		return -1; // error 404
+	}
+
+	public int GetLevelIndex(WindowData data)
+	{
+		return GetLevelIndex(data.KeyName);
 	}
 
 

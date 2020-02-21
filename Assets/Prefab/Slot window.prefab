@@ -182,7 +182,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 237, y: 355.5}
+  m_SizeDelta: {x: 237, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &829457109328174677
 CanvasRenderer:
@@ -352,7 +352,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829457109410267620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 829457110582062538}
+        m_MethodName: UnlockLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &829457109410267626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +466,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829457109328174682}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 829457110582062538}
+        m_MethodName: PlayLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &829457110125976078
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +673,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829457110137541588}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 829457110582062538}
+        m_MethodName: PlayLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &829457110137541594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +871,7 @@ GameObject:
   - component: {fileID: 829457110582062539}
   - component: {fileID: 829457110582062538}
   m_Layer: 5
-  m_Name: Slot_ window (1)
+  m_Name: Slot window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,7 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc87803ff9e64e8d846255082b6855a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
+  levelData:
     data: {fileID: 0}
     status: 0
   completeButton: {fileID: 829457109738587386}

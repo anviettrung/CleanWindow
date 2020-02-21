@@ -19,6 +19,11 @@ public class UIWindowShop : MonoBehaviour
 		UpdateUI();
 	}
 
+	protected void Update()
+	{
+		UpdateUI();
+	}
+
 	#endregion
 
 	#region FUNCTION
@@ -32,7 +37,7 @@ public class UIWindowShop : MonoBehaviour
 	{
 		ResetItemData();
 		for (int i = 0, j = from; i < items.Count && j <= to; i++, j++) {
-			items[i].data = allData[j];
+			items[i].levelData = allData[j];
 		}
 	}
 
@@ -45,7 +50,7 @@ public class UIWindowShop : MonoBehaviour
 	protected void ResetItemData()
 	{
 		for (int i = 0; i < items.Count; i++)
-			items[i].data = null;
+			items[i].levelData = null;
 	}
 
 	public virtual void UpdateUI()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIWindowShopItem : MonoBehaviour
 {
 	#region DATA
-	public Level data;
+	public Level levelData;
 
 	[Header("All Button states")]
 	public Button completeButton;
@@ -29,9 +29,23 @@ public class UIWindowShopItem : MonoBehaviour
 	#endregion
 
 	#region FUNCTION
+	public void PlayLevel()
+	{
+		if (levelData != null)
+			LevelManager.Instance.OpenLevel(levelData.data);
+	}
+
+	public void UnlockLevel()
+	{
+		LevelManager.Instance.UnlockLevel(levelData.data.KeyName);
+	}
+
+	#endregion
+
+	#region SHOW/HIDE
 	public virtual void UpdateUI()
 	{
-		if (data == null) {
+		if (levelData == null) {
 			gameObject.SetActive(false);
 			return;
 		}
@@ -40,11 +54,11 @@ public class UIWindowShopItem : MonoBehaviour
 
 		HideAllButton();
 
-		switch (data.status) {
+		switch (levelData.status) {
 			case Level.Status.COMPLETE:
 				completeButton.gameObject.SetActive(true);
-				mainPic.sprite = data.data.Picture;
-				labelWindowName.text = data.data.WindowName;
+				mainPic.sprite = levelData.data.Picture;
+				labelWindowName.text = levelData.data.WindowName;
 				break;
 			case Level.Status.UNLOCK:
 				unlockButton.gameObject.SetActive(true);
@@ -63,6 +77,5 @@ public class UIWindowShopItem : MonoBehaviour
 		unlockButton.gameObject.SetActive(false);
 		lockButton.gameObject.SetActive(false);
 	}
-
 	#endregion
 }
