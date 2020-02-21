@@ -1320,6 +1320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343257062}
   - component: {fileID: 343257063}
+  - component: {fileID: 343257064}
   m_Layer: 5
   m_Name: 'Layout: Setting Panel'
   m_TagString: Untagged
@@ -1360,6 +1361,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockName: Setting
+--- !u!114 &343257064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343257061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdc349dd9d4e4c5dbaaaf977c5368a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &354075898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,7 +1853,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1773618789
+  m_SortingLayerID: 753932127
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d648f2a49fb841a69f7d2b5ad722966, type: 3}
@@ -2125,7 +2138,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1773618789
+  m_SortingLayerID: 753932127
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d648f2a49fb841a69f7d2b5ad722966, type: 3}
@@ -2874,7 +2887,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1773618789
+  m_SortingLayerID: 753932127
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a5cf7ab08846d49b0bb979be327603ed, type: 3}
@@ -3994,6 +4007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142809412}
+  - component: {fileID: 1142809413}
   m_Layer: 5
   m_Name: 'Layout: window shop'
   m_TagString: Untagged
@@ -4021,6 +4035,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1142809413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142809411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdc349dd9d4e4c5dbaaaf977c5368a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1196687712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5338,7 +5364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.101960786, g: 0.105882354, b: 0.105882354, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7618,6 +7644,7 @@ GameObject:
   - component: {fileID: 2074857121}
   - component: {fileID: 2074857120}
   - component: {fileID: 2074857124}
+  - component: {fileID: 2074857126}
   m_Layer: 5
   m_Name: Main UI
   m_TagString: Untagged
@@ -7757,6 +7784,23 @@ MonoBehaviour:
     - {fileID: 939782924}
     - {fileID: 354075898}
     - {fileID: 1611631983}
+--- !u!114 &2074857126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074857119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49018e6a1c9234ba99ee698cc2fc3b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cwPanels:
+  - {fileID: 1142809413}
+  - {fileID: 2107281718}
+  - {fileID: 343257064}
+  blackCover: {fileID: 1599201753}
 --- !u!1 &2091014607
 GameObject:
   m_ObjectHideFlags: 0
@@ -7802,6 +7846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107281717}
+  - component: {fileID: 2107281718}
   m_Layer: 5
   m_Name: 'Layout: Tool shop'
   m_TagString: Untagged
@@ -7829,6 +7874,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2107281718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107281716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdc349dd9d4e4c5dbaaaf977c5368a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6023809858833659293
 PrefabInstance:
   m_ObjectHideFlags: 0

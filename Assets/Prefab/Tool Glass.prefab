@@ -4728,7 +4728,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1899391335
+  m_SortingLayerID: -1991697951
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
@@ -4821,7 +4821,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1538085831
+  m_SortingLayerID: -2127847769
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7267cb11b0ee74192a5e19567fd1bea1, type: 3}
@@ -4846,7 +4846,7 @@ GameObject:
   - component: {fileID: 6284911791028538751}
   - component: {fileID: 7276951416469576734}
   m_Layer: 0
-  m_Name: Tool Glass(Clone)
+  m_Name: Tool Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
