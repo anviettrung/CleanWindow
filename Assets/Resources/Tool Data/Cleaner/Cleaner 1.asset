@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5933ab989d3449f4b1e5bf6a7f8d2c0, type: 3}
-  m_Name: Glasser list
+  m_Script: {fileID: 11500000, guid: 72e744e82935142aebaa90627845095e, type: 3}
+  m_Name: Cleaner 1
   m_EditorClassIdentifier: 
-  tools:
-  - {fileID: 11400000, guid: 130c182d2676e4c13ae7d7656de4aa77, type: 2}
+  keyName: cleaner1
+  toolName: Cleaner
+  art: {fileID: 21300000, guid: 2c73df529001945618e57224fdfd83c6, type: 3}
+  toolType: 0

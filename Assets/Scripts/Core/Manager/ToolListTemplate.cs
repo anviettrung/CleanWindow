@@ -15,7 +15,7 @@ public class ToolListTemplate : MonoBehaviour
 
 	// tracking
 	protected Tool currentTool;
-	protected int usingToolIndex;
+	public int usingToolIndex;
 
 	#endregion
 
@@ -34,8 +34,6 @@ public class ToolListTemplate : MonoBehaviour
 			ToolItem t = new ToolItem(toolsData.Tools[i]);
 			tools.Add(t);
 		}
-
-		//UIManager.Instance.windowShop.SetData(tools);
 	}
 	#endregion
 
@@ -61,11 +59,6 @@ public class ToolListTemplate : MonoBehaviour
 		CreateTool(usingToolIndex);
 	}
 
-	public Tool GetTool()
-	{
-		return currentTool;
-	}
-
 	public void UnlockLevel(string keyName)
 	{
 
@@ -84,6 +77,16 @@ public class ToolListTemplate : MonoBehaviour
 		return -1; // error 404
 	}
 
+	public Tool GetTool()
+	{
+		return currentTool;
+	}
+
+	public ToolItem GetToolItem()
+	{
+		return tools[usingToolIndex];
+	}
+
 
 	#endregion
 
@@ -91,7 +94,6 @@ public class ToolListTemplate : MonoBehaviour
 
 	public void Save()
 	{
-		Debug.Log("Save tool");
 		for (int i = 0; i < tools.Count; i++) {
 
 			PlayerPrefs.SetInt("tool_" + tools[i].data.KeyName, (int)tools[i].status);

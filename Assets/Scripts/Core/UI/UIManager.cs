@@ -31,6 +31,9 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Shop UI elements")]
 	public UIWindowShop windowShop;
+	public UIToolShop toolShop;
+
+	public Text labelWindowShopPageIndex;
 
 	[Header("Setting elements")]
 
@@ -69,13 +72,14 @@ public class UIManager : Singleton<UIManager>
 		startButton.gameObject.SetActive(s);
 	}
 
-	public void ShowWindowShop(bool s)
+	public void SelectTabCleanerTool()
 	{
-		layoutWindowShop.SetActive(s);
+		toolShop.SetData(ToolManager.Instance.cleaner.tools);
+	}
 
-		if (s == true) {
-			windowShop.UpdateUI();
-		}
+	public void SelectTabGlasserTool()
+	{
+		toolShop.SetData(ToolManager.Instance.glasser.tools);
 	}
 
 	#endregion

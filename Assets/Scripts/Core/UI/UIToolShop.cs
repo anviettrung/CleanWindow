@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIWindowShop : MonoBehaviour
+public class UIToolShop : MonoBehaviour
 {
 	#region DATA
-	public List<UIWindowShopItem> items;
-	protected List<Level> allData;
+	public List<UIToolShopItem> items;
+	protected List<ToolItem> allData;
 	#endregion
 
 	#region EVENT
@@ -27,7 +27,7 @@ public class UIWindowShop : MonoBehaviour
 	#endregion
 
 	#region FUNCTION
-	public virtual void SetData(List<Level> datas)
+	public virtual void SetData(List<ToolItem> datas)
 	{
 		allData = datas;
 		UpdateItemData();
@@ -37,7 +37,7 @@ public class UIWindowShop : MonoBehaviour
 	{
 		ResetItemData();
 		for (int i = 0, j = from; i < items.Count && j <= to; i++, j++) {
-			items[i].levelData = allData[j];
+			items[i].toolData = allData[j];
 		}
 	}
 
@@ -50,12 +50,12 @@ public class UIWindowShop : MonoBehaviour
 	protected void ResetItemData()
 	{
 		for (int i = 0; i < items.Count; i++)
-			items[i].levelData = null;
+			items[i].toolData = null;
 	}
 
 	public virtual void UpdateUI()
 	{
-		foreach (UIWindowShopItem item in items) {
+		foreach (UIToolShopItem item in items) {
 			item.UpdateUI();
 		}
 	}

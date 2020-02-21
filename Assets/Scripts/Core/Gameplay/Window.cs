@@ -40,6 +40,9 @@ public class Window : MonoBehaviour
 		NONE
 	}
 
+	// Tracking
+	protected int initBPixel;
+
 	#endregion
 
 	#region EVENT
@@ -104,9 +107,11 @@ public class Window : MonoBehaviour
 		switch (s) {
 			case State.DIRTY:
 				onEnterStateDirty.Invoke();
+				initBPixel = tdDirty.blackPixel;
 				break;
 			case State.WET:
 				onEnterStateWet.Invoke();
+				initBPixel = tdWet.blackPixel;
 				break;
 			case State.COMPLETE:
 				onEnterStateComplete.Invoke();
@@ -174,7 +179,7 @@ public class Window : MonoBehaviour
 		if (drawer == null) return 0;
 		if (drawer.totalPixel == 0) return 0;
 
-		return ((float)drawer.blackPixel / (float)drawer.totalPixel);
+		return (float)(drawer.blackPixel - initBPixel) / (float)(drawer.totalPixel - initBPixel);
 	}
 
 	#endregion

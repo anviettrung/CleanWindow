@@ -118,11 +118,17 @@ public class LevelManager : Singleton<LevelManager>
 		currentWindow.ChangeState(Window.State.DIRTY);
 	}
 
+	public void UnlockLevel(int x)
+	{
+		if (x != -1) {
+			levels[x].status = Level.Status.UNLOCK;
+			Save();
+		}
+	}
+
 	public void UnlockLevel(string keyName)
 	{
-		int x = GetLevelIndex(keyName);
-		levels[x].status = Level.Status.UNLOCK;
-		Save();
+		UnlockLevel(GetLevelIndex(keyName));
 	}
 
 	public void LevelCompleted(string keyName)
@@ -130,6 +136,10 @@ public class LevelManager : Singleton<LevelManager>
 		for (int i = 0; i < levels.Count; i++) {
 			if (levels[i].data.KeyName == keyName) {
 				levels[i].status = Level.Status.COMPLETE;
+
+				// Auto unlock next level
+				if (i + 1 < levels.Count)
+					UnlockLevel(i + 1);
 
 				Save();
 				return;
@@ -162,17 +172,17 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void Save()
 	{
-		Debug.Log("Save level");
 		for (int i = 0; i < levels.Count; i++) {
 
 			PlayerPrefs.SetInt("lvl_" + levels[i].data.KeyName, (int)levels[i].status);
 
 		}
+
+		PlayerPrefs.SetInt("lastest_lvl", lastestLevelIndex);
 	}
 
 	public void Load()
 	{
-		Debug.Log("Load level");
 		for (int i = 0; i < levels.Count; i++) {
 
 			string key = "lvl_" + levels[i].data.KeyName;
@@ -184,6 +194,9 @@ public class LevelManager : Singleton<LevelManager>
 			}
 
 		}
+
+		if (PlayerPrefs.HasKey("lastest_lvl"))
+			lastestLevelIndex = PlayerPrefs.GetInt("lastest_lvl");
 	}
 	#endregion
 }
