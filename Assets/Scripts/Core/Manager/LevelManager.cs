@@ -121,7 +121,7 @@ public class LevelManager : Singleton<LevelManager>
 	public void UnlockLevel(int x)
 	{
 		if (x != -1) {
-			levels[x].status = Level.Status.UNLOCK;
+			levels[x].ChangeStatus(Level.Status.UNLOCK);
 			Save();
 		}
 	}
@@ -135,7 +135,7 @@ public class LevelManager : Singleton<LevelManager>
 	{
 		for (int i = 0; i < levels.Count; i++) {
 			if (levels[i].data.KeyName == keyName) {
-				levels[i].status = Level.Status.COMPLETE;
+				levels[i].ChangeStatus(Level.Status.COMPLETE);
 
 				// Auto unlock next level
 				if (i + 1 < levels.Count)
@@ -216,5 +216,12 @@ public class Level
 	public Level(WindowData d)
 	{
 		data = d;
+	}
+
+	public void ChangeStatus(Level.Status s)
+	{
+		// Once status is complete, it couldn't back to other status
+		if (status != Status.COMPLETE)
+			status = s;
 	}
 }

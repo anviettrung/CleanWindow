@@ -19,16 +19,16 @@ public class GameManager : Singleton<GameManager>
 
 	protected void Start()
 	{
-		// Load game data
+		// Default setting
+		// Setting first time play
+		LevelManager.Instance.levels[0].ChangeStatus(Level.Status.UNLOCK); // Unlock first level
+		ToolManager.Instance.cleaner.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first cleaner tool
+		ToolManager.Instance.glasser.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first glasser tool
+																			   // Load game data
 		if (!PlayerPrefs.HasKey("Old user")) {
-			// Setting first time play
-			LevelManager.Instance.levels[0].status = Level.Status.UNLOCK; // Unlock first level
-			ToolManager.Instance.cleaner.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first cleaner tool
-			ToolManager.Instance.glasser.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first glasser tool
-
 			PlayerPrefs.SetInt("Old user", 1);
 		} else {
-			// Setting if played
+			// Setting if not first time play
 			LevelManager.Instance.Load();
 			ToolManager.Instance.Load();
 		}

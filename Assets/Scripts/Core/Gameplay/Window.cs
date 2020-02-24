@@ -152,7 +152,7 @@ public class Window : MonoBehaviour
 	public void PlayEndGameAnimation()
 	{
 		//PlayerInput.Instance.LockInput("window");
-		srWindow.sprite = GameManager.Instance.GeneralResources.OpenWindowSprite;
+		srWindow.GetComponent<Animator>().SetTrigger("Open");
 		// Congrat
 		UIManager.Instance.CallLayout("End Game");
 	}
