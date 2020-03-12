@@ -26,16 +26,21 @@ public class Window : MonoBehaviour
 	public SpriteRenderer srWet;
 	public SpriteRenderer srDirty;
 	public SpriteRenderer srWindow;
-	public SpriteRenderer srBackground;
 
 	[Header("Texture Drawer")]
 	public TextureDrawer tdDirty;
 	public TextureDrawer tdWet;
+
+	[Header("Explosion")]
+	public ExplodeExe expGlass;
+
+	[Header("State")]
 	public Window.State state;
 	public enum State
 	{
 		DIRTY,
 		WET,
+		BREAK_GLASS,
 		COMPLETE,
 		NONE
 	}
@@ -49,6 +54,7 @@ public class Window : MonoBehaviour
 	[Header("Events")]
 	public UnityEvent onEnterStateDirty = new UnityEvent();
 	public UnityEvent onEnterStateWet = new UnityEvent();
+	public UnityEvent onEnterStateBreakGlass = new UnityEvent();
 	public UnityEvent onEnterStateComplete = new UnityEvent();
 
 	#endregion
@@ -61,16 +67,23 @@ public class Window : MonoBehaviour
 
 	private void Update()
 	{
-		float progress = GetDrawerProcess(); // get current progress
-		if (progress > targetProgress) {
-			TextureDrawer drawer = GetCurrentTextureDrawer();
-			if (drawer != null)
-				drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
-			NextState();
-			progress = GetDrawerProcess(); // get new progress
-		}
+		if (state == State.DIRTY || state == State.WET) {
+			float progress = GetDrawerProcess(); // get current progress
+			if (progress > targetProgress) {
+				TextureDrawer drawer = GetCurrentTextureDrawer();
+				if (drawer != null)
+					drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
+				NextState();
+				progress = GetDrawerProcess(); // get new progress
+			}
 
-		UIManager.Instance.SetProgressBar(progress);
+			UIManager.Instance.SetProgressBar(progress);
+		} else if (state == State.BREAK_GLASS) {
+			if (Input.GetKeyDown(KeyCode.G)) {
+				expGlass.Action();
+				Invoke("NextState", 1);
+			}
+		}
 	}
 
 	#endregion
@@ -109,12 +122,23 @@ public class Window : MonoBehaviour
 				onEnterStateDirty.Invoke();
 				initBPixel = tdDirty.blackPixel;
 				break;
+
 			case State.WET:
 				onEnterStateWet.Invoke();
 				initBPixel = tdWet.blackPixel;
 				break;
+
+			case State.BREAK_GLASS:
+				onEnterStateBreakGlass.Invoke();
+				srDirty.gameObject.SetActive(false);
+				srWet.gameObject.SetActive(false);
+				break;
+
 			case State.COMPLETE:
 				onEnterStateComplete.Invoke();
+				LevelManager.Instance.LevelCompleted(data.KeyName);
+				PlayEndGameAnimation();
+
 				break;
 		}
 	}
@@ -128,13 +152,14 @@ public class Window : MonoBehaviour
 				break;
 
 			case State.WET:
+				ChangeState(State.BREAK_GLASS);
+				break;
+
+			case State.BREAK_GLASS:
 				ChangeState(State.COMPLETE);
 				break;
 
 			case State.COMPLETE:
-				LevelManager.Instance.LevelCompleted(data.KeyName);
-				PlayEndGameAnimation();
-
 				ChangeState(State.NONE);
 				break;
 

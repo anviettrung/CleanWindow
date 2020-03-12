@@ -60,7 +60,6 @@ public class WaterDrop : MonoBehaviour
 
 	public void Update()
 	{
-		Debug.Log(drops.Count);
 		for (int i = 0; i < drops.Count; i++) {
 			WaterDropData drop = drops[i];
 			drop.elapsedDropTime = Time.time - drop.startDropTime;

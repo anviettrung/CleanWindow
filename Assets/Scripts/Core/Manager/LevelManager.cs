@@ -62,7 +62,7 @@ public class LevelManager : Singleton<LevelManager>
 		w.onEnterStateDirty.AddListener(UsingGlasserTool);
 		w.onEnterStateWet.AddListener(DestroyGlasserTool);
 		w.onEnterStateWet.AddListener(UsingCleanerTool);
-		w.onEnterStateComplete.AddListener(DestroyCleanerTool);
+		w.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
 
 		currentWindow = w; // track
 	}
