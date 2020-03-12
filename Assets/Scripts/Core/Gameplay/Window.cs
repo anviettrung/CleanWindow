@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Cinemachine;
 
 public class Window : MonoBehaviour
 {
@@ -31,8 +32,12 @@ public class Window : MonoBehaviour
 	public TextureDrawer tdDirty;
 	public TextureDrawer tdWet;
 
-	[Header("Explosion")]
-	public ExplodeExe expGlass;
+	[Header("Break Glass Settings")]
+	public ExplodeExe glassExplodeExe;
+	public float glassFallDuration = 2.5f;
+	public float nextStateAfterBreakGlassTime = 1.0f;
+
+	protected Transform holderAfterBroken;
 
 	[Header("State")]
 	public Window.State state;
@@ -47,6 +52,8 @@ public class Window : MonoBehaviour
 
 	// Tracking
 	protected int initBPixel;
+
+	protected CinemachineImpulseSource impulseSource;
 
 	#endregion
 
@@ -63,6 +70,7 @@ public class Window : MonoBehaviour
 	private void Start()
 	{
 		Init();
+		impulseSource = FindObjectOfType<CinemachineImpulseSource>();
 	}
 
 	private void Update()
@@ -80,10 +88,29 @@ public class Window : MonoBehaviour
 			UIManager.Instance.SetProgressBar(progress);
 		} else if (state == State.BREAK_GLASS) {
 			if (Input.GetKeyDown(KeyCode.G)) {
-				expGlass.Action();
-				Invoke("NextState", 1);
+				holderAfterBroken = new GameObject(glassExplodeExe.name).transform;
+				glassExplodeExe.Action(holderAfterBroken);
+
+				StartCoroutine(CoroutineUtils.DelaySeconds(
+					() => holderAfterBroken.gameObject.SetActive(false), 
+					glassFallDuration)
+				);
+
+				StartCoroutine(CoroutineUtils.DelaySeconds(
+					NextState,
+					nextStateAfterBreakGlassTime)
+				);
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.Y))
+			impulseSource.GenerateImpulse();
+	}
+
+	private void OnDestroy()
+	{
+		if (holderAfterBroken != null)
+			Destroy(holderAfterBroken.gameObject);
 	}
 
 	#endregion

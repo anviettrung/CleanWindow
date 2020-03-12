@@ -771,20 +771,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b70c0ab9216144c6fb0bc5b899d5f202, type: 2}
-  targetProgress: 0.97
+  targetProgress: 0.96
   srMainPicture: {fileID: 7240903670052092304}
   srWet: {fileID: 7240903669983327965}
   srDirty: {fileID: 7240903670756791137}
   srWindow: {fileID: 7240903670479933847}
-  srBackground: {fileID: 7240903670052092304}
   tdDirty: {fileID: 7240903670756791140}
   tdWet: {fileID: 7240903669983327936}
-  expGlass: {fileID: 3665119128497082866}
+  glassExplodeExe: {fileID: 3665119128497082866}
+  glassFallDuration: 2.5
+  nextStateAfterBreakGlassTime: 1
   state: 0
   onEnterStateDirty:
     m_PersistentCalls:
       m_Calls: []
   onEnterStateWet:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterStateBreakGlass:
     m_PersistentCalls:
       m_Calls: []
   onEnterStateComplete:

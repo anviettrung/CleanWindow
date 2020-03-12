@@ -12,9 +12,9 @@ public class ExplodeExe : MonoBehaviour
 		_explodable = GetComponent<Explodable>();
 	}
 
-	public void Action()
+	public void Action(Transform holder = null)
 	{
-		_explodable.explode((new GameObject(gameObject.name)).transform);
+		_explodable.explode(holder);
 		ExplosionForce ef = FindObjectOfType<ExplosionForce>();
 		ef.doExplosion(transform.position);
 	}
