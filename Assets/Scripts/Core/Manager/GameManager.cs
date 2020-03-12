@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
 	#region UNITY_CALLBACK
 	protected void Awake()
 	{
+		
 	}
 
 	protected void Start()
@@ -55,7 +56,3 @@ public class GameManager : Singleton<GameManager>
 
 	#endregion
 }
-
-// Events
-public class StringEvent : UnityEvent<string> { }
-

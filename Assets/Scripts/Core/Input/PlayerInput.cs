@@ -30,8 +30,9 @@ public class PlayerInput : Singleton<PlayerInput>
 				if (window.GetCurrentTextureDrawer() != null)
 					window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
 
-				if (tool != null)
+				if (tool != null) {
 					tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
+				}
 			}
 		}
 	}

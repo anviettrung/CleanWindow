@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1797392868554477655
 Transform:
   m_ObjectHideFlags: 0
@@ -4845,6 +4845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6284911791028538751}
   - component: {fileID: 7276951416469576734}
+  - component: {fileID: 8654659335952931471}
   m_Layer: 0
   m_Name: Tool Glass
   m_TagString: Untagged
@@ -4882,3 +4883,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 130c182d2676e4c13ae7d7656de4aa77, type: 2}
   srMain: {fileID: 8833707124376685320}
+--- !u!114 &8654659335952931471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748551618143602468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3d18104bd814a9b98b062d1211bb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 3603314906086974533}

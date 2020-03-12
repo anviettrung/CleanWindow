@@ -179,6 +179,7 @@ MonoBehaviour:
   maskTextureName: _MaskTex
   savingTime: 0.02
   brushTexture: {fileID: 2800000, guid: 67f1bbc523be546349bcab377298ca9d, type: 3}
+  brushScale: 1
   totalPixel: 0
   whitePixel: 0
   blackPixel: 0
@@ -581,6 +582,7 @@ MonoBehaviour:
   maskTextureName: _MaskTex
   savingTime: 0.02
   brushTexture: {fileID: 2800000, guid: 67f1bbc523be546349bcab377298ca9d, type: 3}
+  brushScale: 0.75
   totalPixel: 0
   whitePixel: 0
   blackPixel: 0
@@ -632,6 +634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7240903671535195492}
   - component: {fileID: 7240903671535195493}
+  - component: {fileID: 35651304385629433}
   m_Layer: 0
   m_Name: Window
   m_TagString: Untagged
@@ -690,3 +693,27 @@ MonoBehaviour:
   onEnterStateComplete:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &35651304385629433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240903671535195494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02943a677607c49f192faca90d1f905e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7240903670756791140}
+  dropRangeX: 35
+  maxDrop: 15
+  durationMin: 1
+  durationMax: 3
+  speedMin: 50
+  speedMax: 100
+  brushScaleStartMin: 0.7
+  brushScaleStartMax: 0.5
+  brushScaleEndMin: 0.1
+  brushScaleEndMax: 0.4
+  drops: []

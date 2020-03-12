@@ -17,6 +17,8 @@ public class TextureDrawer : MonoBehaviour
 	protected int brushWidth;  // Get from brush texture
 	protected int brushHeight; // Get from brush texture
 
+	public float brushScale = 2;
+
 	protected Color[] brushPixels; // convert brush texture into array of pixels
 
 	[Header("Pixel Counter")]
@@ -27,6 +29,7 @@ public class TextureDrawer : MonoBehaviour
 
 	// Texture
 	protected Texture2D dynamicMaskTexture;
+
 	protected float textureWidth;
 	protected float textureHeight;
 
@@ -49,6 +52,8 @@ public class TextureDrawer : MonoBehaviour
 	public UnityEvent onDrawStart  = new UnityEvent();
 	public UnityEvent onDrawFinish = new UnityEvent();
 	public UnityEvent onDrawFail   = new UnityEvent();
+
+	public UnityVector2Event onDrawAtVector2 = new UnityVector2Event();
 
 	#endregion
 
@@ -97,16 +102,16 @@ public class TextureDrawer : MonoBehaviour
 			}
 		}
 
-		colors = new Color[brushHeight * brushWidth];
+		colors = dynamicMaskTexture.GetPixels();
 	}
 	#endregion
 
 	#region FUNCTION
-	public void DrawAt(Vector2 targetPosition)
+	public void DrawAt(Vector2 targetPosition, float bScale, bool invokeVec2Event = true)
 	{
-		if (isSaving) {
-			return;
-		}
+		//if (isSaving) {
+		//	return;
+		//}
 
 		Ray ray = Camera.main.ScreenPointToRay(targetPosition);
 		RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
@@ -129,11 +134,11 @@ public class TextureDrawer : MonoBehaviour
 		Vector2 localpos = hit.point - (Vector2)(sr.transform.position + sr.sprite.bounds.min);
 		Vector2 pixelUV = new Vector2(localpos.x / sr.sprite.bounds.size.x, localpos.y / sr.sprite.bounds.size.y);
 
-		// Recaculate affected region
-		int startX = (int)(pixelUV.x * dynamicMaskTexture.width - brushWidth * 0.5f);
-		int startY = (int)(pixelUV.y * dynamicMaskTexture.height - brushHeight * 0.5f);
-		int brWidthResize = brushWidth;
-		int brHeightResize = brushHeight;
+		// Recalculate affected region
+		int brWidthResize = (int)(brushWidth * bScale);
+		int brHeightResize = (int)(brushHeight * bScale);
+		int startX = (int)(pixelUV.x * dynamicMaskTexture.width - brWidthResize * 0.5f);
+		int startY = (int)(pixelUV.y * dynamicMaskTexture.height - brHeightResize * 0.5f);
 		int deltaX = 0;
 		int deltaY = 0;
 
@@ -169,39 +174,27 @@ public class TextureDrawer : MonoBehaviour
 
 
 
-		Color[] curTexViewport = dynamicMaskTexture.GetPixels(
-			drawBoxUpperLeft.x, drawBoxUpperLeft.y,
-			drawBoxResize.x, drawBoxResize.y
-		);
+		//Color[] curTexViewport = dynamicMaskTexture.GetPixels(
+		//	drawBoxUpperLeft.x, drawBoxUpperLeft.y,
+		//	drawBoxResize.x, drawBoxResize.y
+		//);
+
 
 		isSaving = true;
 
 		// EVENT CALL
 		onDrawStart.Invoke();
+		if (invokeVec2Event)
+			onDrawAtVector2.Invoke(targetPosition);
 
 		for (int i = 0; i < drawBoxResize.y; i++) {
 			for (int j = 0; j < drawBoxResize.x; j++) {
-				int vpcoord = i * drawBoxResize.x + j; // viewportcoord
-				int bxcoord = (i - deltaY) * brushWidth + (j - deltaX);
-				colors[vpcoord].a = curTexViewport[vpcoord].a - brushPixels[bxcoord].a;
+				int vpcoord = (drawBoxUpperLeft.y + i) * dynamicMaskTexture.width + (drawBoxUpperLeft.x + j); // viewportcoord
+				int bxcoord = (int)Mathf.Floor((i - deltaY) / bScale) * brushWidth
+					+ (int)Mathf.Floor((j - deltaX) / bScale);
+				colors[vpcoord].a = colors[vpcoord].a - brushPixels[bxcoord].a;
 			}
 		}
-
-		SaveTexture();
-	}
-
-	//Sets the base material with a our canvas texture, then removes all our brushes
-	void SaveTexture()
-	{
-		dynamicMaskTexture.SetPixels(
-			drawBoxUpperLeft.x, drawBoxUpperLeft.y,
-			drawBoxResize.x, drawBoxResize.y,
-			colors
-		);
-
-		dynamicMaskTexture.Apply();
-
-		UpdateCounter();
 
 		// EVENT CALL
 		onDrawFinish.Invoke();
@@ -209,9 +202,21 @@ public class TextureDrawer : MonoBehaviour
 		Invoke("SavingDone", savingTime);
 	}
 
+	public void DrawAt(Vector2 targetPosition, bool invokeVec2Event = true)
+	{
+		DrawAt(targetPosition, brushScale, invokeVec2Event);
+	}
+
 	void SavingDone()
 	{
 		isSaving = false;
+	}
+
+	private void LateUpdate()
+	{
+		UpdateCounter();
+		dynamicMaskTexture.SetPixels(colors);
+		dynamicMaskTexture.Apply();
 	}
 
 	void UpdateCounter()
