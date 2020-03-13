@@ -114,8 +114,14 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void PlayLevel()
 	{
-		UIManager.Instance.CallLayout("Playing");
-		currentWindow.ChangeState(Window.State.DIRTY);
+		StartCoroutine(CoroutineUtils.Chain(
+			CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
+			CoroutineUtils.WaitForSeconds(2),
+			CoroutineUtils.Do(() => { 
+				UIManager.Instance.CallLayout("Playing");
+				currentWindow.ChangeState(Window.State.DIRTY);
+			})
+		));
 	}
 
 	public void UnlockLevel(int x)
