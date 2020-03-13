@@ -89,22 +89,29 @@ public class Window : MonoBehaviour
 		} else if (state == State.BREAK_GLASS) {
 			if (Input.GetKeyDown(KeyCode.G)) {
 				holderAfterBroken = new GameObject(glassExplodeExe.name).transform;
-				glassExplodeExe.Action(holderAfterBroken);
+
+				StartCoroutine(CoroutineUtils.Chain(
+
+					CoroutineUtils.Do(() => {
+						glassExplodeExe.Action(holderAfterBroken);
+						impulseSource.GenerateImpulse();
+					}),
+
+					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.5f, 0.2f),
+					CoroutineUtils.WaitForSecondsRealtime(0.5f),
+					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
+
+				));
 
 				StartCoroutine(CoroutineUtils.DelaySeconds(
-					() => holderAfterBroken.gameObject.SetActive(false), 
-					glassFallDuration)
-				);
+						() => holderAfterBroken.gameObject.SetActive(false),
+						glassFallDuration));
 
 				StartCoroutine(CoroutineUtils.DelaySeconds(
-					NextState,
-					nextStateAfterBreakGlassTime)
-				);
+						NextState,
+						nextStateAfterBreakGlassTime));
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.Y))
-			impulseSource.GenerateImpulse();
 	}
 
 	private void OnDestroy()

@@ -38,6 +38,11 @@ public static class CoroutineUtils
 		yield return new WaitForSeconds(time);
 	}
 
+	public static IEnumerator WaitForSecondsRealtime(float time)
+	{
+		yield return new WaitForSecondsRealtime(time);
+	}
+
 	public static IEnumerator Do(Action action)
 	{
 		action();
