@@ -97,7 +97,7 @@ public class Window : MonoBehaviour
 						impulseSource.GenerateImpulse();
 					}),
 
-					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.5f, 0.2f),
+					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
 					CoroutineUtils.WaitForSecondsRealtime(0.5f),
 					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
