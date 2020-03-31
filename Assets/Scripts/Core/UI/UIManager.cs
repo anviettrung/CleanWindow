@@ -15,6 +15,7 @@ public class UIManager : Singleton<UIManager>
 	public GameObject layoutWindowShop;
 	public GameObject layoutToolShop;
 	public GameObject layoutSettingPanel;
+	public GameObject layoutChangeTheme;
 
 	[Header("Top UI elements")]
 	public GameObject panelMoney;
@@ -70,6 +71,7 @@ public class UIManager : Singleton<UIManager>
 		layoutToolShop.SetActive(s);
 		layoutSettingPanel.SetActive(s);
 		startButton.gameObject.SetActive(s);
+		layoutChangeTheme.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()
