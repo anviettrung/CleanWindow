@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ChangeMenuTheme : MonoBehaviour
 {
@@ -11,9 +13,12 @@ public class ChangeMenuTheme : MonoBehaviour
     public SpriteRenderer walll;
     public SpriteRenderer furniture;
 
-    public void OnClickChangeTheme(int themeID)
+    public void OnClickChangeTheme()
     {
-        this.walll.sprite = this.themeDatas.Theme[themeID - 1].WallSprite;
-        this.furniture.sprite = this.themeDatas.Theme[themeID - 1].FurnitureSprite;
+        var selected_object = EventSystem.current.currentSelectedGameObject;
+        var themeID = selected_object.transform.GetSiblingIndex() + 1;
+        var theme = Array.Find(this.themeDatas.Theme, t => t.ThemeID == themeID);
+        this.walll.sprite = theme.WallSprite;
+        this.furniture.sprite = theme.FurnitureSprite;
     }
 }
