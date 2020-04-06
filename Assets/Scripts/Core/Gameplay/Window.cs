@@ -129,7 +129,7 @@ public class Window : MonoBehaviour
 		if (data == null) return;
 
 		srMainPicture.sprite = data.Picture;
-		srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
+		//srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
 		tdDirty.sr.material.SetColor("_MaskColor", data.DirtyColor);
 
 		tdDirty.Init();

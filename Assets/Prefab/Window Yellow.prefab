@@ -490,7 +490,7 @@ Animator:
   m_GameObject: {fileID: 7240903670479933849}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa3cea39538cd4432a69ea48b43243ed, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2b77b9ef519b22d40a49cdcb7a000798, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -737,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7240903671535195492
 Transform:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   srWet: {fileID: 7240903669983327965}
   srDirty: {fileID: 7240903670756791137}
   srWindow: {fileID: 7240903670479933847}
-  srWindowBorder: {fileID: 0}
+  srWindowBorder: {fileID: 7240903670704206543}
   tdDirty: {fileID: 7240903670756791140}
   tdWet: {fileID: 7240903669983327936}
   glassExplodeExe: {fileID: 3665119128497082866}

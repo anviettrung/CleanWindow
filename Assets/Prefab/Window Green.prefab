@@ -737,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7240903671535195492
 Transform:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   srWet: {fileID: 7240903669983327965}
   srDirty: {fileID: 7240903670756791137}
   srWindow: {fileID: 7240903670479933847}
-  srWindowBorder: {fileID: 0}
+  srWindowBorder: {fileID: 7240903670704206543}
   tdDirty: {fileID: 7240903670756791140}
   tdWet: {fileID: 7240903669983327936}
   glassExplodeExe: {fileID: 3665119128497082866}
