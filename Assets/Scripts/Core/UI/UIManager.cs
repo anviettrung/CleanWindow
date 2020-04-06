@@ -18,7 +18,6 @@ public class UIManager : Singleton<UIManager>
 	public GameObject layoutChangeTheme;
 
 	[Header("Top UI elements")]
-	public GameObject panelMoney;
 	public Image iconMoney;
 	public Text labelMoneyNumber;
 
@@ -26,6 +25,7 @@ public class UIManager : Singleton<UIManager>
 
 	public Text labelLevelName;
 	public Slider progressBar;
+	public Image gameTitle;
 
 	[Header("Bot UI elements")]
 	public Button startButton;
@@ -72,6 +72,7 @@ public class UIManager : Singleton<UIManager>
 		layoutSettingPanel.SetActive(s);
 		startButton.gameObject.SetActive(s);
 		layoutChangeTheme.SetActive(s);
+		gameTitle.gameObject.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()

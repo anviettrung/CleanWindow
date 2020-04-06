@@ -116,6 +116,16 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void PlayLevel()
 	{
+		currentWindow.gameObject.SetActive(true);
+
+		PlayerInput.Instance.window = currentWindow;
+
+		// Setting events
+		currentWindow.onEnterStateDirty.AddListener(UsingGlasserTool);
+		currentWindow.onEnterStateWet.AddListener(DestroyGlasserTool);
+		currentWindow.onEnterStateWet.AddListener(UsingCleanerTool);
+		currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
+
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
 			CoroutineUtils.WaitForSeconds(2),
@@ -124,6 +134,15 @@ public class LevelManager : Singleton<LevelManager>
 				currentWindow.ChangeState(Window.State.DIRTY);
 			})
 		));
+
+		foreach (var window in ChangeMenuTheme.Instance.windows)
+		{
+			if (window.gameObject.activeInHierarchy == false)
+			{
+				Destroy(window.gameObject);
+			}
+		}
+		ChangeMenuTheme.Instance.windows.TrimExcess();
 	}
 
 	public void UnlockLevel(int x)

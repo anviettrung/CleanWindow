@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-public class ChangeMenuTheme : MonoBehaviour
+public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
 {
     [Header("Theme Data")]
     public ListThemeData themeDatas;
@@ -18,14 +18,39 @@ public class ChangeMenuTheme : MonoBehaviour
 
     private void Awake()
     {
+        //for (int i = 0; i < themeDatas.Theme.Length; i++)
+        //{
+        //    var window_clone = Instantiate(themeDatas.Theme[i].windowPrefab);
+        //    window_clone.GetComponent<Window>().enabled = false;
+        //    window_clone.SetActive(false);
+        //    if (windows.Contains(window_clone.GetComponent<Window>()) == false)
+        //    {
+        //        windows.Add(window_clone.GetComponent<Window>());
+        //    }
+        //    if (i == 0)
+        //    {
+        //        LevelManager.Instance.currentWindow = window_clone.GetComponent<Window>();
+        //        this.wall.sprite = themeDatas.Theme[0].WallSprite;
+        //    }
+        //}
+    }
+
+    private void OnEnable()
+    {
+        windows.Clear();
+        windows = FindObjectsOfType<Window>().ToList();
         for (int i = 0; i < themeDatas.Theme.Length; i++)
         {
             var window_clone = Instantiate(themeDatas.Theme[i].windowPrefab);
-            window_clone.GetComponent<Window>().enabled = false;
+            //window_clone.GetComponent<Window>().enabled = false;
             window_clone.SetActive(false);
-            if (windows.Contains(window_clone.GetComponent<Window>()) == false)
+            if (windows.Find(w => w.name == window_clone.name) == null)
             {
                 windows.Add(window_clone.GetComponent<Window>());
+            }
+            else
+            {
+                Destroy(window_clone.gameObject);
             }
             if (i == 0)
             {
