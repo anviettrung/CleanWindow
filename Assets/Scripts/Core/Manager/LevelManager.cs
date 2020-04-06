@@ -14,7 +14,7 @@ public class LevelManager : Singleton<LevelManager>
 	public GameObject windowPrefab;
 
 	// tracking
-	protected Window currentWindow;
+	public Window currentWindow;
 	protected int lastestLevelIndex;
 
 	#endregion

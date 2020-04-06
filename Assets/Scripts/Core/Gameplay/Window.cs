@@ -27,6 +27,7 @@ public class Window : MonoBehaviour
 	public SpriteRenderer srWet;
 	public SpriteRenderer srDirty;
 	public SpriteRenderer srWindow;
+	public SpriteRenderer srWindowBorder;
 
 	[Header("Texture Drawer")]
 	public TextureDrawer tdDirty;
