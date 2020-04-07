@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb973a4f54b48245b512e5626c572fe, type: 3}
+  m_Script: {fileID: 11500000, guid: baef96e4859fe8d4aaf02f16772eac32, type: 3}
   m_Name: Theme Pink
   m_EditorClassIdentifier: 
   themeID: 4
