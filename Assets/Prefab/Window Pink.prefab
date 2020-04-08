@@ -779,7 +779,7 @@ MonoBehaviour:
   srWindowBorder: {fileID: 7240903670704206543}
   tdDirty: {fileID: 7240903670756791140}
   tdWet: {fileID: 7240903669983327936}
-  glassExplodeExe: {fileID: 3665119128497082866}
+  glassExplode: {fileID: 0}
   glassFallDuration: 2.5
   nextStateAfterBreakGlassTime: 1
   state: 0

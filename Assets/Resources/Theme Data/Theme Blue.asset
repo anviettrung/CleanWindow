@@ -15,5 +15,5 @@ MonoBehaviour:
   themeID: 5
   themeName: Theme 2
   wallSprite: {fileID: 21300000, guid: 02993e425dd2db04d905288328238bb9, type: 3}
-  windowPrefab: {fileID: 7240903671535195494, guid: d7d09ff59d308c5469391e929e35e195,
+  windowPrefab: {fileID: 5870194655274403743, guid: 7347640956c284f4aabd7ec8b2c457d4,
     type: 3}
