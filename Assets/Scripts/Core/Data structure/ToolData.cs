@@ -20,6 +20,7 @@ public class ToolData : ScriptableObject
 	public enum Type
 	{
 		CLEANER,
-		GLASSER
+		GLASSER,
+		BREAKER
 	}
 }

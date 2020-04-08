@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Bot UI elements")]
 	public Button startButton;
+	public Button tapAndHoldButton;
 
 	[Header("Shop UI elements")]
 	public UIWindowShop windowShop;
@@ -73,6 +74,7 @@ public class UIManager : Singleton<UIManager>
 		startButton.gameObject.SetActive(s);
 		layoutChangeTheme.SetActive(s);
 		gameTitle.gameObject.SetActive(s);
+		tapAndHoldButton.gameObject.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()

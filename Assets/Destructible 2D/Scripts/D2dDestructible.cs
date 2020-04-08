@@ -1671,18 +1671,26 @@ namespace Destructible2D
 			clone.transform.localRotation = transform.localRotation;
 			clone.transform.localScale    = transform.localScale;
 
-			//if (!ExplodeWindow.Instance.fragments.Contains(clone))
-			//{
-			//	ExplodeWindow.Instance.fragments.Add(clone);
-			//}
-			//ExplodeWindow.Instance.fragments.TrimExcess();
+			ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
 
-			//if (!TestExplodeWindow.Instance.fragments.Contains(clone))
-			//{
-			//	TestExplodeWindow.Instance.fragments.Add(clone);
-			//}
-			//TestExplodeWindow.Instance.fragments.TrimExcess();
+			if (explode.isBroken == false)
+			{
+				if (!explode.fragments.Contains(clone))
+				{
+					explode.fragments.Add(clone);
+				}
+				explode.fragments.TrimExcess();
+			}
 
+			//for testing
+			//if (TestExplodeWindow.Instance.isBroken == false)
+			//{
+			//	if (!TestExplodeWindow.Instance.fragments.Contains(clone))
+			//	{
+			//		TestExplodeWindow.Instance.fragments.Add(clone);
+			//	}
+			//	TestExplodeWindow.Instance.fragments.TrimExcess();
+			//}
 			return clone;
 		}
 

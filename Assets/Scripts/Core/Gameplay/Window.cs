@@ -6,241 +6,339 @@ using Cinemachine;
 
 public class Window : MonoBehaviour
 {
-	#region DATA
-	[Header("Data")]
-	[SerializeField] protected WindowData data;
-	public WindowData Data {
-		get {
-			return data;
-		}
-		set {
-			data = value;
-			Init();
-		}
-	}
+    #region DATA
+    [Header("Data")]
+    [SerializeField] protected WindowData data;
+    public WindowData Data
+    {
+        get
+        {
+            return data;
+        }
+        set
+        {
+            data = value;
+            Init();
+        }
+    }
 
-	[Header("General setting")]
-	public float targetProgress = 0.95f;
+    [Header("General setting")]
+    public float targetProgress = 0.95f;
 
-	[Header("Sprite Renderers")]
-	public SpriteRenderer srMainPicture;
-	public SpriteRenderer srWet;
-	public SpriteRenderer srDirty;
-	public SpriteRenderer srWindow;
-	public SpriteRenderer srWindowBorder;
+    [Header("Sprite Renderers")]
+    public SpriteRenderer srMainPicture;
+    public SpriteRenderer srWet;
+    public SpriteRenderer srDirty;
+    public SpriteRenderer srWindow;
+    public SpriteRenderer srWindowBorder;
 
-	[Header("Texture Drawer")]
-	public TextureDrawer tdDirty;
-	public TextureDrawer tdWet;
+    [Header("Texture Drawer")]
+    public TextureDrawer tdDirty;
+    public TextureDrawer tdWet;
 
-	[Header("Break Glass Settings")]
-	public ExplodeExe glassExplodeExe;
-	public float glassFallDuration = 2.5f;
-	public float nextStateAfterBreakGlassTime = 1.0f;
+    [Header("Break Glass Settings")]
+    //public ExplodeExe glassExplodeExe;
+    public ExplodeWindow glassExplode;
+    public float glassFallDuration = 2.5f;
+    public float nextStateAfterBreakGlassTime = 1.0f;
 
-	protected Transform holderAfterBroken;
+    protected Transform holderAfterBroken;
 
-	[Header("State")]
-	public Window.State state;
-	public enum State
-	{
-		DIRTY,
-		WET,
-		BREAK_GLASS,
-		COMPLETE,
-		NONE
-	}
+    [Header("State")]
+    public Window.State state;
+    public enum State
+    {
+        DIRTY,
+        WET,
+        BREAK_GLASS,
+        COMPLETE,
+        NONE
+    }
 
-	// Tracking
-	protected int initBPixel;
+    // Tracking
+    protected int initBPixel;
 
-	protected CinemachineImpulseSource impulseSource;
+    protected CinemachineImpulseSource impulseSource;
 
-	#endregion
+    #endregion
 
-	#region EVENT
-	[Header("Events")]
-	public UnityEvent onEnterStateDirty = new UnityEvent();
-	public UnityEvent onEnterStateWet = new UnityEvent();
-	public UnityEvent onEnterStateBreakGlass = new UnityEvent();
-	public UnityEvent onEnterStateComplete = new UnityEvent();
+    #region EVENT
+    [Header("Events")]
+    public UnityEvent onEnterStateDirty = new UnityEvent();
+    public UnityEvent onEnterStateWet = new UnityEvent();
+    public UnityEvent onEnterStateBreakGlass = new UnityEvent();
+    public UnityEvent onEnterStateComplete = new UnityEvent();
 
-	#endregion
+    #endregion
 
-	#region UNITY_CALLBACK
-	private void Start()
-	{
-		Init();
-		impulseSource = FindObjectOfType<CinemachineImpulseSource>();
-	}
+    #region UNITY_CALLBACK
+    private void Start()
+    {
+        Init();
+        impulseSource = FindObjectOfType<CinemachineImpulseSource>();
+    }
 
-	private void Update()
-	{
-		if (state == State.DIRTY || state == State.WET) {
-			float progress = GetDrawerProcess(); // get current progress
-			if (progress > targetProgress) {
-				TextureDrawer drawer = GetCurrentTextureDrawer();
-				if (drawer != null)
-					drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
-				NextState();
-				progress = GetDrawerProcess(); // get new progress
-			}
+    private void Update()
+    {
+        if (state == State.DIRTY || state == State.WET)
+        {
+            float progress = GetDrawerProcess(); // get current progress
+            if (progress > targetProgress)
+            {
+                TextureDrawer drawer = GetCurrentTextureDrawer();
+                if (drawer != null)
+                    drawer.SetMaskTexture(GameManager.Instance.GeneralResources.TransparentPixel);
+                NextState();
+                progress = GetDrawerProcess(); // get new progress
+            }
 
-			UIManager.Instance.SetProgressBar(progress);
-		} else if (state == State.BREAK_GLASS) {
-			if (Input.GetKeyDown(KeyCode.G)) {
-				holderAfterBroken = new GameObject(glassExplodeExe.name).transform;
+            UIManager.Instance.SetProgressBar(progress);
+        }
+        else if (state == State.BREAK_GLASS)
+        {
+            if (glassExplode.isBroken == true)
+            {
+                TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
+                CoroutineUtils.WaitForSecondsRealtime(0.5f);
+                TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
 
-				StartCoroutine(CoroutineUtils.Chain(
+                StartCoroutine(CoroutineUtils.Chain(
 
-					CoroutineUtils.Do(() => {
-						glassExplodeExe.Action(holderAfterBroken);
-						impulseSource.GenerateImpulse();
-					}),
+                        CoroutineUtils.Do(() =>
+                        {
+                        //glassExplodeExe.Action(holderAfterBroken);
+                        glassExplode.BreakGlass();
+                            impulseSource.GenerateImpulse();
+                        }),
+                        TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
+                        CoroutineUtils.WaitForSecondsRealtime(0.5f),
+                        TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
-					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
-					CoroutineUtils.WaitForSecondsRealtime(0.5f),
-					TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
+                    ));
 
-				));
+                //if (glassExplode.isBroken == true)
+                //{
+                //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
+                //    CoroutineUtils.WaitForSecondsRealtime(0.5f);
+                //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
+                //}
 
-				StartCoroutine(CoroutineUtils.DelaySeconds(
-						() => holderAfterBroken.gameObject.SetActive(false),
-						glassFallDuration));
+                //StartCoroutine(CoroutineUtils.DelaySeconds(
+                //        () => holderAfterBroken.gameObject.SetActive(false),
+                //        glassFallDuration));
 
-				StartCoroutine(CoroutineUtils.DelaySeconds(
-						NextState,
-						nextStateAfterBreakGlassTime));
-			}
-		}
-	}
+                StartCoroutine(CoroutineUtils.DelaySeconds(
+                        NextState,
+                        nextStateAfterBreakGlassTime));
+            }
 
-	private void OnDestroy()
-	{
-		if (holderAfterBroken != null)
-			Destroy(holderAfterBroken.gameObject);
-	}
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    //holderAfterBroken = new GameObject(glassExplodeExe.name).transform;
 
-	#endregion
+            //    //StartCoroutine(CoroutineUtils.Chain(
 
-	#region INITIALIZATION
-	protected void Init()
-	{
-		if (data == null) return;
+            //    //	CoroutineUtils.Do(() =>
+            //    //	{
+            //    //		//glassExplodeExe.Action(holderAfterBroken);
+            //    //		glassExplode.UpdateGlass();
+            //    //		impulseSource.GenerateImpulse();
+            //    //	}),
+            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
+            //    //	CoroutineUtils.WaitForSecondsRealtime(0.5f),
+            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
-		srMainPicture.sprite = data.Picture;
-		//srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
-		tdDirty.sr.material.SetColor("_MaskColor", data.DirtyColor);
+            //    //));
 
-		tdDirty.Init();
-		tdWet.Init();
+            //    //if (glassExplode.isBroken == true)
+            //    //{
+            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
+            //    //	CoroutineUtils.WaitForSecondsRealtime(0.5f);
+            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
+            //    //}
 
-		state = State.DIRTY;
+            //    //StartCoroutine(CoroutineUtils.DelaySeconds(
+            //    //		() => holderAfterBroken.gameObject.SetActive(false),
+            //    //		glassFallDuration));
 
-		UpdateUI();
-	}
+            //    //StartCoroutine(CoroutineUtils.DelaySeconds(
+            //    //		NextState,
+            //    //		nextStateAfterBreakGlassTime));
 
-	public void Reset()
-	{
-		Init();
-	}
+            //    this.BreakGlass();
+            //}
+        }
+    }
 
-	#endregion
+    private void BreakGlass()
+    {
+        glassExplode.UpdateGlass();
+        if (glassExplode.isBroken == true)
+        {
+            TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
+            CoroutineUtils.WaitForSecondsRealtime(0.5f);
+            TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
 
-	#region FUNCTION
-	public void ChangeState(Window.State s)
-	{
-		state = s;
+            StartCoroutine(CoroutineUtils.Chain(
 
-		switch (s) {
-			case State.DIRTY:
-				onEnterStateDirty.Invoke();
-				initBPixel = tdDirty.blackPixel;
-				break;
+                    CoroutineUtils.Do(() =>
+                    {
+                        //glassExplodeExe.Action(holderAfterBroken);
+                        glassExplode.BreakGlass();
+                        impulseSource.GenerateImpulse();
+                    }),
+                    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
+                    CoroutineUtils.WaitForSecondsRealtime(0.5f),
+                    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
-			case State.WET:
-				onEnterStateWet.Invoke();
-				initBPixel = tdWet.blackPixel;
-				break;
+                ));
 
-			case State.BREAK_GLASS:
-				onEnterStateBreakGlass.Invoke();
-				srDirty.gameObject.SetActive(false);
-				srWet.gameObject.SetActive(false);
-				break;
+            //if (glassExplode.isBroken == true)
+            //{
+            //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
+            //    CoroutineUtils.WaitForSecondsRealtime(0.5f);
+            //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
+            //}
 
-			case State.COMPLETE:
-				onEnterStateComplete.Invoke();
-				LevelManager.Instance.LevelCompleted(data.KeyName);
-				PlayEndGameAnimation();
+            //StartCoroutine(CoroutineUtils.DelaySeconds(
+            //        () => holderAfterBroken.gameObject.SetActive(false),
+            //        glassFallDuration));
 
-				break;
-		}
-	}
+            StartCoroutine(CoroutineUtils.DelaySeconds(
+                    NextState,
+                    nextStateAfterBreakGlassTime));
+        }
+    }
 
-	public void NextState()
-	{
-		switch (state) {
+    private void OnDestroy()
+    {
+        if (holderAfterBroken != null)
+            Destroy(holderAfterBroken.gameObject);
+    }
 
-			case State.DIRTY:
-				ChangeState(State.WET);
-				break;
+    #endregion
 
-			case State.WET:
-				ChangeState(State.BREAK_GLASS);
-				break;
+    #region INITIALIZATION
+    protected void Init()
+    {
+        if (data == null) return;
 
-			case State.BREAK_GLASS:
-				ChangeState(State.COMPLETE);
-				break;
+        srMainPicture.sprite = data.Picture;
+        //srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;
+        tdDirty.sr.material.SetColor("_MaskColor", data.DirtyColor);
 
-			case State.COMPLETE:
-				ChangeState(State.NONE);
-				break;
+        tdDirty.Init();
+        tdWet.Init();
 
-			case State.NONE:
-				break;
-		}
-	}
+        state = State.DIRTY;
 
-	protected void UpdateUI()
-	{
-		UIManager.Instance.SetLabelLevelName(data.WindowName);
-		UIManager.Instance.SetProgressBar(GetDrawerProcess());
-	}
+        UpdateUI();
+    }
 
-	public void PlayEndGameAnimation()
-	{
-		//PlayerInput.Instance.LockInput("window");
-		srWindow.GetComponent<Animator>().SetTrigger("Open");
-		// Congrat
-		UIManager.Instance.CallLayout("End Game");
-	}
-	#endregion
+    public void Reset()
+    {
+        Init();
+    }
 
-	#region GET/SET
-	public TextureDrawer GetCurrentTextureDrawer()
-	{
-		switch (state) {
-			case State.DIRTY:
-				return tdDirty;
-			case State.WET:
-				return tdWet;
-			default:
-				return null;
-		}
-	}
+    #endregion
 
-	public float GetDrawerProcess()
-	{
-		if (state == State.COMPLETE || state == State.NONE) return 1;
+    #region FUNCTION
+    public void ChangeState(Window.State s)
+    {
+        state = s;
 
-		TextureDrawer drawer = GetCurrentTextureDrawer();
-		if (drawer == null) return 0;
-		if (drawer.totalPixel == 0) return 0;
+        switch (s)
+        {
+            case State.DIRTY:
+                onEnterStateDirty.Invoke();
+                initBPixel = tdDirty.blackPixel;
+                break;
 
-		return (float)(drawer.blackPixel - initBPixel) / (float)(drawer.totalPixel - initBPixel);
-	}
+            case State.WET:
+                onEnterStateWet.Invoke();
+                initBPixel = tdWet.blackPixel;
+                break;
 
-	#endregion
+            case State.BREAK_GLASS:
+                onEnterStateBreakGlass.Invoke();
+                srDirty.gameObject.SetActive(false);
+                srWet.gameObject.SetActive(false);
+                break;
+
+            case State.COMPLETE:
+                onEnterStateComplete.Invoke();
+                LevelManager.Instance.LevelCompleted(data.KeyName);
+                PlayEndGameAnimation();
+
+                break;
+        }
+    }
+
+    public void NextState()
+    {
+        switch (state)
+        {
+
+            case State.DIRTY:
+                ChangeState(State.WET);
+                break;
+
+            case State.WET:
+                ChangeState(State.BREAK_GLASS);
+                break;
+
+            case State.BREAK_GLASS:
+                ChangeState(State.COMPLETE);
+                break;
+
+            case State.COMPLETE:
+                ChangeState(State.NONE);
+                break;
+
+            case State.NONE:
+                break;
+        }
+    }
+
+    protected void UpdateUI()
+    {
+        UIManager.Instance.SetLabelLevelName(data.WindowName);
+        UIManager.Instance.SetProgressBar(GetDrawerProcess());
+    }
+
+    public void PlayEndGameAnimation()
+    {
+        //PlayerInput.Instance.LockInput("window");
+        srWindow.GetComponent<Animator>().SetTrigger("Open");
+        // Congrat
+        UIManager.Instance.CallLayout("End Game");
+    }
+    #endregion
+
+    #region GET/SET
+    public TextureDrawer GetCurrentTextureDrawer()
+    {
+        switch (state)
+        {
+            case State.DIRTY:
+                return tdDirty;
+            case State.WET:
+                return tdWet;
+            default:
+                return null;
+        }
+    }
+
+    public float GetDrawerProcess()
+    {
+        if (state == State.COMPLETE || state == State.NONE) return 1;
+
+        TextureDrawer drawer = GetCurrentTextureDrawer();
+        if (drawer == null) return 0;
+        if (drawer.totalPixel == 0) return 0;
+
+        return (float)(drawer.blackPixel - initBPixel) / (float)(drawer.totalPixel - initBPixel);
+    }
+
+    #endregion
 }

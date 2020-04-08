@@ -14,7 +14,7 @@ public class LevelManager : Singleton<LevelManager>
 	public GameObject windowPrefab;
 
 	// tracking
-	public Window currentWindow;
+	[HideInInspector] public Window currentWindow;
 	protected int lastestLevelIndex;
 
 	#endregion
@@ -65,6 +65,8 @@ public class LevelManager : Singleton<LevelManager>
 		w.onEnterStateWet.AddListener(DestroyGlasserTool);
 		w.onEnterStateWet.AddListener(UsingCleanerTool);
 		w.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
+		w.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
+		w.onEnterStateComplete.AddListener(DestroyBreakerTool);
 
 		currentWindow = w; // track
 	}
@@ -89,6 +91,21 @@ public class LevelManager : Singleton<LevelManager>
 	#endregion
 
 	#region FUNCTION
+
+	protected void UsingBreakerTool()
+	{
+		ToolManager.Instance.breaker.CreateTool();
+		PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
+
+		ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
+		explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
+	}
+
+	protected void DestroyBreakerTool()
+	{
+		if (ToolManager.Instance.breaker.GetTool() != null)
+			Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
+	}
 
 	protected void UsingCleanerTool()
 	{
@@ -116,6 +133,13 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void PlayLevel()
 	{
+		StartCoroutine(CoroutineUtils.Chain(
+		CoroutineUtils.Do(() =>
+		{
+			UIManager.Instance.CallLayout("Playing");
+			currentWindow.ChangeState(Window.State.DIRTY);
+		})));
+
 		currentWindow.gameObject.SetActive(true);
 
 		PlayerInput.Instance.window = currentWindow;
@@ -125,14 +149,16 @@ public class LevelManager : Singleton<LevelManager>
 		currentWindow.onEnterStateWet.AddListener(DestroyGlasserTool);
 		currentWindow.onEnterStateWet.AddListener(UsingCleanerTool);
 		currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
+		currentWindow.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
+		currentWindow.onEnterStateComplete.AddListener(DestroyBreakerTool);
 
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
-			CoroutineUtils.WaitForSeconds(2),
-			CoroutineUtils.Do(() => { 
-				UIManager.Instance.CallLayout("Playing");
-				currentWindow.ChangeState(Window.State.DIRTY);
-			})
+			CoroutineUtils.WaitForSeconds(2)
+			//CoroutineUtils.Do(() => { 
+			//	UIManager.Instance.CallLayout("Playing");
+			//	currentWindow.ChangeState(Window.State.DIRTY);
+			//})
 		));
 
 		foreach (var window in ChangeMenuTheme.Instance.windows)
