@@ -157,7 +157,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -341}
-  m_SizeDelta: {x: 140, y: 229}
+  m_SizeDelta: {x: 92, y: 80}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &22024501
 MonoBehaviour:
@@ -6367,7 +6367,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -546}
-  m_SizeDelta: {x: 92, y: 80}
+  m_SizeDelta: {x: 88, y: 74}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1444649919
 MonoBehaviour:
@@ -9762,6 +9762,7 @@ MonoBehaviour:
   progressBar: {fileID: 2019223015}
   gameTitle: {fileID: 2028077234}
   startButton: {fileID: 594362486}
+  tapAndHoldButton: {fileID: 0}
   windowShop: {fileID: 1082476901}
   toolShop: {fileID: 1305747934}
   labelWindowShopPageIndex: {fileID: 0}
