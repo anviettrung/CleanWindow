@@ -3149,8 +3149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fragments: []
-  glassLeft: {fileID: 0}
-  glassRight: {fileID: 0}
+  glassLeft: {fileID: 23716385886663459}
+  glassRight: {fileID: 23716384454501084}
   glassSide: 0
   isBroken: 0
   changeSide: 0
@@ -3360,7 +3360,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3682,7 +3682,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

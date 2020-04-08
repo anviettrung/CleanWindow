@@ -40,6 +40,10 @@ public class ExplodeWindow : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    if (UIManager.Instance.tapAndHold.activeInHierarchy == true)
+                    {
+                        UIManager.Instance.tapAndHold.SetActive(false);
+                    }
                     if (breakerAnim != null)
                     {
                         if (breakerAnim.isPlaying)

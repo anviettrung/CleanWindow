@@ -99,6 +99,8 @@ public class LevelManager : Singleton<LevelManager>
 
 		ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
 		explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
+
+		UIManager.Instance.tapAndHold.SetActive(true);
 	}
 
 	protected void DestroyBreakerTool()
@@ -133,13 +135,6 @@ public class LevelManager : Singleton<LevelManager>
 
 	public void PlayLevel()
 	{
-		StartCoroutine(CoroutineUtils.Chain(
-		CoroutineUtils.Do(() =>
-		{
-			UIManager.Instance.CallLayout("Playing");
-			currentWindow.ChangeState(Window.State.DIRTY);
-		})));
-
 		currentWindow.gameObject.SetActive(true);
 
 		PlayerInput.Instance.window = currentWindow;
@@ -151,6 +146,13 @@ public class LevelManager : Singleton<LevelManager>
 		currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
 		currentWindow.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
 		currentWindow.onEnterStateComplete.AddListener(DestroyBreakerTool);
+
+		StartCoroutine(CoroutineUtils.Chain(
+			CoroutineUtils.Do(() =>
+			{
+				UIManager.Instance.CallLayout("Playing");
+				currentWindow.ChangeState(Window.State.DIRTY);
+			})));
 
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
