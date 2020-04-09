@@ -21,15 +21,26 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
     [Header("Transform Button")]
     public Transform changeThemeTransform;
 
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("lasted_theme"))
+        {
+            PlayerPrefs.DeleteKey("lasted_theme");
+        }
+    }
+
     public void CreateNewWindow()
     {
         windows.Clear();
-        windows = FindObjectsOfType<Window>().ToList();
         for (int i = 0; i < themeDatas.Theme.Length; i++)
         {
             var window_clone = Instantiate(themeDatas.Theme[i].windowPrefab);
-            //window_clone.GetComponent<Window>().enabled = false;
             window_clone.SetActive(false);
+            if (PlayerPrefs.HasKey("lastest_lvl"))
+            {
+                var level = PlayerPrefs.GetInt("lastest_lvl");
+                window_clone.GetComponent<Window>().Data = LevelManager.Instance.levels[level].data;
+            }
             if (windows.Find(w => w.name == window_clone.name) == null)
             {
                 windows.Add(window_clone.GetComponent<Window>());
@@ -39,33 +50,74 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 Destroy(window_clone.gameObject);
             }
         }
-        this.EnableDefaultTheme();
+        this.EnableTheme();
     }
 
-    private void EnableDefaultTheme()
+    private void EnableTheme()
     {
-        //Default theme = Blue theme
-        var default_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == 5);
-        for (int i = 0; i < windows.Count; i++)
+        if (!PlayerPrefs.HasKey("lasted_theme"))
         {
-            if (windows[i].name.Contains(default_theme.WindowPrefab.name))
+            //Enable default theme
+            //Default theme = Blue theme
+            var default_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == 5);
+            PlayerPrefs.SetInt("lasted_theme", default_theme.ThemeID);
+            for (int i = 0; i < windows.Count; i++)
             {
-                LevelManager.Instance.currentWindow = windows[i];
-                this.wall.sprite = default_theme.WallSprite;
-                foreach (Transform child in changeThemeTransform)
+                if (PlayerPrefs.HasKey("lastest_lvl"))
                 {
-                    if (child.name.Contains("Blue"))
-                    {
-                        child.transform.GetChild(0).gameObject.SetActive(true);
-                    }
+                    var level = PlayerPrefs.GetInt("lastest_lvl");
+                    windows[i].Data = LevelManager.Instance.levels[level].data;
                 }
-                return;
-            }
-            else
-            {
-                continue;
+                if (windows[i].name.Contains(default_theme.WindowPrefab.name))
+                {
+                    LevelManager.Instance.currentWindow = windows[i];
+                    this.wall.sprite = default_theme.WallSprite;
+                    foreach (Transform child in changeThemeTransform)
+                    {
+                        if (child.name.Contains("Blue"))
+                        {
+                            child.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                    }
+                    return;
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
+        else
+        {
+            var lasted_theme_id = PlayerPrefs.GetInt("lasted_theme");
+            var lasted_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == lasted_theme_id);
+            for (int i = 0; i < windows.Count; i++)
+            {
+                if (PlayerPrefs.HasKey("lastest_lvl"))
+                {
+                    var level = PlayerPrefs.GetInt("lastest_lvl");
+                    windows[i].Data = LevelManager.Instance.levels[level].data;
+                }
+                if (windows[i].name.Contains(lasted_theme.WindowPrefab.name))
+                {
+                    LevelManager.Instance.currentWindow = windows[i];
+                    this.wall.sprite = lasted_theme.WallSprite;
+                    foreach (Transform child in changeThemeTransform)
+                    {
+                        if (child.name.Contains(lasted_theme.name))
+                        {
+                            child.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                    }
+                    return;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        windows.Clear();
     }
 
     public void OnClickChangeTheme()
@@ -74,6 +126,8 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         var themeID = selected_object.transform.GetSiblingIndex() + 1;
         var theme = Array.Find(this.themeDatas.Theme, t => t.ThemeID == themeID);
         var window_clone = windows.ElementAt(themeID - 1);
+
+        window_clone.GetComponent<Window>().Data = LevelManager.Instance.currentWindow.Data;
 
         selected_object.transform.GetChild(0).gameObject.SetActive(true);
         foreach (Transform child in selected_object.transform.parent)
@@ -94,5 +148,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 w.gameObject.SetActive(false);
             }
         }
+
+        PlayerPrefs.SetInt("lasted_theme", themeID);
     }
 }
