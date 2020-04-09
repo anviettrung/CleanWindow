@@ -21,7 +21,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
     [Header("Transform Button")]
     public Transform changeThemeTransform;
 
-    private void OnEnable()
+    public void CreateNewWindow()
     {
         windows.Clear();
         windows = FindObjectsOfType<Window>().ToList();

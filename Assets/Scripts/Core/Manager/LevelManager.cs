@@ -49,8 +49,10 @@ public class LevelManager : Singleton<LevelManager>
 		WindowData data = levels[x].data;
 		lastestLevelIndex = x;
 
-		//if (currentWindow != null)
-		//	Destroy(currentWindow.gameObject);
+		if (currentWindow != null)
+			Destroy(currentWindow.gameObject);
+
+		ChangeMenuTheme.Instance.CreateNewWindow();
 
 		//Window w = Instantiate(windowPrefab).GetComponent<Window>();
 		currentWindow.gameObject.SetActive(true);
