@@ -58,7 +58,7 @@ public class Window : MonoBehaviour
     // Tracking
     protected int initBPixel;
 
-    protected CinemachineImpulseSource impulseSource;
+    [HideInInspector] public CinemachineImpulseSource impulseSource;
 
     #endregion
 
@@ -108,7 +108,7 @@ public class Window : MonoBehaviour
                         {
                         //glassExplodeExe.Action(holderAfterBroken);
                         glassExplode.BreakGlass();
-                            impulseSource.GenerateImpulse();
+                            //impulseSource.GenerateImpulse();
                         }),
                         TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
                         CoroutineUtils.WaitForSecondsRealtime(0.5f),

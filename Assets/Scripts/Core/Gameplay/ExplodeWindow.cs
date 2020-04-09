@@ -21,11 +21,15 @@ public class ExplodeWindow : MonoBehaviour
     [HideInInspector] public bool changeSide;
     [HideInInspector] public Animation breakerAnim;
 
+    private float holdingTime;
+
     private void Start()
     {
         fragments.Add(glassLeft);
         glassSide = GlassSide.LEFT;
         window = GetComponent<Window>();
+
+        holdingTime = 0f;
     }
 
     private void Update()
@@ -44,43 +48,57 @@ public class ExplodeWindow : MonoBehaviour
                     {
                         UIManager.Instance.tapAndHold.SetActive(false);
                     }
-                    if (breakerAnim != null)
-                    {
-                        if (breakerAnim.isPlaying)
-                        {
-                            breakerAnim.Stop();
-                        }
-                        breakerAnim.Play("Break");
-                    }
-                    forceBreak += 50f;
-                    for (int i = 0; i < fragments.Count; i++)
-                    {
-                        fragments[i].Damage = forceBreak;
-                    }
+                    forceBreak += 100f;
                     //Debug.Log("<b>On Mouse Down</b>");
                 }
 
-                if (Input.GetMouseButton(0))
+                else if (Input.GetMouseButton(0))
                 {
-                    if (breakerAnim != null)
+                    holdingTime += Time.deltaTime;
+                    if (holdingTime > 1f)
                     {
-                        if (breakerAnim.isPlaying)
+                        if (breakerAnim != null)
                         {
-                            breakerAnim.Stop();
+                            if(breakerAnim.isPlaying)
+                            {
+                                breakerAnim.Stop();
+                            }
+                            breakerAnim.Play("Holding");
                         }
-                        breakerAnim.Play("Break");
+                        LevelManager.Instance.currentWindow.impulseSource.GenerateImpulse();
+                        forceBreak += 1f;
+                        //Debug.Log("<b>On Mouse Drag</b>");
                     }
-                    forceBreak += 1f;
-                    for (int i = 0; i < fragments.Count; i++)
-                    {
-                        fragments[i].Damage = forceBreak;
-                    }
-                    //Debug.Log("<b>On Mouse Drag</b>");
                 }
 
                 if (Input.GetMouseButtonUp(0))
                 {
+                    holdingTime = 0f;
+                    if (breakerAnim != null)
+                    {
+                        //if (breakerAnim.isPlaying)
+                        if (holdingTime > 1f)
+                        {
+                            if (breakerAnim.IsPlaying("Holding"))
+                            {
+                                breakerAnim.Stop("Holding");
+                            }
+                            breakerAnim.Play("Release");
+                        }
+                        else
+                        {
+                            if (breakerAnim.isPlaying)
+                            {
+                                breakerAnim.Stop();
+                            }
+                            breakerAnim.Play("Break");
+                        }
+                    }
                     BreakGlass();
+                    for (int i = 0; i < fragments.Count; i++)
+                    {
+                        fragments[i].Damage = forceBreak;
+                    }
                     //Debug.Log("<color=red>On Mouse Up</color>");
                 }
             }
@@ -111,10 +129,9 @@ public class ExplodeWindow : MonoBehaviour
             for (int i = 0; i < fragments.Count; i++)
             {
                 var rigidbody_2D = fragments[i].GetComponent<Rigidbody2D>();
-                //rigidbody_2D.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rigidbody_2D.constraints = RigidbodyConstraints2D.None;
                 rigidbody_2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
-                rigidbody_2D.gravityScale = 5f;
+                rigidbody_2D.gravityScale = Random.Range(2f,5f);
             }
 
             fragments.Clear();
@@ -126,6 +143,8 @@ public class ExplodeWindow : MonoBehaviour
             {
                 changeSide = true;
             }
+
+            //LevelManager.Instance.currentWindow.impulseSource.GenerateImpulse();
         }
     }
 
@@ -140,8 +159,8 @@ public class ExplodeWindow : MonoBehaviour
             if (breakerAnim.isPlaying)
             {
                 breakerAnim.Stop();
+                breakerAnim.Play("MoveTool");
             }
-            breakerAnim.Play("MoveTool");
         }
         forceBreak = 0f;
     }

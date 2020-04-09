@@ -77,7 +77,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6751398922124231113}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!212 &6751398923575973747
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141,6 +141,8 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 730afed819637534faf796f1490a1241, type: 2}
   - {fileID: 7400000, guid: 88b12f16ef6b93742ae8f247918969eb, type: 2}
+  - {fileID: 7400000, guid: b50b353bede905345bf95a9882525dd6, type: 2}
+  - {fileID: 7400000, guid: 53ffda19532973143bb7b1d6417565cb, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

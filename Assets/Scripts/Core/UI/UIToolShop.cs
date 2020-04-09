@@ -55,10 +55,21 @@ public class UIToolShop : MonoBehaviour
 
 	public virtual void UpdateUI()
 	{
+		this.UnlockAllItemForTesting();
 		foreach (UIToolShopItem item in items) {
 			item.UpdateUI();
 		}
 	}
 
+	#endregion
+
+	#region Testing
+	private void UnlockAllItemForTesting()
+	{
+		foreach (UIToolShopItem item in items)
+		{
+			item.toolData.status = ToolItem.Status.UNLOCK;
+		}
+	}
 	#endregion
 }

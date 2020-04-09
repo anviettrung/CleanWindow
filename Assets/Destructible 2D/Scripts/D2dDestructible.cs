@@ -1691,6 +1691,7 @@ namespace Destructible2D
 			//	}
 			//	TestExplodeWindow.Instance.fragments.TrimExcess();
 			//}
+
 			return clone;
 		}
 
