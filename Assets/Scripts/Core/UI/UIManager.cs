@@ -89,6 +89,11 @@ public class UIManager : Singleton<UIManager>
 		toolShop.SetData(ToolManager.Instance.glasser.tools);
 	}
 
+	public void SelectTabCustomizeTool()
+	{
+		toolShop.SetData(ToolManager.Instance.breaker.tools);
+	}
+
 	#endregion
 
 	#region LAYOUT MANAGER
