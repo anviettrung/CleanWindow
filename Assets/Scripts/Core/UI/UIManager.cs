@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager>
 	public GameObject layoutToolShop;
 	public GameObject layoutSettingPanel;
 	public GameObject layoutChangeTheme;
+	public GameObject layoutTopUIGameplay;
 
 	[Header("Top UI elements")]
 	public Image iconMoney;
@@ -75,6 +76,7 @@ public class UIManager : Singleton<UIManager>
 		layoutChangeTheme.SetActive(s);
 		gameTitle.gameObject.SetActive(s);
 		tapAndHold.SetActive(s);
+		layoutTopUIGameplay.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()

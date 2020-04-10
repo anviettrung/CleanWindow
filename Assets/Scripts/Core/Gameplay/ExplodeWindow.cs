@@ -22,6 +22,7 @@ public class ExplodeWindow : MonoBehaviour
     [HideInInspector] public Animation breakerAnim;
 
     private float holdingTime;
+    private bool canTap;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class ExplodeWindow : MonoBehaviour
         window = GetComponent<Window>();
 
         holdingTime = 0f;
+        canTap = true;
     }
 
     private void Update()
@@ -40,7 +42,7 @@ public class ExplodeWindow : MonoBehaviour
             {
                 ChangeWindow();
             }
-            if (isBroken == false)
+            if (isBroken == false && canTap == true)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -59,7 +61,7 @@ public class ExplodeWindow : MonoBehaviour
                     {
                         if (breakerAnim != null)
                         {
-                            if(breakerAnim.isPlaying)
+                            if (breakerAnim.isPlaying)
                             {
                                 breakerAnim.Stop();
                             }
@@ -130,11 +132,12 @@ public class ExplodeWindow : MonoBehaviour
             {
                 var rigidbody_2D = fragments[i].GetComponent<Rigidbody2D>();
                 rigidbody_2D.constraints = RigidbodyConstraints2D.None;
-                rigidbody_2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
-                rigidbody_2D.gravityScale = Random.Range(2f,5f);
+                //rigidbody_2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
+                rigidbody_2D.sleepMode = RigidbodySleepMode2D.StartAwake;
+                rigidbody_2D.gravityScale = Random.Range(2f, 5f);
             }
 
-            fragments.Clear();
+            //fragments.Clear();
             if (glassSide == GlassSide.RIGHT)
             {
                 isBroken = true;
@@ -150,10 +153,7 @@ public class ExplodeWindow : MonoBehaviour
 
     public void ChangeWindow()
     {
-        fragments.Clear();
-        fragments.Add(glassRight);
-        glassSide = GlassSide.RIGHT;
-
+        canTap = false;
         if (breakerAnim != null)
         {
             if (breakerAnim.isPlaying)
@@ -162,6 +162,23 @@ public class ExplodeWindow : MonoBehaviour
                 breakerAnim.Play("MoveTool");
             }
         }
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            foreach (var frag in fragments)
+            {
+                Destroy(frag.gameObject);
+            }
+            canTap = true;
+            fragments.Clear();
+            fragments.Add(glassRight);
+        }, breakerAnim.GetClip("MoveTool").length));
+        if (UIManager.Instance.tapAndHold.activeInHierarchy == false)
+        {
+            UIManager.Instance.tapAndHold.SetActive(true);
+        }
+        //fragments.Clear();
+        //fragments.Add(glassRight);
+        glassSide = GlassSide.RIGHT;
         forceBreak = 0f;
     }
 }
