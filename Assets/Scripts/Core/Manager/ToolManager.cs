@@ -15,7 +15,7 @@ public class ToolManager : Singleton<ToolManager>
 
 	public void Init()
 	{
-		UIManager.Instance.toolShop.SetData(cleaner.tools);
+		UIManager.Instance.toolShop.SetData(glasser.tools);
 	}
 
 	public bool IsSelectingTool(ToolItem t)
