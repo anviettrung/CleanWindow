@@ -5,7 +5,7 @@ using UnityEngine;
 public class CWPanelManager : Singleton<CWPanelManager>
 {
 	public List<CWPanel> cwPanels;
-	public GameObject blackCover;
+	public GameObject panelCover;
 
 	private void Awake()
 	{
@@ -18,12 +18,12 @@ public class CWPanelManager : Singleton<CWPanelManager>
 	public void OnOpenPanel(CWPanel panel)
 	{
 		HideAllPanelsExcept(panel);
-		blackCover.SetActive(true);
+		panelCover.SetActive(true);
 	}
 
 	public void OnClosePanel(CWPanel panel)
 	{
-		blackCover.SetActive(false);
+		panelCover.SetActive(false);
 	}
 
 	protected void HideAllPanelsExcept(CWPanel panel)

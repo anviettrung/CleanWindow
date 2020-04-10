@@ -10,7 +10,7 @@ public class UITabHighlight : MonoBehaviour
 	public Sprite spriteHighlightOn;
 	public Sprite spriteHighlightOff;
 
-	[SerializeField] protected bool isOn;
+	[SerializeField] public bool isOn;
 
 	public void SwitchStatus()
 	{
