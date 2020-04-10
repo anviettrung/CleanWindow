@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIHighLightText : MonoBehaviour//, ISelectHandler, IDeselectHandler
+public class UIHighLightText : MonoBehaviour
 {
     public Color selectColor;
     public Color deselectColor;
@@ -35,16 +35,4 @@ public class UIHighLightText : MonoBehaviour//, ISelectHandler, IDeselectHandler
             deselectButton.SetActive(true);
         }
     }
-
-    //public void OnSelect(BaseEventData eventData)
-    //{
-    //    mainText.color = selectColor;
-    //    deselectButton.SetActive(false);
-    //}
-
-    //public void OnDeselect(BaseEventData eventData)
-    //{
-    //    mainText.color = deselectColor;
-    //    deselectButton.SetActive(true);
-    //}
 }
