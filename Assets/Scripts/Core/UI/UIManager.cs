@@ -45,6 +45,9 @@ public class UIManager : Singleton<UIManager>
 	public Button nextButton;
 	public Button watchAdsButton;
 
+	[Header("Progress Gameplay")]
+	public List<UIProgress> uIProgresses;
+
 	#endregion
 
 	#region FUNCTION
@@ -124,6 +127,21 @@ public class UIManager : Singleton<UIManager>
 		ShowAll(false);
 		for (int i = 0; i < layoutInf.elements.Length; i++) {
 			layoutInf.elements[i].SetActive(true);
+		}
+	}
+
+	public void ShowNextStepProgress(Window.State windowState)
+	{
+		for (int i = 0; i < this.uIProgresses.Count;i++)
+		{
+			if (this.uIProgresses[i].state == windowState)
+			{
+				this.uIProgresses[i].highlight.SetActive(true);
+			}
+			else
+			{
+				this.uIProgresses[i].highlight.SetActive(false);
+			}
 		}
 	}
 

@@ -272,6 +272,8 @@ public class Window : MonoBehaviour
 
                 break;
         }
+
+        UIManager.Instance.ShowNextStepProgress(s);
     }
 
     public void NextState()
