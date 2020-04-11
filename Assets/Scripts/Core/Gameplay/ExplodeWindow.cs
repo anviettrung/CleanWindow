@@ -105,6 +105,13 @@ public class ExplodeWindow : MonoBehaviour
                 }
             }
         }
+        if (window.state == Window.State.COMPLETE)
+        {
+            if (this.fragments.Count > 0)
+            {
+                this.fragments.Clear();
+            }
+        }
     }
 
     public void UpdateGlass()

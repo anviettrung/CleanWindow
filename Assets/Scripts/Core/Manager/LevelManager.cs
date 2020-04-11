@@ -141,6 +141,15 @@ public class LevelManager : Singleton<LevelManager>
 
 		PlayerInput.Instance.window = currentWindow;
 
+		var all_winddows = FindObjectsOfType<Window>();
+		foreach (var w in all_winddows)
+		{
+			if (w != currentWindow)
+			{
+				Destroy(w.gameObject);
+			}
+		}
+
 		// Setting events
 		currentWindow.onEnterStateDirty.AddListener(UsingGlasserTool);
 		currentWindow.onEnterStateWet.AddListener(DestroyGlasserTool);
