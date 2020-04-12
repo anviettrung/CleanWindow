@@ -31,8 +31,10 @@ public class UIWindowShopItem : MonoBehaviour
 	#region FUNCTION
 	public void PlayLevel()
 	{
-		if (levelData != null)
-			LevelManager.Instance.OpenLevel(levelData.data);
+		LevelManager.Instance.PlayLevel();
+
+		//if (levelData != null)
+		//	LevelManager.Instance.OpenLevel(levelData.data);
 	}
 
 	public void UnlockLevel()

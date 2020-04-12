@@ -55,10 +55,21 @@ public class UIWindowShop : MonoBehaviour
 
 	public virtual void UpdateUI()
 	{
+		this.UnlockAllItemForTesting();
 		foreach (UIWindowShopItem item in items) {
 			item.UpdateUI();
 		}
 	}
 
+	#endregion
+
+	#region Testing
+	private void UnlockAllItemForTesting()
+	{
+		foreach (UIWindowShopItem item in items)
+		{
+			item.levelData.status = Level.Status.COMPLETE;
+		}
+	}
 	#endregion
 }
