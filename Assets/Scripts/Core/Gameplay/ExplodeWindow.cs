@@ -46,10 +46,6 @@ public class ExplodeWindow : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (UIManager.Instance.tapAndHold.activeInHierarchy == true)
-                    {
-                        UIManager.Instance.tapAndHold.SetActive(false);
-                    }
                     forceBreak += 100f;
                     //Debug.Log("<b>On Mouse Down</b>");
                 }
@@ -75,7 +71,10 @@ public class ExplodeWindow : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    holdingTime = 0f;
+                    if (UIManager.Instance.tapAndHold.activeInHierarchy == true)
+                    {
+                        UIManager.Instance.tapAndHold.SetActive(false);
+                    }
                     if (breakerAnim != null)
                     {
                         //if (breakerAnim.isPlaying)
@@ -86,6 +85,11 @@ public class ExplodeWindow : MonoBehaviour
                                 breakerAnim.Stop("Holding");
                             }
                             breakerAnim.Play("Release");
+                            for (int i = 0; i < fragments.Count; i++)
+                            {
+                                fragments[i].Damage = 350f;
+                            }
+                            BreakGlass();
                         }
                         else
                         {
@@ -96,11 +100,12 @@ public class ExplodeWindow : MonoBehaviour
                             breakerAnim.Play("Break");
                         }
                     }
-                    BreakGlass();
                     for (int i = 0; i < fragments.Count; i++)
                     {
                         fragments[i].Damage = forceBreak;
                     }
+                    BreakGlass();
+                    holdingTime = 0f;
                     //Debug.Log("<color=red>On Mouse Up</color>");
                 }
             }
