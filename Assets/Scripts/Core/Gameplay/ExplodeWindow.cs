@@ -87,7 +87,7 @@ public class ExplodeWindow : MonoBehaviour
                             breakerAnim.Play("Release");
                             for (int i = 0; i < fragments.Count; i++)
                             {
-                                fragments[i].Damage = 350f;
+                                fragments[i].Damage = 600f;
                             }
                             BreakGlass();
                         }
@@ -115,23 +115,6 @@ public class ExplodeWindow : MonoBehaviour
             if (this.fragments.Count > 0)
             {
                 this.fragments.Clear();
-            }
-        }
-    }
-
-    public void UpdateGlass()
-    {
-        for (int i = 0; i < fragments.Count; i++)
-        {
-            fragments[i].Damage += 10;
-        }
-        if (fragments.Count > 0 && fragments[0].Damage >= 300)
-        {
-            //fragments.Clear();
-            isBroken = true;
-            for (int i = 0; i < fragments.Count; i++)
-            {
-                fragments[i].transform.GetChild(0).gameObject.SetActive(true);
             }
         }
     }

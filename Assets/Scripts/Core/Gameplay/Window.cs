@@ -115,98 +115,10 @@ public class Window : MonoBehaviour
                         TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
                     ));
-
-                //if (glassExplode.isBroken == true)
-                //{
-                //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
-                //    CoroutineUtils.WaitForSecondsRealtime(0.5f);
-                //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
-                //}
-
-                //StartCoroutine(CoroutineUtils.DelaySeconds(
-                //        () => holderAfterBroken.gameObject.SetActive(false),
-                //        glassFallDuration));
-
                 StartCoroutine(CoroutineUtils.DelaySeconds(
                         NextState,
                         nextStateAfterBreakGlassTime));
             }
-
-            //if (Input.GetKeyDown(KeyCode.G))
-            //{
-            //    //holderAfterBroken = new GameObject(glassExplodeExe.name).transform;
-
-            //    //StartCoroutine(CoroutineUtils.Chain(
-
-            //    //	CoroutineUtils.Do(() =>
-            //    //	{
-            //    //		//glassExplodeExe.Action(holderAfterBroken);
-            //    //		glassExplode.UpdateGlass();
-            //    //		impulseSource.GenerateImpulse();
-            //    //	}),
-            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
-            //    //	CoroutineUtils.WaitForSecondsRealtime(0.5f),
-            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
-
-            //    //));
-
-            //    //if (glassExplode.isBroken == true)
-            //    //{
-            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
-            //    //	CoroutineUtils.WaitForSecondsRealtime(0.5f);
-            //    //	TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
-            //    //}
-
-            //    //StartCoroutine(CoroutineUtils.DelaySeconds(
-            //    //		() => holderAfterBroken.gameObject.SetActive(false),
-            //    //		glassFallDuration));
-
-            //    //StartCoroutine(CoroutineUtils.DelaySeconds(
-            //    //		NextState,
-            //    //		nextStateAfterBreakGlassTime));
-
-            //    this.BreakGlass();
-            //}
-        }
-    }
-
-    private void BreakGlass()
-    {
-        glassExplode.UpdateGlass();
-        if (glassExplode.isBroken == true)
-        {
-            TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
-            CoroutineUtils.WaitForSecondsRealtime(0.5f);
-            TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
-
-            StartCoroutine(CoroutineUtils.Chain(
-
-                    CoroutineUtils.Do(() =>
-                    {
-                        //glassExplodeExe.Action(holderAfterBroken);
-                        glassExplode.BreakGlass();
-                        impulseSource.GenerateImpulse();
-                    }),
-                    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
-                    CoroutineUtils.WaitForSecondsRealtime(0.5f),
-                    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
-
-                ));
-
-            //if (glassExplode.isBroken == true)
-            //{
-            //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f);
-            //    CoroutineUtils.WaitForSecondsRealtime(0.5f);
-            //    TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f);
-            //}
-
-            //StartCoroutine(CoroutineUtils.DelaySeconds(
-            //        () => holderAfterBroken.gameObject.SetActive(false),
-            //        glassFallDuration));
-
-            StartCoroutine(CoroutineUtils.DelaySeconds(
-                    NextState,
-                    nextStateAfterBreakGlassTime));
         }
     }
 
