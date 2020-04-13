@@ -145,5 +145,21 @@ public class UIManager : Singleton<UIManager>
 		}
 	}
 
+	public void BackToMainMenu()
+	{
+		if (ToolManager.Instance.cleaner.GetTool() != null)
+			Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
+		if (ToolManager.Instance.glasser.GetTool() != null)
+			Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
+		if (ToolManager.Instance.breaker.GetTool() != null)
+			Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
+		if (LevelManager.Instance.currentWindow != null)
+			Destroy(LevelManager.Instance.currentWindow.gameObject);
+
+		LevelManager.Instance.OpenLastestLevel();
+
+		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
+	}
+
 	#endregion
 }
