@@ -115,7 +115,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 }
             }
         }
-        windows.Clear();
+        //windows.Clear();
     }
 
     public void OnClickChangeTheme()

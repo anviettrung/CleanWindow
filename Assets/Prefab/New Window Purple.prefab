@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1056981461724706260}
   - component: {fileID: 7685766736830016584}
   - component: {fileID: 1056981461724706262}
+  - component: {fileID: 6067715834584410421}
   m_Layer: 0
   m_Name: New Window Purple
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   isBroken: 0
   changeSide: 0
   breakerAnim: {fileID: 0}
+--- !u!114 &6067715834584410421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056981461724706263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727451bffb89fdc458e16fabfcf0e62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1056981462052377214}
 --- !u!1 &1056981462052377473
 GameObject:
   m_ObjectHideFlags: 0

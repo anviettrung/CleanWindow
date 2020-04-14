@@ -1,27 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class ResizeWindow : MonoBehaviour
 {
-    public void Resize(Sprite sprite)
+    public SpriteRenderer spriteRenderer;
+
+    private float ratioWidth = 0f;
+    private float ratioHeight = 0f;
+
+    void Start()
     {
-        transform.localScale = new Vector3(1, 1, 1);
+        Camera cam = Camera.main;
+        float height = cam.orthographicSize;
+        float width = height * Screen.width / Screen.height;
+        float unit_width = spriteRenderer.sprite.textureRect.width / spriteRenderer.sprite.pixelsPerUnit;
+        float unit_height = spriteRenderer.sprite.textureRect.height / spriteRenderer.sprite.pixelsPerUnit;
 
-        float width = sprite.bounds.size.x;
-        float height = sprite.bounds.size.y;
+#if UNITY_IOS
+        if (Device.generation.ToString().Contains("iPad"))
+        {
+            ratioWidth = 0.6f;
+            ratioHeight = 0.6f;
+        }
+        else
+        {
+            ratioWidth = ratioHeight = 0.8f;
+        }
+#elif UNITY_ANDROID
+#elif UNITY_EDITOR 
+        ratioWidth = ratioHeight = 0.8f;
+#endif
 
-
-        float worldScreenHeight = Camera.main.orthographicSize;
-        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
-
-        Vector3 xWidth = transform.localScale;
-        xWidth.x = worldScreenWidth / width;
-        //transform.localScale = xWidth;
-        Vector3 yHeight = transform.localScale;
-        yHeight.y = worldScreenHeight / height;
-        //transform.localScale = yHeight;
-
-        transform.localScale = new Vector3(xWidth.x * 0.8f, yHeight.y * 0.8f, 1);
+        this.transform.localScale = new Vector3(width / unit_width * ratioWidth, height / unit_height * ratioHeight);
     }
 }
