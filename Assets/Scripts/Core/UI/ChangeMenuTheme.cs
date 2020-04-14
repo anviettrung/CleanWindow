@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
-using UnityEngine.UI;
 
 public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
 {
@@ -12,8 +11,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
     public ListThemeData themeDatas;
 
     [Header("Home Background")]
-    //public SpriteRenderer wall;
-    public Image wall;
+    public SpriteRenderer wall;
 
     [Header("List Window")]
     public List<Window> windows = new List<Window>();
