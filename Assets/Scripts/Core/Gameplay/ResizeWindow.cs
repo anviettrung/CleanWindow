@@ -29,6 +29,7 @@ public class ResizeWindow : MonoBehaviour
             ratioWidth = ratioHeight = 0.8f;
         }
 #elif UNITY_ANDROID
+        ratioWidth = ratioHeight = 0.8f;
 #elif UNITY_EDITOR 
         ratioWidth = ratioHeight = 0.8f;
 #endif
