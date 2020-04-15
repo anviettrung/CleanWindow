@@ -21,12 +21,12 @@ public class ResizeWindow : MonoBehaviour
 #if UNITY_IOS
         if (Device.generation.ToString().Contains("iPad"))
         {
-            ratioWidth = 0.6f;
-            ratioHeight = 0.6f;
+            ratioWidth = ratioHeight = 0.8f;
         }
         else
         {
-            ratioWidth = ratioHeight = 0.8f;
+            ratioWidth = 0.8f;
+            ratioHeight = 0.6f;
         }
 #elif UNITY_ANDROID
         ratioWidth = ratioHeight = 0.8f;
@@ -34,6 +34,9 @@ public class ResizeWindow : MonoBehaviour
         ratioWidth = ratioHeight = 0.8f;
 #endif
 
-        this.transform.localScale = new Vector3(width / unit_width * ratioWidth, height / unit_height * ratioHeight);
+        //this.transform.localScale = new Vector3(width / unit_width * ratioWidth, height / unit_height * ratioHeight);
+
+        //for testing
+        this.transform.localScale = new Vector3(width / unit_width * 0.8f, height / unit_height * 0.6f);
     }
 }
