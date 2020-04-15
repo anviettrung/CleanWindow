@@ -30,6 +30,7 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Bot UI elements")]
 	public Button startButton;
+	public GameObject layoutCapture;
 	public GameObject tapAndHold;
 
 	[Header("Shop UI elements")]
@@ -47,6 +48,10 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Progress Gameplay")]
 	public List<UIProgress> uIProgresses;
+
+	[Header("Capture Image")]
+	public Image captureImage;
+	public CanvasGroup flashImage;
 
 	#endregion
 
@@ -80,6 +85,7 @@ public class UIManager : Singleton<UIManager>
 		gameTitle.gameObject.SetActive(s);
 		tapAndHold.SetActive(s);
 		layoutTopUIGameplay.SetActive(s);
+		layoutCapture.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()
@@ -159,6 +165,35 @@ public class UIManager : Singleton<UIManager>
 		LevelManager.Instance.OpenLastestLevel();
 
 		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
+	}
+
+	public void TakePhoto()
+	{
+		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
+		StartCoroutine(ShowFlash(0.5f));
+		StartCoroutine(CoroutineUtils.DelaySeconds(
+				LevelManager.Instance.currentWindow.NextState,
+				LevelManager.Instance.currentWindow.nextStateAfterBreakGlassTime));
+	}
+
+	private IEnumerator ShowFlash(float time)
+	{
+		float count = 0f;
+		while (count < time)
+		{
+			count += Time.deltaTime;
+			this.flashImage.alpha = Mathf.Lerp(0f, 1f, count / time);
+			yield return null;
+		}
+		this.captureImage.sprite = LevelManager.Instance.currentWindow.srMainPicture.sprite;
+		this.CallLayout("End Game");
+		count = 0f;
+		while (count < time)
+		{
+			count += Time.deltaTime;
+			this.flashImage.alpha = Mathf.Lerp(1f, 0f, count / time);
+			yield return null;
+		}
 	}
 
 	#endregion

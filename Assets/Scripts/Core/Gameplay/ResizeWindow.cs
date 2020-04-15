@@ -10,10 +10,12 @@ public class ResizeWindow : MonoBehaviour
     private float ratioWidth = 0f;
     private float ratioHeight = 0f;
 
+    private const float ORTHORGRAPHIC_SIZE = 12.144f;
     void Start()
     {
-        Camera cam = Camera.main;
-        float height = cam.orthographicSize;
+        //Camera cam = Camera.main;
+        //float height = cam.orthographicSize;
+        float height = ORTHORGRAPHIC_SIZE;
         float width = height * Screen.width / Screen.height;
         float unit_width = spriteRenderer.sprite.textureRect.width / spriteRenderer.sprite.pixelsPerUnit;
         float unit_height = spriteRenderer.sprite.textureRect.height / spriteRenderer.sprite.pixelsPerUnit;
@@ -25,8 +27,8 @@ public class ResizeWindow : MonoBehaviour
         }
         else
         {
-            ratioWidth = 0.8f;
-            ratioHeight = 0.6f;
+            ratioWidth = 0.7f;
+            ratioHeight = 0.8f;
         }
 #elif UNITY_ANDROID
         ratioWidth = ratioHeight = 0.8f;
@@ -34,9 +36,10 @@ public class ResizeWindow : MonoBehaviour
         ratioWidth = ratioHeight = 0.8f;
 #endif
 
-        //this.transform.localScale = new Vector3(width / unit_width * ratioWidth, height / unit_height * ratioHeight);
+        //on device
+        this.transform.localScale = new Vector3(width / unit_width * ratioWidth, height / unit_height * ratioHeight);
 
         //for testing
-        this.transform.localScale = new Vector3(width / unit_width * 0.8f, height / unit_height * 0.6f);
+        //this.transform.localScale = new Vector3(width / unit_width * 0.7f, height / unit_height * 0.8f);
     }
 }

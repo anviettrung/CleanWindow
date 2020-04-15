@@ -51,6 +51,7 @@ public class Window : MonoBehaviour
         DIRTY,
         WET,
         BREAK_GLASS,
+        CAPTURE,
         COMPLETE,
         NONE
     }
@@ -67,6 +68,7 @@ public class Window : MonoBehaviour
     public UnityEvent onEnterStateDirty = new UnityEvent();
     public UnityEvent onEnterStateWet = new UnityEvent();
     public UnityEvent onEnterStateBreakGlass = new UnityEvent();
+    public UnityEvent onEnterStateCapture = new UnityEvent();
     public UnityEvent onEnterStateComplete = new UnityEvent();
 
     #endregion
@@ -115,9 +117,10 @@ public class Window : MonoBehaviour
                         TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
 
                     ));
-                StartCoroutine(CoroutineUtils.DelaySeconds(
-                        NextState,
-                        nextStateAfterBreakGlassTime));
+                NextState();
+                //StartCoroutine(CoroutineUtils.DelaySeconds(
+                //        NextState,
+                //        nextStateAfterBreakGlassTime));
             }
         }
     }
@@ -177,11 +180,15 @@ public class Window : MonoBehaviour
                 srWet.gameObject.SetActive(false);
                 break;
 
+            case State.CAPTURE:
+                //onEnterStateCapture.Invoke();
+                PlayEndGameAnimation();
+                break;
+
             case State.COMPLETE:
                 onEnterStateComplete.Invoke();
                 LevelManager.Instance.LevelCompleted(data.KeyName);
-                PlayEndGameAnimation();
-
+               
                 break;
         }
 
@@ -202,6 +209,10 @@ public class Window : MonoBehaviour
                 break;
 
             case State.BREAK_GLASS:
+                ChangeState(State.CAPTURE);
+                break;
+
+            case State.CAPTURE:
                 ChangeState(State.COMPLETE);
                 break;
 
@@ -224,8 +235,13 @@ public class Window : MonoBehaviour
     {
         //PlayerInput.Instance.LockInput("window");
         srWindow.GetComponent<Animator>().SetTrigger("Open");
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            onEnterStateCapture.Invoke();
+        }, 1f));
+
         // Congrat
-        UIManager.Instance.CallLayout("End Game");
+        //UIManager.Instance.CallLayout("End Game");
     }
     #endregion
 

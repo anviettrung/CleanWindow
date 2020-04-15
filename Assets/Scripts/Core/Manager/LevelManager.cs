@@ -68,7 +68,9 @@ public class LevelManager : Singleton<LevelManager>
 		w.onEnterStateWet.AddListener(UsingCleanerTool);
 		w.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
 		w.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
-		w.onEnterStateComplete.AddListener(DestroyBreakerTool);
+		w.onEnterStateCapture.AddListener(DestroyBreakerTool);
+		w.onEnterStateCapture.AddListener(EnableButtonCapture);
+		w.onEnterStateComplete.AddListener(DisableButtonCapture);
 
 		currentWindow = w; // track
 	}
@@ -135,6 +137,16 @@ public class LevelManager : Singleton<LevelManager>
 			Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
 	}
 
+	protected void EnableButtonCapture()
+	{
+		UIManager.Instance.layoutCapture.gameObject.SetActive(true);
+	}
+
+	protected void DisableButtonCapture()
+	{
+		UIManager.Instance.layoutCapture.gameObject.SetActive(false);
+	}
+
 	public void PlayLevel()
 	{
 		currentWindow.gameObject.SetActive(true);
@@ -156,7 +168,9 @@ public class LevelManager : Singleton<LevelManager>
 		currentWindow.onEnterStateWet.AddListener(UsingCleanerTool);
 		currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
 		currentWindow.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
-		currentWindow.onEnterStateComplete.AddListener(DestroyBreakerTool);
+		currentWindow.onEnterStateCapture.AddListener(DestroyBreakerTool);
+		currentWindow.onEnterStateCapture.AddListener(EnableButtonCapture);
+		currentWindow.onEnterStateComplete.AddListener(DisableButtonCapture);
 
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() =>
