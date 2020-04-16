@@ -59,6 +59,8 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
             //Default theme = Blue theme
             var default_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == 1);
             PlayerPrefs.SetInt("lasted_theme", default_theme.ThemeID);
+            UIManager.Instance.avatarPlayer.sprite = default_theme.AvatarPlayer;
+
             for (int i = 0; i < windows.Count; i++)
             {
                 if (PlayerPrefs.HasKey("lastest_lvl"))
@@ -136,6 +138,8 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         }
 
         this.wall.sprite = theme.WallSprite;
+        UIManager.Instance.avatarPlayer.sprite = theme.AvatarPlayer;
+
         window_clone.gameObject.SetActive(true);
         LevelManager.Instance.currentWindow = window_clone.GetComponent<Window>();
         foreach (var w in windows)

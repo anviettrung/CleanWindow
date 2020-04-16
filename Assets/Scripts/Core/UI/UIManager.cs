@@ -39,18 +39,17 @@ public class UIManager : Singleton<UIManager>
 
 	public Text labelWindowShopPageIndex;
 
-	[Header("Setting elements")]
-
-
 	[Header("Navigator button")]
 	public Button nextButton;
 	public Button watchAdsButton;
 
-	[Header("Progress Gameplay")]
+	[Header("Top UI in Gameplay")]
 	public List<UIProgress> uIProgresses;
+	public Image avatarPlayer;
 
 	[Header("Capture Image")]
 	public Image captureImage;
+	public Image avatarInCapture;
 	public CanvasGroup flashImage;
 
 	#endregion
@@ -186,6 +185,7 @@ public class UIManager : Singleton<UIManager>
 			yield return null;
 		}
 		this.captureImage.sprite = LevelManager.Instance.currentWindow.srMainPicture.sprite;
+		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
 		this.CallLayout("End Game");
 		count = 0f;
 		while (count < time)
