@@ -57,7 +57,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         {
             //Enable default theme
             //Default theme = Blue theme
-            var default_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == 5);
+            var default_theme = Array.Find(themeDatas.Theme, theme => theme.ThemeID == 1);
             PlayerPrefs.SetInt("lasted_theme", default_theme.ThemeID);
             for (int i = 0; i < windows.Count; i++)
             {
@@ -115,7 +115,6 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 }
             }
         }
-        //windows.Clear();
     }
 
     public void OnClickChangeTheme()
@@ -123,7 +122,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         var selected_object = EventSystem.current.currentSelectedGameObject;
         var themeID = selected_object.transform.GetSiblingIndex() + 1;
         var theme = Array.Find(this.themeDatas.Theme, t => t.ThemeID == themeID);
-        var window_clone = windows.ElementAt(themeID - 1);
+        var window_clone = windows.Find(w_id => w_id.name.Contains(theme.ThemeName));
 
         window_clone.GetComponent<Window>().Data = LevelManager.Instance.currentWindow.Data;
 
