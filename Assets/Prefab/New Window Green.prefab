@@ -16,8 +16,6 @@ GameObject:
   - component: {fileID: 23716384454501087}
   - component: {fileID: 23716384454501072}
   - component: {fileID: 23716384454501073}
-  - component: {fileID: 23716384454501074}
-  - component: {fileID: 23716384454501076}
   - component: {fileID: 23716384454501083}
   - component: {fileID: 23716384454501075}
   m_Layer: 0
@@ -279,58 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3c1fd85e053f64ab748a5f998a9f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &23716384454501074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23716384454501079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c5f1e1730d93a4880c460394961c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MassPerSolidPixel: 0.01
---- !u!114 &23716384454501076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23716384454501079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138f97f7bf4c28459d6b9b00bb42a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseDamageMin: 0
-  DamageMin: 0
-  UseDamageMax: 0
-  DamageMax: 0
-  UseAlphaCountMin: 0
-  AlphaCountMin: 0
-  UseAlphaCountMax: 1
-  AlphaCountMax: 10
-  UseRemainingAlphaMin: 0
-  RemainingAlphaMin: 0
-  UseRemainingAlphaMax: 0
-  RemainingAlphaMax: 1
-  OnRequirementMet:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  met: 0
 --- !u!114 &23716384454501083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2677,8 +2623,6 @@ GameObject:
   - component: {fileID: 23716385886663462}
   - component: {fileID: 23716385886663463}
   - component: {fileID: 23716385886663480}
-  - component: {fileID: 23716385886663481}
-  - component: {fileID: 23716385886663483}
   - component: {fileID: 23716385886663457}
   - component: {fileID: 23716385886663458}
   m_Layer: 0
@@ -2940,58 +2884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3c1fd85e053f64ab748a5f998a9f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &23716385886663481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23716385886663485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c5f1e1730d93a4880c460394961c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MassPerSolidPixel: 0.01
---- !u!114 &23716385886663483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23716385886663485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138f97f7bf4c28459d6b9b00bb42a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseDamageMin: 0
-  DamageMin: 0
-  UseDamageMax: 0
-  DamageMax: 0
-  UseAlphaCountMin: 0
-  AlphaCountMin: 0
-  UseAlphaCountMax: 1
-  AlphaCountMax: 10
-  UseRemainingAlphaMin: 0
-  RemainingAlphaMin: 0
-  UseRemainingAlphaMax: 0
-  RemainingAlphaMax: 1
-  OnRequirementMet:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  met: 0
 --- !u!114 &23716385886663457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3109,6 +3001,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onEnterStateBreakGlass:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterStateCapture:
     m_PersistentCalls:
       m_Calls: []
   onEnterStateComplete:

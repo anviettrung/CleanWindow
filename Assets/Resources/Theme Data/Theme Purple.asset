@@ -15,5 +15,6 @@ MonoBehaviour:
   themeID: 2
   themeName: Purple
   wallSprite: {fileID: 21300000, guid: c7a090bc5e87c454ab1fb1b8d3188a7c, type: 3}
+  avatarPlayer: {fileID: 21300000, guid: 316693199ef56704380ebe94b242bd74, type: 3}
   windowPrefab: {fileID: 1056981461724706263, guid: aba20e721f25e6c4a8c606713f975ba0,
     type: 3}
