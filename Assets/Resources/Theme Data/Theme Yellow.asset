@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baef96e4859fe8d4aaf02f16772eac32, type: 3}
   m_Name: Theme Yellow
   m_EditorClassIdentifier: 
-  themeID: 2
-  themeName: Theme 2
+  themeID: 3
+  themeName: Yellow
   wallSprite: {fileID: 21300000, guid: dd85fc0448bf25b489596bbd14e64081, type: 3}
   windowPrefab: {fileID: 5282228990270060124, guid: 3e94e92f50bba874dbdb5da0ed1a32cd,
     type: 3}

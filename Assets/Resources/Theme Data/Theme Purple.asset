@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baef96e4859fe8d4aaf02f16772eac32, type: 3}
   m_Name: Theme Purple
   m_EditorClassIdentifier: 
-  themeID: 1
-  themeName: Theme 1
+  themeID: 2
+  themeName: Purple
   wallSprite: {fileID: 21300000, guid: c7a090bc5e87c454ab1fb1b8d3188a7c, type: 3}
   windowPrefab: {fileID: 1056981461724706263, guid: aba20e721f25e6c4a8c606713f975ba0,
     type: 3}
