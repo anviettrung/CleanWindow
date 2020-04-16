@@ -46,6 +46,7 @@ public class UIManager : Singleton<UIManager>
 	[Header("Top UI in Gameplay")]
 	public List<UIProgress> uIProgresses;
 	public Image avatarPlayer;
+	public Text cityName;
 
 	[Header("Capture Image")]
 	public Image captureImage;

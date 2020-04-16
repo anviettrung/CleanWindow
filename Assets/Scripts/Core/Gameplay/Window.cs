@@ -238,6 +238,8 @@ public class Window : MonoBehaviour
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             onEnterStateCapture.Invoke();
+            UIManager.Instance.cityName.text = this.Data.WindowName;
+            //UIManager.Instance.cityName.text.
         }, 1f));
 
         // Congrat

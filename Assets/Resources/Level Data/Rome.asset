@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rome
   m_EditorClassIdentifier: 
   keyName: rome
-  windowName: Rome
+  windowName: ROME
   picture: {fileID: 21300000, guid: 1faf63527c0064f71b81d5e854600fd3, type: 3}
   dirtyColor: {r: 0.88235295, g: 0.6039216, b: 0.27058825, a: 0.9019608}

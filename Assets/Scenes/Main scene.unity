@@ -8357,7 +8357,7 @@ GameObject:
   - component: {fileID: 1166440572}
   - component: {fileID: 1166440571}
   m_Layer: 5
-  m_Name: Name
+  m_Name: City Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8396,7 +8396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.9811321, g: 0.11569952, b: 0.45722184, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16654,6 +16654,7 @@ MonoBehaviour:
   - {fileID: 942261901}
   - {fileID: 1943826748}
   avatarPlayer: {fileID: 623437918}
+  cityName: {fileID: 1166440571}
   captureImage: {fileID: 6906036140759790912}
   avatarInCapture: {fileID: 6906036140266919611}
   flashImage: {fileID: 2773207819789825061}
