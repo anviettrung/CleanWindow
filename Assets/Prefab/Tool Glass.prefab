@@ -4883,6 +4883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 130c182d2676e4c13ae7d7656de4aa77, type: 2}
   srMain: {fileID: 8833707124376685320}
+  glasserEffect: {fileID: 0}
 --- !u!114 &8654659335952931471
 MonoBehaviour:
   m_ObjectHideFlags: 0

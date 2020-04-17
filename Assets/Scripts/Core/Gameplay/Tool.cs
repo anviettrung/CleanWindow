@@ -24,6 +24,9 @@ public class Tool : MonoBehaviour
 	[Header("Sprite Renderers")]
 	public SpriteRenderer srMain;
 
+	[Header("Glass Effect")]
+	public GlasserEffect glasserEffect;
+
 	#endregion
 
 	#region EVENT

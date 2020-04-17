@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolsData: {fileID: 11400000, guid: a20818d0f1feb4bd49469fccb4c2df70, type: 2}
   tools: []
-  toolPrefab: {fileID: 5748551618143602468, guid: 3af6744f26e524406a9333a15c506ddc,
+  toolPrefab: {fileID: 651985118944293240, guid: 62f5dbdc4004d104e9a13c02877f4022,
     type: 3}
   usingToolIndex: 0
 --- !u!114 &295271332
@@ -7513,6 +7513,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010786016}
+  m_CullTransparentMesh: 0
+--- !u!1 &1024045753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024045754}
+  - component: {fileID: 1024045756}
+  - component: {fileID: 1024045755}
+  m_Layer: 5
+  m_Name: 'Caption: city name'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1024045754
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024045753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6906036140186459671}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -186.2, y: -81.4}
+  m_SizeDelta: {x: 302.3, y: 94.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1024045755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024045753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.98039216, g: 0.11764706, b: 0.45882353, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &1024045756
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024045753}
   m_CullTransparentMesh: 0
 --- !u!1 &1035923814
 GameObject:
@@ -16658,6 +16735,7 @@ MonoBehaviour:
   captureImage: {fileID: 6906036140759790912}
   avatarInCapture: {fileID: 6906036140266919611}
   flashImage: {fileID: 2773207819789825061}
+  cityCaption: {fileID: 1024045755}
   layouts:
   - layoutName: Main Menu
     elements:
@@ -17759,7 +17837,7 @@ GameObject:
   - component: {fileID: 1157122991421658627}
   - component: {fileID: 1157122991421658624}
   m_Layer: 0
-  m_Name: Furniture
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17774,7 +17852,7 @@ Transform:
   m_GameObject: {fileID: 1157122991421658626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -4.62, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1157122990045637851}
   m_RootOrder: 2
@@ -22271,6 +22349,7 @@ RectTransform:
   m_Children:
   - {fileID: 6906036140266919608}
   - {fileID: 6906036140507490414}
+  - {fileID: 1024045754}
   - {fileID: 6906036140759790913}
   m_Father: {fileID: 1611631984}
   m_RootOrder: 2
@@ -22433,7 +22512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6906036140759790912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22474,7 +22553,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6906036140186459671}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

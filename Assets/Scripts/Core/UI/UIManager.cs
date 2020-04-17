@@ -52,6 +52,7 @@ public class UIManager : Singleton<UIManager>
 	public Image captureImage;
 	public Image avatarInCapture;
 	public CanvasGroup flashImage;
+	public Text cityCaption;
 
 	#endregion
 
@@ -187,6 +188,7 @@ public class UIManager : Singleton<UIManager>
 		}
 		this.captureImage.sprite = LevelManager.Instance.currentWindow.srMainPicture.sprite;
 		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
+		this.cityCaption.text = this.cityName.text;
 		this.CallLayout("End Game");
 		count = 0f;
 		while (count < time)
