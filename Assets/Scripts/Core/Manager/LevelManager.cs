@@ -53,19 +53,36 @@ public class LevelManager : Singleton<LevelManager>
 	#region OPEN_LEVEL
 	public void OpenLevel(int x)
 	{
-		StopAllCoroutines();
-		var list_tools = FindObjectsOfType<Tool>();
-		for (int i = 0; i < list_tools.Length; i++)
+		//StopAllCoroutines();
+		var tool_list_template = FindObjectsOfType<ToolListTemplate>();
+		foreach (var tool in tool_list_template)
 		{
-			if (list_tools[i].Data.ToolType != ToolData.Type.BREAKER)
+			tool.StopCoroutineMoveTool();
+			if (tool.currentTool != null)
 			{
-				list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-			}
-			else
-			{
-				list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+				if (tool.currentTool.Data.ToolType != ToolData.Type.BREAKER)
+				{
+					tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+				}
+				else
+				{
+					tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+				}
 			}
 		}
+
+		//var list_tools = FindObjectsOfType<Tool>();
+		//for (int i = 0; i < list_tools.Length; i++)
+		//{
+		//	if (list_tools[i].Data.ToolType != ToolData.Type.BREAKER)
+		//	{
+		//		list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+		//	}
+		//	else
+		//	{
+		//		list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+		//	}
+		//}
 
 
 		// UI

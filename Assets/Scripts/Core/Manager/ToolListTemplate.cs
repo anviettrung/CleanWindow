@@ -14,7 +14,8 @@ public class ToolListTemplate : MonoBehaviour
 	public GameObject toolPrefab;
 
 	// tracking
-	protected Tool currentTool;
+	//protected Tool currentTool;
+	[HideInInspector] public Tool currentTool;
 	public int usingToolIndex;
 	private Tool createdTool;
 
@@ -164,6 +165,11 @@ public class ToolListTemplate : MonoBehaviour
 			this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count/time);
 			yield return null;
 		}
+	}
+
+	public void StopCoroutineMoveTool()
+	{
+		StopAllCoroutines();
 	}
 
 	//public void ResetPosition()
