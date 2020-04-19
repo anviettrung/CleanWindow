@@ -29,6 +29,17 @@ public class LevelManager : Singleton<LevelManager>
 	#region INITIALIZATION
 	public void Init()
 	{
+		for (int i = 0; i < this.levelsData.Windows.Length; i++)
+		{
+			var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
+			slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
+			slot_window.GetComponent<UIWindowShopItem>().levelText.text = "Level " + i;
+			if (!UIManager.Instance.windowShop.items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
+			{
+				UIManager.Instance.windowShop.items.Add(slot_window.GetComponent<UIWindowShopItem>());
+			}
+		}
+
 		levels = new List<Level>();
 		for (int i = 0; i < levelsData.Windows.Length; i++) {
 			Level lvl = new Level(levelsData.Windows[i]);

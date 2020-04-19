@@ -14,20 +14,6 @@ public class UIWindowShop : MonoBehaviour
     #endregion
 
     #region UNITY_CALLBACK
-
-    private void Awake()
-    {
-        //for (int i = 0; i < LevelManager.Instance.levelsData.Windows.Length; i++)
-        //{
-        //    var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
-        //    slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
-        //    if (!items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
-        //    {
-        //        items.Add(slot_window.GetComponent<UIWindowShopItem>());
-        //    }
-        //}
-    }
-
     protected void OnEnable()
     {
         UpdateUI();

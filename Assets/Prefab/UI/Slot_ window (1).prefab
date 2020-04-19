@@ -679,6 +679,7 @@ MonoBehaviour:
   mainPic: {fileID: 9206946965434745383}
   labelWindowName: {fileID: 9206946966780008471}
   unlockPic: {fileID: 9206946965750445657}
+  levelText: {fileID: 9206946965317291176}
 --- !u!1 &9206946966606392661
 GameObject:
   m_ObjectHideFlags: 0

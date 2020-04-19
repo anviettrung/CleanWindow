@@ -20,7 +20,8 @@ public class UIWindowShopItem : MonoBehaviour
 	[Header("Unlock button elements")]
 	public Image unlockPic;
 
-	//[Header("Lock button elements")]
+	[Header("Lock button elements")]
+	public Text levelText;
 
 	#endregion
 
