@@ -23,6 +23,7 @@ public class ExplodeWindow : MonoBehaviour
 
     private float holdingTime;
     private bool canTap;
+    private bool isHolding;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class ExplodeWindow : MonoBehaviour
 
         holdingTime = 0f;
         canTap = true;
+        isHolding = false;
     }
 
     private void Update()
@@ -46,8 +48,16 @@ public class ExplodeWindow : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    if (UIManager.Instance.tapAndHold.activeInHierarchy == true)
+                    {
+                        UIManager.Instance.tapAndHold.SetActive(false);
+                    }
                     forceBreak += 100f;
                     //Debug.Log("<b>On Mouse Down</b>");
+                    if (breakerAnim.IsPlaying("StartHolding"))
+                    {
+                        breakerAnim.Stop("StartHolding");
+                    }
                 }
 
                 else if (Input.GetMouseButton(0))
@@ -71,20 +81,15 @@ public class ExplodeWindow : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (UIManager.Instance.tapAndHold.activeInHierarchy == true)
-                    {
-                        UIManager.Instance.tapAndHold.SetActive(false);
-                    }
                     if (breakerAnim != null)
                     {
-                        //if (breakerAnim.isPlaying)
+                        if (breakerAnim.isPlaying)
+                        {
+                            breakerAnim.Stop();
+                        }
+                        breakerAnim.Play("Release");
                         if (holdingTime > 1f)
                         {
-                            if (breakerAnim.IsPlaying("Holding"))
-                            {
-                                breakerAnim.Stop("Holding");
-                            }
-                            breakerAnim.Play("Release");
                             for (int i = 0; i < fragments.Count; i++)
                             {
                                 fragments[i].Damage = 600f;
@@ -93,18 +98,13 @@ public class ExplodeWindow : MonoBehaviour
                         }
                         else
                         {
-                            if (breakerAnim.isPlaying)
+                            for (int i = 0; i < fragments.Count; i++)
                             {
-                                breakerAnim.Stop();
+                                fragments[i].Damage = forceBreak;
                             }
-                            breakerAnim.Play("Break");
+                            BreakGlass();
                         }
                     }
-                    for (int i = 0; i < fragments.Count; i++)
-                    {
-                        fragments[i].Damage = forceBreak;
-                    }
-                    BreakGlass();
                     holdingTime = 0f;
                     //Debug.Log("<color=red>On Mouse Up</color>");
                 }
@@ -127,7 +127,6 @@ public class ExplodeWindow : MonoBehaviour
             {
                 var rigidbody_2D = fragments[i].GetComponent<Rigidbody2D>();
                 rigidbody_2D.constraints = RigidbodyConstraints2D.None;
-                //rigidbody_2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
                 rigidbody_2D.sleepMode = RigidbodySleepMode2D.StartAwake;
                 rigidbody_2D.gravityScale = Random.Range(2f, 5f);
             }
@@ -141,8 +140,10 @@ public class ExplodeWindow : MonoBehaviour
             {
                 changeSide = true;
             }
-
-            //LevelManager.Instance.currentWindow.impulseSource.GenerateImpulse();
+        }
+        else
+        {
+            UIManager.Instance.tapAndHold.SetActive(true);
         }
     }
 
@@ -151,6 +152,8 @@ public class ExplodeWindow : MonoBehaviour
         canTap = false;
         if (breakerAnim != null)
         {
+            breakerAnim.transform.localScale = Vector3.one;
+            breakerAnim.transform.eulerAngles = Vector3.zero;
             if (breakerAnim.isPlaying)
             {
                 breakerAnim.Stop();
@@ -171,8 +174,6 @@ public class ExplodeWindow : MonoBehaviour
         {
             UIManager.Instance.tapAndHold.SetActive(true);
         }
-        //fragments.Clear();
-        //fragments.Add(glassRight);
         glassSide = GlassSide.RIGHT;
         forceBreak = 0f;
     }
