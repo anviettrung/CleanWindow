@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6751398922124231114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -2.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6751398923575973746}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8a2c7b2c65f21224ea262dcc2c093cf0, type: 2}
   srMain: {fileID: 6751398923575973747}
+  glasserEffect: {fileID: 0}
 --- !u!1 &6751398923575973748
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +144,7 @@ Animation:
   - {fileID: 7400000, guid: 88b12f16ef6b93742ae8f247918969eb, type: 2}
   - {fileID: 7400000, guid: b50b353bede905345bf95a9882525dd6, type: 2}
   - {fileID: 7400000, guid: 53ffda19532973143bb7b1d6417565cb, type: 2}
+  - {fileID: 7400000, guid: 33706c15e06056d40ac5ed68fadc8308, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
