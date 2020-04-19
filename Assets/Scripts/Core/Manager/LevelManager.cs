@@ -53,6 +53,21 @@ public class LevelManager : Singleton<LevelManager>
 	#region OPEN_LEVEL
 	public void OpenLevel(int x)
 	{
+		StopAllCoroutines();
+		var list_tools = FindObjectsOfType<Tool>();
+		for (int i = 0; i < list_tools.Length; i++)
+		{
+			if (list_tools[i].Data.ToolType != ToolData.Type.BREAKER)
+			{
+				list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+			}
+			else
+			{
+				list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+			}
+		}
+
+
 		// UI
 		UIManager.Instance.CallLayout("Main Menu");
 
@@ -110,7 +125,7 @@ public class LevelManager : Singleton<LevelManager>
 	protected void UsingBreakerTool()
 	{
 		ToolManager.Instance.breaker.CreateTool();
-		PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
+		//PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
 
 		ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
 		explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
@@ -120,32 +135,45 @@ public class LevelManager : Singleton<LevelManager>
 
 	protected void DestroyBreakerTool()
 	{
+		//if (ToolManager.Instance.breaker.GetTool() != null)
+		//	Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
 		if (ToolManager.Instance.breaker.GetTool() != null)
-			Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
+		{
+			ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 2f);
+		}
 	}
 
 	protected void UsingCleanerTool()
 	{
 		ToolManager.Instance.cleaner.CreateTool();
-		PlayerInput.Instance.tool = ToolManager.Instance.cleaner.GetTool();
+		//PlayerInput.Instance.tool = ToolManager.Instance.cleaner.GetTool();
 	}
 
 	protected void DestroyCleanerTool()
 	{
+		//if (ToolManager.Instance.cleaner.GetTool() != null)
+		//	Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
+
 		if (ToolManager.Instance.cleaner.GetTool() != null)
-			Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
+		{
+			ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 2f);
+		}
 	}
 
 	protected void UsingGlasserTool()
 	{
 		ToolManager.Instance.glasser.CreateTool();
-		PlayerInput.Instance.tool = ToolManager.Instance.glasser.GetTool();
+		//PlayerInput.Instance.tool = ToolManager.Instance.glasser.GetTool();
 	}
 
 	protected void DestroyGlasserTool()
 	{
+		//if (ToolManager.Instance.glasser.GetTool() != null)
+		//	Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
 		if (ToolManager.Instance.glasser.GetTool() != null)
-			Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
+		{
+			ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 2f);
+		}
 	}
 
 	protected void EnableButtonCapture()

@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] private GeneralResource generalResources = null;
 	public GeneralResource GeneralResources { get { return generalResources; } }
 
+	[Header("Tool Transform")]
+	public ToolTransform toolTransform;
+
 	#endregion
 
 	#region UNITY_CALLBACK

@@ -144,6 +144,10 @@ public class ExplodeWindow : MonoBehaviour
         else
         {
             UIManager.Instance.tapAndHold.SetActive(true);
+            if (isBroken == true)
+            {
+                UIManager.Instance.tapAndHold.SetActive(false);
+            }
         }
     }
 

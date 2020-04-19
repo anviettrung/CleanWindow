@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
@@ -156,14 +157,23 @@ public class UIManager : Singleton<UIManager>
 		}
 	}
 
+	public bool IsPointerUIsObject()
+	{
+		PointerEventData eventData = new PointerEventData(EventSystem.current);
+		eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(eventData, results);
+		return results.FindAll(result => result.gameObject.layer == LayerMask.NameToLayer("UI")).Count > 0;
+	}
+
 	public void BackToMainMenu()
 	{
-		if (ToolManager.Instance.cleaner.GetTool() != null)
-			Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
-		if (ToolManager.Instance.glasser.GetTool() != null)
-			Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
-		if (ToolManager.Instance.breaker.GetTool() != null)
-			Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
+		//if (ToolManager.Instance.cleaner.GetTool() != null)
+		//	ToolManager.Instance.cleaner.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+		//if (ToolManager.Instance.glasser.GetTool() != null)
+		//	ToolManager.Instance.glasser.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+		//if (ToolManager.Instance.breaker.GetTool() != null)
+		//	ToolManager.Instance.breaker.GetTool().transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
 		if (LevelManager.Instance.currentWindow != null)
 			Destroy(LevelManager.Instance.currentWindow.gameObject);
 

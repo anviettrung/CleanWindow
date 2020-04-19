@@ -31,18 +31,21 @@ public class PlayerInput : Singleton<PlayerInput>
         {
             if (window != null && Input.GetMouseButton(0))
             {
-                if (window.GetCurrentTextureDrawer() != null)
-                    window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
-
-                if (tool != null)
+                if (UIManager.Instance.IsPointerUIsObject() == false)
                 {
-                    if (tool.Data.ToolType != ToolData.Type.BREAKER)
+                    if (window.GetCurrentTextureDrawer() != null)
+                        window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
+
+                    if (tool != null)
                     {
-                        tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
-                        if (tool.Data.ToolType == ToolData.Type.GLASSER)
+                        if (tool.Data.ToolType != ToolData.Type.BREAKER)
                         {
-                            if (tool.glasserEffect != null)
-                                tool.glasserEffect.PlayGlasserEffect(true);
+                            tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
+                            if (tool.Data.ToolType == ToolData.Type.GLASSER)
+                            {
+                                if (tool.glasserEffect != null)
+                                    tool.glasserEffect.PlayGlasserEffect(true);
+                            }
                         }
                     }
                 }
