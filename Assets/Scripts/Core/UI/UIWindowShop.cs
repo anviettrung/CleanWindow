@@ -4,72 +4,77 @@ using UnityEngine;
 
 public class UIWindowShop : MonoBehaviour
 {
-	#region DATA
-	public List<UIWindowShopItem> items;
-	protected List<Level> allData;
-	#endregion
+    #region DATA
+    public List<UIWindowShopItem> items;
+    protected List<Level> allData;
+    #endregion
 
-	#region EVENT
+    #region EVENT
 
-	#endregion
+    #endregion
 
-	#region UNITY_CALLBACK
-	protected void OnEnable()
-	{
-		UpdateUI();
-	}
+    #region UNITY_CALLBACK
 
-	protected void Update()
-	{
-		UpdateUI();
-	}
+    private void Awake()
+    {
+        //for (int i = 0; i < LevelManager.Instance.levelsData.Windows.Length; i++)
+        //{
+        //    var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
+        //    slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
+        //    if (!items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
+        //    {
+        //        items.Add(slot_window.GetComponent<UIWindowShopItem>());
+        //    }
+        //}
+    }
 
-	#endregion
+    protected void OnEnable()
+    {
+        UpdateUI();
+    }
 
-	#region FUNCTION
-	public virtual void SetData(List<Level> datas)
-	{
-		allData = datas;
-		UpdateItemData();
-	}
+    protected void Update()
+    {
+        UpdateUI();
+    }
 
-	public virtual void UpdateItemData(int from, int to)
-	{
-		ResetItemData();
-		for (int i = 0, j = from; i < items.Count && j <= to; i++, j++) {
-			items[i].levelData = allData[j];
-		}
-	}
+    #endregion
 
-	// all
-	public void UpdateItemData()
-	{
-		UpdateItemData(0, allData.Count - 1);
-	}
+    #region FUNCTION
+    public virtual void SetData(List<Level> datas)
+    {
+        allData = datas;
+        UpdateItemData();
+    }
 
-	protected void ResetItemData()
-	{
-		for (int i = 0; i < items.Count; i++)
-			items[i].levelData = null;
-	}
+    public virtual void UpdateItemData(int from, int to)
+    {
+        ResetItemData();
+        for (int i = 0, j = from; i < items.Count && j <= to; i++, j++)
+        {
+            items[i].levelData = allData[j];
+        }
+    }
 
-	public virtual void UpdateUI()
-	{
-		this.UnlockAllItemForTesting();
-		foreach (UIWindowShopItem item in items) {
-			item.UpdateUI();
-		}
-	}
+    // all
+    public void UpdateItemData()
+    {
+        UpdateItemData(0, allData.Count - 1);
+    }
 
-	#endregion
+    protected void ResetItemData()
+    {
+        for (int i = 0; i < items.Count; i++)
+            items[i].levelData = null;
+    }
 
-	#region Testing
-	private void UnlockAllItemForTesting()
-	{
-		foreach (UIWindowShopItem item in items)
-		{
-			item.levelData.status = Level.Status.COMPLETE;
-		}
-	}
-	#endregion
+    public virtual void UpdateUI()
+    {
+        foreach (UIWindowShopItem item in items)
+        {
+            item.UpdateUI();
+        }
+    }
+
+    #endregion
 }

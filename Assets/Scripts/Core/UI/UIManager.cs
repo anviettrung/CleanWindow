@@ -54,6 +54,10 @@ public class UIManager : Singleton<UIManager>
 	public CanvasGroup flashImage;
 	public Text cityCaption;
 
+	[Header("Layout Window Shop")]
+	public GameObject slotWindow;
+	public Transform contentWindow;
+
 	#endregion
 
 	#region FUNCTION
