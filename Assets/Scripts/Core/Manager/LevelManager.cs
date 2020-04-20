@@ -157,8 +157,11 @@ public class LevelManager : Singleton<LevelManager>
 		if (ToolManager.Instance.breaker.GetTool() != null)
 		{
 			ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 2f);
-			ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
-
+			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+			{
+				ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
+			},2f));
+			
 		}
 	}
 
