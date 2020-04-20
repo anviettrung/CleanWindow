@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolsData: {fileID: 11400000, guid: 28e981e189ac0e9489ade4930bebd72a, type: 2}
   tools: []
-  toolPrefab: {fileID: 6751398922124231114, guid: 8f7b49fe19fed7747b40d0b49f0a0d59,
+  toolPrefab: {fileID: 3380382479469547043, guid: 9404cad8c754341439daf01685602127,
     type: 3}
   currentTool: {fileID: 0}
   usingToolIndex: 0
@@ -3433,7 +3433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.199951, y: -227}
+  m_AnchoredPosition: {x: -7.199951, y: -227.00024}
   m_SizeDelta: {x: -208.5, y: -423.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010602571
@@ -5032,7 +5032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341078716}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.8, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1699475123}
@@ -7905,7 +7905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014455809}
   m_Layer: 0
-  m_Name: Breaker spawn transform
+  m_Name: Spawn breaker transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
