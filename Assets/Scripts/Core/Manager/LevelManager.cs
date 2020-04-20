@@ -87,6 +87,7 @@ public class LevelManager : Singleton<LevelManager>
 
 		// UI
 		UIManager.Instance.CallLayout("Main Menu");
+		UIManager.Instance.cityName.text = "???";
 
 		// Instantiate
 		WindowData data = levels[x].data;

@@ -54,10 +54,10 @@ public class ExplodeWindow : MonoBehaviour
                     }
                     forceBreak += 100f;
                     //Debug.Log("<b>On Mouse Down</b>");
-                    if (breakerAnim.IsPlaying("StartHolding"))
-                    {
-                        breakerAnim.Stop("StartHolding");
-                    }
+                    //if (breakerAnim.IsPlaying("StartHolding"))
+                    //{
+                    //    breakerAnim.Stop("StartHolding");
+                    //}
                 }
 
                 else if (Input.GetMouseButton(0))
@@ -67,10 +67,10 @@ public class ExplodeWindow : MonoBehaviour
                     {
                         if (breakerAnim != null)
                         {
-                            if (breakerAnim.isPlaying)
-                            {
-                                breakerAnim.Stop();
-                            }
+                            //if (breakerAnim.isPlaying)
+                            //{
+                            //    breakerAnim.Stop();
+                            //}
                             breakerAnim.Play("Holding");
                         }
                         LevelManager.Instance.currentWindow.impulseSource.GenerateImpulse();
@@ -83,13 +83,14 @@ public class ExplodeWindow : MonoBehaviour
                 {
                     if (breakerAnim != null)
                     {
-                        if (breakerAnim.isPlaying)
-                        {
-                            breakerAnim.Stop();
-                        }
-                        breakerAnim.Play("Release");
+                        //if (breakerAnim.isPlaying)
+                        //{
+                        //    breakerAnim.Stop();
+                        //}
+                        //breakerAnim.Play("Release");
                         if (holdingTime > 1f)
                         {
+                            breakerAnim.Play("Release");
                             for (int i = 0; i < fragments.Count; i++)
                             {
                                 fragments[i].Damage = 600f;
@@ -98,6 +99,7 @@ public class ExplodeWindow : MonoBehaviour
                         }
                         else
                         {
+                            breakerAnim.Play("Break");
                             for (int i = 0; i < fragments.Count; i++)
                             {
                                 fragments[i].Damage = forceBreak;
@@ -158,11 +160,12 @@ public class ExplodeWindow : MonoBehaviour
         {
             breakerAnim.transform.localScale = Vector3.one;
             breakerAnim.transform.eulerAngles = Vector3.zero;
-            if (breakerAnim.isPlaying)
-            {
-                breakerAnim.Stop();
-                breakerAnim.Play("MoveTool");
-            }
+            //if (breakerAnim.isPlaying)
+            //{
+            //    breakerAnim.Stop();
+            //    breakerAnim.Play("MoveTool");
+            //}
+            breakerAnim.Play("MoveTool");
         }
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
