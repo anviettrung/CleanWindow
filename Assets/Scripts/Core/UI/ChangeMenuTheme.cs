@@ -72,6 +72,10 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 {
                     LevelManager.Instance.currentWindow = windows[i];
                     this.wall.sprite = default_theme.WallSprite;
+
+                    //pick avatar
+                    UIManager.Instance.avatarPlayer.sprite = GetLastedAvatar(default_theme);
+
                     foreach (Transform child in changeThemeTransform)
                     {
                         if (child.name.Contains("Blue"))
@@ -102,6 +106,10 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
                 {
                     LevelManager.Instance.currentWindow = windows[i];
                     this.wall.sprite = lasted_theme.WallSprite;
+
+                    //pick avatar
+                    UIManager.Instance.avatarPlayer.sprite = this.GetLastedAvatar(lasted_theme);
+
                     foreach (Transform child in changeThemeTransform)
                     {
                         if (child.name.Contains(lasted_theme.name))
@@ -138,7 +146,11 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         }
 
         this.wall.sprite = theme.WallSprite;
-        UIManager.Instance.avatarPlayer.sprite = theme.AvatarPlayer;
+        if (!PlayerPrefs.HasKey("last_selected_avatar"))
+        {
+            UIManager.Instance.avatarPlayer.sprite = theme.AvatarPlayer;
+            PlayerPrefs.SetString("last_selected_avatar", theme.AvatarPlayer.name);
+        }
 
         window_clone.gameObject.SetActive(true);
         LevelManager.Instance.currentWindow = window_clone.GetComponent<Window>();
@@ -151,5 +163,22 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         }
 
         PlayerPrefs.SetInt("lasted_theme", themeID);
+    }
+
+    private Sprite GetLastedAvatar(Theme theme)
+    {
+        if (!PlayerPrefs.HasKey("last_selected_avatar"))
+        {
+            UIManager.Instance.avatarPlayer.sprite = theme.AvatarPlayer;
+            PlayerPrefs.SetString("last_selected_avatar", theme.AvatarPlayer.name);
+            return theme.AvatarPlayer;
+        }
+        else
+        {
+            var lasted_ava_name = PlayerPrefs.GetString("last_selected_avatar");
+            var lasted_ava_sprite = Array.Find(themeDatas.Theme, t => t.AvatarPlayer.name == lasted_ava_name).AvatarPlayer;
+            UIManager.Instance.avatarPlayer.sprite = lasted_ava_sprite;
+            return lasted_ava_sprite;
+        }
     }
 }
