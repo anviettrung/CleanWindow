@@ -97,9 +97,8 @@ GameObject:
   - component: {fileID: 3457726204271549250}
   - component: {fileID: 3457726204271549251}
   - component: {fileID: 3457726204271549260}
-  - component: {fileID: 3457726204271549261}
-  - component: {fileID: 3457726204271549262}
-  - component: {fileID: 3457726204271549256}
+  - component: {fileID: 5514640716378966318}
+  - component: {fileID: 5265964760584257381}
   m_Layer: 0
   m_Name: Glass Right
   m_TagString: Untagged
@@ -179,7 +178,7 @@ MonoBehaviour:
   Indestructible: 0
   RecordAlphaCount: 1
   AutoSharpen: 1
-  AutoSplit: 1
+  AutoSplit: 0
   SplitPixelsMin: 5
   SplitExpand: -1
   SplitFeather: 1
@@ -359,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3c1fd85e053f64ab748a5f998a9f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3457726204271549261
+--- !u!114 &5514640716378966318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,33 +367,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3457726204271549258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c5f1e1730d93a4880c460394961c48, type: 3}
+  m_Script: {fileID: 11500000, guid: a319451f41a34dc47a8420d9d5e6dd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MassPerSolidPixel: 0.01
---- !u!114 &3457726204271549262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457726204271549258}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fbcb04c243139438f8b0b3f28d0e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Life: 3
-  Fade: 0
-  FadeDuration: 1
-  Shrink: 0
-  ShrinkDuration: 1
-  RandomizeOnEnable: 0
-  LifeMin: 3
-  LifeMax: 5
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  startLocalScale: {x: 0, y: 0, z: 0}
---- !u!114 &3457726204271549256
+  RemainingFractures: 10
+  RequiredDamage: 100
+  RequiredDamageMultiplier: 2
+  FractureCount: 5
+  FractureCountMultiplier: 0.75
+  Irregularity: 0.292
+--- !u!114 &5265964760584257381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,36 +385,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3457726204271549258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138f97f7bf4c28459d6b9b00bb42a7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 438b16ff95d7cbe44a762bfd4951bdcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseDamageMin: 0
-  DamageMin: 0
-  UseDamageMax: 0
-  DamageMax: 0
-  UseAlphaCountMin: 0
-  AlphaCountMin: 0
-  UseAlphaCountMax: 1
-  AlphaCountMax: 10
-  UseRemainingAlphaMin: 0
-  RemainingAlphaMin: 0
-  UseRemainingAlphaMax: 0
-  RemainingAlphaMax: 1
-  OnRequirementMet:
+  DebugCollisions: 0
+  ImpactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  ImpactThreshold: 1
+  ImpactDelay: 0
+  DamageOnImpact: 1
+  DamageDestructible: {fileID: 3457726204271549255}
+  DamageScale: 1
+  UseFirstOnly: 1
+  OnImpact:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3457726204271549262}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  met: 0
+      m_Calls: []
 --- !u!1 &3457726204308046039
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,9 +739,8 @@ GameObject:
   - component: {fileID: 3457726204749041475}
   - component: {fileID: 3457726204749041484}
   - component: {fileID: 3457726204749041485}
-  - component: {fileID: 3457726204749041486}
-  - component: {fileID: 3457726204749041487}
-  - component: {fileID: 3457726204749041481}
+  - component: {fileID: 8273729272294969908}
+  - component: {fileID: 6768441216768623427}
   m_Layer: 0
   m_Name: Glass Left
   m_TagString: Untagged
@@ -853,7 +820,7 @@ MonoBehaviour:
   Indestructible: 0
   RecordAlphaCount: 1
   AutoSharpen: 1
-  AutoSplit: 1
+  AutoSplit: 0
   SplitPixelsMin: 5
   SplitExpand: -1
   SplitFeather: 1
@@ -1033,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3c1fd85e053f64ab748a5f998a9f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3457726204749041486
+--- !u!114 &8273729272294969908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1042,33 +1009,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3457726204749041483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c5f1e1730d93a4880c460394961c48, type: 3}
+  m_Script: {fileID: 11500000, guid: a319451f41a34dc47a8420d9d5e6dd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MassPerSolidPixel: 0.01
---- !u!114 &3457726204749041487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457726204749041483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fbcb04c243139438f8b0b3f28d0e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Life: 3
-  Fade: 0
-  FadeDuration: 1
-  Shrink: 0
-  ShrinkDuration: 1
-  RandomizeOnEnable: 0
-  LifeMin: 3
-  LifeMax: 5
-  startColor: {r: 0, g: 0, b: 0, a: 0}
-  startLocalScale: {x: 0, y: 0, z: 0}
---- !u!114 &3457726204749041481
+  RemainingFractures: 10
+  RequiredDamage: 100
+  RequiredDamageMultiplier: 2
+  FractureCount: 5
+  FractureCountMultiplier: 0.75
+  Irregularity: 0.292
+--- !u!114 &6768441216768623427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1077,36 +1027,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3457726204749041483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6138f97f7bf4c28459d6b9b00bb42a7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 438b16ff95d7cbe44a762bfd4951bdcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseDamageMin: 0
-  DamageMin: 0
-  UseDamageMax: 0
-  DamageMax: 0
-  UseAlphaCountMin: 0
-  AlphaCountMin: 0
-  UseAlphaCountMax: 1
-  AlphaCountMax: 10
-  UseRemainingAlphaMin: 0
-  RemainingAlphaMin: 0
-  UseRemainingAlphaMax: 0
-  RemainingAlphaMax: 1
-  OnRequirementMet:
+  DebugCollisions: 0
+  ImpactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  ImpactThreshold: 1
+  ImpactDelay: 0
+  DamageOnImpact: 1
+  DamageDestructible: {fileID: 3457726204749041472}
+  DamageScale: 1
+  UseFirstOnly: 1
+  OnImpact:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3457726204749041487}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  met: 0
+      m_Calls: []
 --- !u!1 &3457726204988110803
 GameObject:
   m_ObjectHideFlags: 0
