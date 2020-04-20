@@ -10,8 +10,8 @@ public class LevelManager : Singleton<LevelManager>
 	[Header("Working data generated from resources")]
 	public List<Level> levels;
 
-	[Header("Prefab")]
-	public GameObject windowPrefab;
+	//[Header("Prefab")]
+	//public GameObject windowPrefab;
 
 	// tracking
 	[HideInInspector] public Window currentWindow;

@@ -702,8 +702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelsData: {fileID: 11400000, guid: aff75399d1211401093e49372eb7d8ab, type: 2}
   levels: []
-  windowPrefab: {fileID: 7240903671535195494, guid: 9a45b78535093468888efde3cf3337e0,
-    type: 3}
   currentWindow: {fileID: 0}
 --- !u!114 &280797512
 MonoBehaviour:
@@ -2461,8 +2459,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.0010223389, y: -0.91713715}
-  m_SizeDelta: {x: 387.47125, y: 657.77}
+  m_AnchoredPosition: {x: 0.0010223389, y: 0}
+  m_SizeDelta: {x: 387.47125, y: 446.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &805839915
 MonoBehaviour:
