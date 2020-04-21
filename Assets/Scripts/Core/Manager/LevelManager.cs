@@ -33,7 +33,7 @@ public class LevelManager : Singleton<LevelManager>
 		{
 			var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
 			slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
-			slot_window.GetComponent<UIWindowShopItem>().levelText.text = "Level " + i;
+			slot_window.GetComponent<UIWindowShopItem>().levelText.text = "LEVEL " + i;
 			if (!UIManager.Instance.windowShop.items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
 			{
 				UIManager.Instance.windowShop.items.Add(slot_window.GetComponent<UIWindowShopItem>());
