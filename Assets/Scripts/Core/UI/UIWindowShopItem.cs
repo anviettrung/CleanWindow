@@ -32,9 +32,9 @@ public class UIWindowShopItem : MonoBehaviour
     #region UNITY_CALLBACK
     private void Start()
     {
-        this.completeButton.onClick.AddListener(() => SettingManager.Instance.OnClickButton());
-        this.unlockButton.onClick.AddListener(() => SettingManager.Instance.OnClickButton());
-        this.lockButton.onClick.AddListener(() => SettingManager.Instance.OnClickButton());
+        this.completeButton.onClick.AddListener(() => VibrationManager.Instance.OnClickButton());
+        this.unlockButton.onClick.AddListener(() => VibrationManager.Instance.OnClickButton());
+        this.lockButton.onClick.AddListener(() => VibrationManager.Instance.OnClickButton());
     }
     #endregion
 

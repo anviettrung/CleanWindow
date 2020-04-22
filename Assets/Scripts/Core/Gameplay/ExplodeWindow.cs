@@ -134,14 +134,26 @@ public class ExplodeWindow : MonoBehaviour
             //fragments.Clear();
             if (glassSide == GlassSide.RIGHT)
             {
+                var audio = this.glassRight.GetComponent<AudioSource>();
+                if (audio.clip == null)
+                {
+                    audio.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
+                }
+                audio.Play();
                 isBroken = true;
             }
             if (glassSide == GlassSide.LEFT)
             {
+                var audio = this.glassLeft.GetComponent<AudioSource>();
+                if (audio.clip == null)
+                {
+                    audio.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
+                }
+                audio.Play();
                 changeSide = true;
             }
 
-            SettingManager.Instance.OnBreakStep();
+            VibrationManager.Instance.OnBreakStep();
         }
         else
         {

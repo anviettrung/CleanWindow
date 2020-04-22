@@ -243,7 +243,7 @@ public class Window : MonoBehaviour
         }, 1f));
 
         //Add haptic:
-        SettingManager.Instance.OnCompleteLevel();
+        VibrationManager.Instance.OnCompleteLevel();
 
         // Congrat
         //UIManager.Instance.CallLayout("End Game");

@@ -38,11 +38,11 @@ public class PlayerInput : Singleton<PlayerInput>
                         window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
                         if (window.state == Window.State.DIRTY)
                         {
-                            SettingManager.Instance.OnGlassStep();
+                            VibrationManager.Instance.OnGlassStep();
                         }
                         else if (window.state == Window.State.WET)
                         {
-                            SettingManager.Instance.OnCleanStep();
+                            VibrationManager.Instance.OnCleanStep();
                         }
                     }
                     if (tool != null)
@@ -69,6 +69,17 @@ public class PlayerInput : Singleton<PlayerInput>
                         if (tool.glasserEffect != null)
                         {
                             tool.glasserEffect.PlayGlasserEffect(false);
+                        }
+                        if( AudioManager.Instance.audioSource.isPlaying)
+                        {
+                            AudioManager.Instance.audioSource.Stop();
+                        }
+                    }
+                    if (tool.Data.ToolType == ToolData.Type.CLEANER)
+                    {
+                        if (AudioManager.Instance.audioSource.isPlaying)
+                        {
+                            AudioManager.Instance.audioSource.Stop();
                         }
                     }
                 }

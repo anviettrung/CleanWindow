@@ -289,7 +289,7 @@ public class LevelManager : Singleton<LevelManager>
 		}
 
 		//Add haptic:
-		SettingManager.Instance.OnAfterTakePhoto();
+		VibrationManager.Instance.OnAfterTakePhoto();
 
 	}
 	#endregion

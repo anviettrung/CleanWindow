@@ -4,7 +4,7 @@ using UnityEngine;
 using MoreMountains.NiceVibrations;
 using UnityEngine.UI;
 
-public class SettingManager : Singleton<SettingManager>
+public class VibrationManager : Singleton<VibrationManager>
 {
     #region CONST_VARIALBES
     private const string KEY_SOUND = "Setting_Sound";
@@ -79,7 +79,10 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            //AudioManager.Instance.audioSource.clip = AudioManager.Instance.clickButtonClip;
+            //AudioManager.Instance.audioSource.loop = false;
+            //AudioManager.Instance.audioSource.Play();
+            AudioManager.Instance.audioSrcClickButton.Play();
         }
     }
 
@@ -96,7 +99,16 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            if (!AudioManager.Instance.audioSource.isPlaying)
+            {
+                var clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.DIRTY).clipAtState;
+                if (AudioManager.Instance.audioSource.clip != clip)
+                {
+                    AudioManager.Instance.audioSource.clip = clip;
+                }
+                AudioManager.Instance.audioSource.loop = true;
+                AudioManager.Instance.audioSource.PlayOneShot(AudioManager.Instance.audioSource.clip);
+            }
         }
     }
 
@@ -113,7 +125,16 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            if (!AudioManager.Instance.audioSource.isPlaying)
+            {
+                var clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.WET).clipAtState;
+                if (AudioManager.Instance.audioSource.clip != clip)
+                {
+                    AudioManager.Instance.audioSource.clip = clip;
+                }
+                AudioManager.Instance.audioSource.loop = true;
+                AudioManager.Instance.audioSource.PlayOneShot(AudioManager.Instance.audioSource.clip);
+            }
         }
     }
 
@@ -130,7 +151,9 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            //AudioManager.Instance.audioSource.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
+            //AudioManager.Instance.audioSource.loop = false;
+            //AudioManager.Instance.audioSource.Play();
         }
     }
 
@@ -147,7 +170,9 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            AudioManager.Instance.audioSource.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.COMPLETE).clipAtState;
+            AudioManager.Instance.audioSource.loop = false;
+            AudioManager.Instance.audioSource.Play();
         }
     }
 
@@ -164,7 +189,9 @@ public class SettingManager : Singleton<SettingManager>
         }
         if (this.sound.isOn)
         {
-
+            AudioManager.Instance.audioSource.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.CAPTURE).clipAtState;
+            AudioManager.Instance.audioSource.loop = false;
+            AudioManager.Instance.audioSource.Play();
         }
     }
 
