@@ -8,7 +8,7 @@ public class SettingManager : Singleton<SettingManager>
 {
     #region CONST_VARIALBES
     private const string KEY_SOUND = "Setting_Sound";
-    private const string KEY_VIBRATION = "Setting_Vibration"; 
+    private const string KEY_VIBRATION = "Setting_Vibration";
     #endregion
 
     public Toggle sound;
@@ -41,7 +41,7 @@ public class SettingManager : Singleton<SettingManager>
     #region SAVE/LOAD
     public void SaveSetting(UIToggle uiToggle)
     {
-        switch(uiToggle.toggleType)
+        switch (uiToggle.toggleType)
         {
             case UIToggle.EToggleType.SOUND:
                 PlayerPrefs.SetString(KEY_SOUND, this.sound.isOn.ToString());
@@ -75,6 +75,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: heavy
             MMVibrationManager.Haptic(HapticTypes.HeavyImpact, false, true, this);
+            Debug.Log("<b> Onclick: Click button </b>");
         }
         if (this.sound.isOn)
         {
@@ -91,6 +92,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: soft
             MMVibrationManager.Haptic(HapticTypes.SoftImpact, false, true, this);
+            Debug.Log("<b> Onclick: Glass Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -107,6 +109,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: continuous
             MMVibrationManager.ContinuousHaptic(this.ContinuousIntensity, this.ContinuousSharpness, this.ContinuousDuration, HapticTypes.LightImpact, this, true);
+            Debug.Log("<b> Onclick: Clean Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -123,6 +126,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: medium
             MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
+            Debug.Log("<b> Onclick: Break Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -139,6 +143,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: success
             MMVibrationManager.Haptic(HapticTypes.Success, false, true, this);
+            Debug.Log("<b> Onclick: Complete Level </b>");
         }
         if (this.sound.isOn)
         {
@@ -155,6 +160,7 @@ public class SettingManager : Singleton<SettingManager>
         {
             //Haptic: medium
             MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
+            Debug.Log("<b> Onclick: Take Photo </b>");
         }
         if (this.sound.isOn)
         {
@@ -167,10 +173,18 @@ public class SettingManager : Singleton<SettingManager>
     /// </summary>
     public void OnAfterTakePhoto()
     {
-        MMVibrationManager.AdvancedHapticPattern(this.presetItem.AHAPFile.text, this.presetItem.WaveFormAsset.WaveForm.Pattern
+        if (this.vibration.isOn)
+        {
+            MMVibrationManager.AdvancedHapticPattern(this.presetItem.AHAPFile.text, this.presetItem.WaveFormAsset.WaveForm.Pattern
                 , this.presetItem.WaveFormAsset.WaveForm.Amplitudes, -1, this.presetItem.RumbleWaveFormAsset.WaveForm.Pattern,
                 this.presetItem.RumbleWaveFormAsset.WaveForm.LowFrequencyAmplitudes, this.presetItem.RumbleWaveFormAsset.WaveForm.HighFrequencyAmplitudes, -1,
                 HapticTypes.LightImpact, this);
+            Debug.Log("<b> Onclick: Take photo done </b>");
+        }
+        if (this.sound.isOn)
+        {
+
+        }
     }
     #endregion
 }

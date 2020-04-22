@@ -204,6 +204,9 @@ public class UIManager : Singleton<UIManager>
 		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
 		this.cityCaption.text = this.cityName.text;
 		this.CallLayout("End Game");
+
+		//Add haptic:
+		SettingManager.Instance.OnTakePhoto();
 		count = 0f;
 		while (count < time)
 		{

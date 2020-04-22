@@ -29,8 +29,8 @@ public class UIToolShopItem : MonoBehaviour
 	#region UNITY_CALLBACK
 	private void Start()
 	{
-		this.unlockButton.onClick.AddListener(() => SettingManager.Instance.OnCompleteLevel());
-		this.lockButton.onClick.AddListener(() => SettingManager.Instance.OnCompleteLevel());
+		this.unlockButton.onClick.AddListener(() => SettingManager.Instance.OnClickButton());
+		this.lockButton.onClick.AddListener(() => SettingManager.Instance.OnClickButton());
 	}
 	#endregion
 

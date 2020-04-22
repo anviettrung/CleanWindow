@@ -106,12 +106,12 @@ public class Window : MonoBehaviour
 
                 StartCoroutine(CoroutineUtils.Chain(
 
-                        CoroutineUtils.Do(() =>
-                        {
-                        //glassExplodeExe.Action(holderAfterBroken);
-                        glassExplode.BreakGlass();
-                            //impulseSource.GenerateImpulse();
-                        }),
+                        //CoroutineUtils.Do(() =>
+                        //{
+                        ////glassExplodeExe.Action(holderAfterBroken);
+                        //glassExplode.BreakGlass();
+                        //    //impulseSource.GenerateImpulse();
+                        //}),
                         TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 0.1f, 0.2f),
                         CoroutineUtils.WaitForSecondsRealtime(0.5f),
                         TimeScaleControl.Instance.DecayOverTime(Time.timeScale, 1.0f, 0.3f)
@@ -241,6 +241,9 @@ public class Window : MonoBehaviour
             UIManager.Instance.cityName.text = this.Data.WindowName;
             //UIManager.Instance.cityName.text.
         }, 1f));
+
+        //Add haptic:
+        SettingManager.Instance.OnCompleteLevel();
 
         // Congrat
         //UIManager.Instance.CallLayout("End Game");

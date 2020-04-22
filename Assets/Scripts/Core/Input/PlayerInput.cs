@@ -34,8 +34,17 @@ public class PlayerInput : Singleton<PlayerInput>
                 if (UIManager.Instance.IsPointerUIsObject() == false)
                 {
                     if (window.GetCurrentTextureDrawer() != null)
+                    {
                         window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
-
+                        if (window.state == Window.State.DIRTY)
+                        {
+                            SettingManager.Instance.OnGlassStep();
+                        }
+                        else if (window.state == Window.State.WET)
+                        {
+                            SettingManager.Instance.OnCleanStep();
+                        }
+                    }
                     if (tool != null)
                     {
                         if (tool.Data.ToolType != ToolData.Type.BREAKER)

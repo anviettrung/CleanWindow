@@ -23,7 +23,6 @@ public class ExplodeWindow : MonoBehaviour
 
     private float holdingTime;
     private bool canTap;
-    private bool isHolding;
 
     private void Start()
     {
@@ -33,7 +32,6 @@ public class ExplodeWindow : MonoBehaviour
 
         holdingTime = 0f;
         canTap = true;
-        isHolding = false;
     }
 
     private void Update()
@@ -142,6 +140,8 @@ public class ExplodeWindow : MonoBehaviour
             {
                 changeSide = true;
             }
+
+            SettingManager.Instance.OnBreakStep();
         }
         else
         {

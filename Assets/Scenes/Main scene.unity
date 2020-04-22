@@ -1895,7 +1895,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1667298588}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 307098839}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
@@ -1911,7 +1911,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &394106889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4364,7 +4364,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1712820005}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 1459281225}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
@@ -4380,7 +4380,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &1059632531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15384,17 +15384,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2074857125}
-        m_MethodName: OnClickButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6284779822209501673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15659,7 +15648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 404}
+  m_AnchoredPosition: {x: 0, y: 241}
   m_SizeDelta: {x: 517, y: 837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6906036140186459881
