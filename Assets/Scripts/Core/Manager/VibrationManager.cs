@@ -75,7 +75,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: heavy
             MMVibrationManager.Haptic(HapticTypes.HeavyImpact, false, true, this);
-            Debug.Log("<b> Onclick: Click button </b>");
+            //Debug.Log("<b> Onclick: Click button </b>");
         }
         if (this.sound.isOn)
         {
@@ -95,7 +95,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: soft
             MMVibrationManager.Haptic(HapticTypes.SoftImpact, false, true, this);
-            Debug.Log("<b> Onclick: Glass Step </b>");
+            //Debug.Log("<b> Onclick: Glass Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -121,7 +121,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: continuous
             MMVibrationManager.ContinuousHaptic(this.ContinuousIntensity, this.ContinuousSharpness, this.ContinuousDuration, HapticTypes.LightImpact, this, true);
-            Debug.Log("<b> Onclick: Clean Step </b>");
+            //Debug.Log("<b> Onclick: Clean Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -147,7 +147,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: medium
             MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
-            Debug.Log("<b> Onclick: Break Step </b>");
+            //Debug.Log("<b> Onclick: Break Step </b>");
         }
         if (this.sound.isOn)
         {
@@ -166,7 +166,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: success
             MMVibrationManager.Haptic(HapticTypes.Success, false, true, this);
-            Debug.Log("<b> Onclick: Complete Level </b>");
+            //Debug.Log("<b> Onclick: Complete Level </b>");
         }
         if (this.sound.isOn)
         {
@@ -185,7 +185,7 @@ public class VibrationManager : Singleton<VibrationManager>
         {
             //Haptic: medium
             MMVibrationManager.Haptic(HapticTypes.MediumImpact, false, true, this);
-            Debug.Log("<b> Onclick: Take Photo </b>");
+            //Debug.Log("<b> Onclick: Take Photo </b>");
         }
         if (this.sound.isOn)
         {
@@ -206,7 +206,7 @@ public class VibrationManager : Singleton<VibrationManager>
                 , this.presetItem.WaveFormAsset.WaveForm.Amplitudes, -1, this.presetItem.RumbleWaveFormAsset.WaveForm.Pattern,
                 this.presetItem.RumbleWaveFormAsset.WaveForm.LowFrequencyAmplitudes, this.presetItem.RumbleWaveFormAsset.WaveForm.HighFrequencyAmplitudes, -1,
                 HapticTypes.LightImpact, this);
-            Debug.Log("<b> Onclick: Take photo done </b>");
+            //Debug.Log("<b> Onclick: Take photo done </b>");
         }
         if (this.sound.isOn)
         {

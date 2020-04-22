@@ -59,6 +59,12 @@ public class UIToolShopItem : MonoBehaviour
 
 		HideAllButton();
 
+		//for testing
+		if (toolData.data.ToolType != ToolData.Type.BREAKER)
+		{
+			toolData.status = ToolItem.Status.UNLOCK;
+		}
+
 		switch (toolData.status) {
 			case ToolItem.Status.UNLOCK:
 				if (ToolManager.Instance.IsSelectingTool(toolData))

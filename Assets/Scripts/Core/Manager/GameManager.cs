@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
 		LevelManager.Instance.levels[0].ChangeStatus(Level.Status.UNLOCK); // Unlock first level
 		ToolManager.Instance.cleaner.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first cleaner tool
 		ToolManager.Instance.glasser.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first glasser tool
+		ToolManager.Instance.breaker.tools[0].status = ToolItem.Status.UNLOCK; // Unlock first breaker tool
 																			   // Load game data
 		if (!PlayerPrefs.HasKey("Old user")) {
 			PlayerPrefs.SetInt("Old user", 1);

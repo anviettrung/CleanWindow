@@ -55,7 +55,7 @@ public class UIToolShop : MonoBehaviour
 
 	public virtual void UpdateUI()
 	{
-		this.UnlockAllItemForTesting();
+		//this.UnlockAllItemForTesting();
 		foreach (UIToolShopItem item in items) {
 			item.UpdateUI();
 		}
