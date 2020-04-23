@@ -45,7 +45,7 @@ public class UIManager : Singleton<UIManager>
 	public Button watchAdsButton;
 
 	[Header("Top UI in Gameplay")]
-	public List<UIProgress> uIProgresses;
+	public List<UIShowStep> uIShowSteps;
 	public Image avatarPlayer;
 	public Text cityName;
 
@@ -58,6 +58,9 @@ public class UIManager : Singleton<UIManager>
 	[Header("Layout Window Shop")]
 	public GameObject slotWindow;
 	public Transform contentWindow;
+
+	[Header("Gift Box")]
+	public Transform panelGiftBox;
 
 	#endregion
 
@@ -144,15 +147,15 @@ public class UIManager : Singleton<UIManager>
 
 	public void ShowNextStepProgress(Window.State windowState)
 	{
-		for (int i = 0; i < this.uIProgresses.Count;i++)
+		for (int i = 0; i < this.uIShowSteps.Count;i++)
 		{
-			if (this.uIProgresses[i].state == windowState)
+			if (this.uIShowSteps[i].state == windowState)
 			{
-				this.uIProgresses[i].highlight.SetActive(true);
+				this.uIShowSteps[i].highlight.SetActive(true);
 			}
 			else
 			{
-				this.uIProgresses[i].highlight.SetActive(false);
+				this.uIShowSteps[i].highlight.SetActive(false);
 			}
 		}
 	}
