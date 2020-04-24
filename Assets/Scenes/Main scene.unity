@@ -3387,17 +3387,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 6255746388004875435}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 280797511}
         m_MethodName: OpenNextLevel
         m_Mode: 1
@@ -10476,9 +10465,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 1960459643}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 41347221}
-  - {fileID: 1325334804}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -1977021423
     m_VirtualCamera: {fileID: 41347221}

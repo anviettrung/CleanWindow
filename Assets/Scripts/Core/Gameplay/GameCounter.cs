@@ -21,14 +21,14 @@ public class GameCounter : Singleton<GameCounter>
     {
         get
         {
-            if (this.totalGamePlayed > this.maxGameToGetGift)
-            {
-                return this.totalGamePlayed = 0;
-            }
-            else
-            {
-                return this.totalGamePlayed;
-            }
+            //if (this.totalGamePlayed > this.maxGameToGetGift)
+            //{
+            //    return this.totalGamePlayed = 1;
+            //}
+            //else
+            //{
+            return this.totalGamePlayed;
+            //}
         }
         set
         {
@@ -41,6 +41,8 @@ public class GameCounter : Singleton<GameCounter>
     private void Start()
     {
         this.maxGameToGetGift = ConfigManager.Instance.gameNumberConfig.MaxGameToGetGiftBox;
+        GameCounter.Instance.LoadTotalGamePlayed();
+        UIManager.Instance.uIGiftBox.uIProgressbar.ValueProgress = (float)GameCounter.Instance.TotalGamePlayed / (float)GameCounter.Instance.maxGameToGetGift;
     }
     #endregion
 

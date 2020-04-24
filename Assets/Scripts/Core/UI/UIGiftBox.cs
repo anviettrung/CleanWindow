@@ -16,10 +16,11 @@ public class UIGiftBox : MonoBehaviour
     #endregion
 
     #region UNITY_CALLBACK
-    private void Awake()
-    {
-        this.LoadProgressGiftBox();
-    }
+    //private void Awake()
+    //{
+    //    GameCounter.Instance.LoadTotalGamePlayed();
+    //    this.uIProgressbar.ValueProgress = (float)GameCounter.Instance.TotalGamePlayed / (float)GameCounter.Instance.maxGameToGetGift;
+    //}
 
     private void OnEnable()
     {
@@ -42,14 +43,15 @@ public class UIGiftBox : MonoBehaviour
     {
         //count number of game played
         GameCounter.Instance.TotalGamePlayed++;
+        if (GameCounter.Instance.TotalGamePlayed > GameCounter.Instance.maxGameToGetGift)
+        {
+            GameCounter.Instance.TotalGamePlayed = 1;
+            this.uIProgressbar.ValueProgress = 0f;
+        }
         GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
 
         this.StartCoroutine(IEUpdateProgressGiftBox(2f));
-        if (this.uIProgressbar.ValueProgress >= 1f)
-        {
-            this.uIProgressbar.ValueProgress = 0f;
-        }
-        this.SaveProgressGiftBox();
+        //this.SaveProgressGiftBox();
     }
 
     private IEnumerator IEUpdateProgressGiftBox(float time)
@@ -57,7 +59,7 @@ public class UIGiftBox : MonoBehaviour
         var max_game_number = GameCounter.Instance.maxGameToGetGift;
         var game_played = GameCounter.Instance.TotalGamePlayed;
         this.textPercent.text = (int)((game_played / max_game_number) * 100f) + "%";
-        if (this.uIProgressbar.ValueProgress <= 1f)
+        if (this.uIProgressbar.ValueProgress < 1f)
         {
             float counter = 0f;
             while (counter < time)
@@ -73,7 +75,7 @@ public class UIGiftBox : MonoBehaviour
     #region SAVE/LOAD PROGRESS
     private void LoadProgressGiftBox()
     {
-        GameCounter.Instance.LoadTotalGamePlayed();
+
         if (PlayerPrefs.HasKey(KEY_PROGRESS_GIFBOX))
         {
             GameCounter.Instance.TotalGamePlayed = PlayerPrefs.GetInt(KEY_PROGRESS_GIFBOX);
