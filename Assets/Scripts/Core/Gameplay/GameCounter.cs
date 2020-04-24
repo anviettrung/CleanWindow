@@ -8,12 +8,12 @@ using UnityEngine;
 public class GameCounter : Singleton<GameCounter>
 {
     #region CONST
-    private const string KEY_GAMECOUNT = "GameCount"; 
+    private const string KEY_GAMECOUNT = "GameCount";
     #endregion
 
     #region FIELDS
     [HideInInspector] public float maxGameToGetGift;
-    private int totalGamePlayed; 
+    private int totalGamePlayed;
     #endregion
 
     #region PROPERTIES
@@ -23,7 +23,7 @@ public class GameCounter : Singleton<GameCounter>
         {
             if (this.totalGamePlayed > this.maxGameToGetGift)
             {
-                return 0;
+                return this.totalGamePlayed = 0;
             }
             else
             {
@@ -56,6 +56,6 @@ public class GameCounter : Singleton<GameCounter>
         {
             this.TotalGamePlayed = PlayerPrefs.GetInt(KEY_GAMECOUNT);
         }
-    } 
+    }
     #endregion
 }

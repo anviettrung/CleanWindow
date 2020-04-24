@@ -44,7 +44,11 @@ public class UIGiftBox : MonoBehaviour
         GameCounter.Instance.TotalGamePlayed++;
         GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
 
-        StartCoroutine(IEUpdateProgressGiftBox(2f));
+        this.StartCoroutine(IEUpdateProgressGiftBox(2f));
+        if (this.uIProgressbar.ValueProgress >= 1f)
+        {
+            this.uIProgressbar.ValueProgress = 0f;
+        }
         this.SaveProgressGiftBox();
     }
 
@@ -53,7 +57,7 @@ public class UIGiftBox : MonoBehaviour
         var max_game_number = GameCounter.Instance.maxGameToGetGift;
         var game_played = GameCounter.Instance.TotalGamePlayed;
         this.textPercent.text = (int)((game_played / max_game_number) * 100f) + "%";
-        if (this.uIProgressbar.ValueProgress < 1f)
+        if (this.uIProgressbar.ValueProgress <= 1f)
         {
             float counter = 0f;
             while (counter < time)

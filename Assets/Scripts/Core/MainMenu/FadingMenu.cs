@@ -32,6 +32,11 @@ public class FadingMenu : MonoBehaviour
         Color startColor = new Color(1f, 1f, 1f, 0f);
         Color endColor = new Color(1f, 1f, 1f, 1f);
         StartCoroutine(IEFading(startColor, endColor, 1.5f));
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.startButton.interactable = true;
+        },
+        1.5f));
     }
 
     private IEnumerator IEFading(Color startColor, Color endColor, float time)
@@ -43,6 +48,7 @@ public class FadingMenu : MonoBehaviour
             this.thisImage.color = Color.Lerp(startColor, endColor, counter / time);
             yield return null;
         }
+        //UIManager.Instance.startButton.interactable = true;
     }
 
     public void FadeOut()

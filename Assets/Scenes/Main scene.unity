@@ -1493,9 +1493,9 @@ MonoBehaviour:
   audioSource: {fileID: 280797514}
   cwSounds:
   - soundState: 0
-    clipAtState: {fileID: 8300000, guid: f0b8fe1f05c4a98408c132c00090dcb4, type: 3}
+    clipAtState: {fileID: 8300000, guid: 6796ba609d17fa44e89318685d332521, type: 3}
   - soundState: 1
-    clipAtState: {fileID: 8300000, guid: 1efa5781721a0bf44a1904b58299b4b1, type: 3}
+    clipAtState: {fileID: 8300000, guid: b61531bf746a13a478af290a73de651c, type: 3}
   - soundState: 2
     clipAtState: {fileID: 8300000, guid: 673cfe58ce0a20847a8594e1f6f87d7a, type: 3}
   - soundState: 3
@@ -3130,7 +3130,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 594362487}
   m_OnClick:
     m_PersistentCalls:
@@ -3203,6 +3203,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 594362484}
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 594362486}
+        m_MethodName: set_interactable
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11696,17 +11707,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 6255746388004875435}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 280797511}
         m_MethodName: OpenNextLevel
         m_Mode: 1
@@ -11717,6 +11717,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1611631983}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2069276544
 MonoBehaviour:
@@ -11922,6 +11933,7 @@ MonoBehaviour:
     type: 3}
   contentWindow: {fileID: 1853046307}
   panelGiftBox: {fileID: 1352025598}
+  uIGiftBox: {fileID: 1935978147}
   layouts:
   - layoutName: Main Menu
     elements:

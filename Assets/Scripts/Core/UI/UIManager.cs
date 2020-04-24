@@ -61,6 +61,7 @@ public class UIManager : Singleton<UIManager>
 
 	[Header("Gift Box")]
 	public Transform panelGiftBox;
+	public UIGiftBox uIGiftBox;
 
 	#endregion
 
@@ -189,6 +190,11 @@ public class UIManager : Singleton<UIManager>
 	{
 		//Add haptic:
 		VibrationManager.Instance.OnTakePhoto();
+
+		//count number of game played
+		//GameCounter.Instance.TotalGamePlayed++;
+		//GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
+		//uIGiftBox.UpdateProgressGiftBox();
 
 		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
 		StartCoroutine(ShowFlash(0.5f));
