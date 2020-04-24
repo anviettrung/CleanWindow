@@ -13,7 +13,7 @@ public class AnimateButton : MonoBehaviour
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             StartCoroutine(IEMoveAllButtonIntoScreen());
-        }, 0.1f
+        }, 0.02f
         ));
     }
 
