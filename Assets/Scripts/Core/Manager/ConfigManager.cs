@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConfigManager : Singleton<ConfigManager>
 {
-    public SettingConfig settingConfig;
+    public VibrationConfig vibrationConfig;
     public GameNumberConfig gameNumberConfig;
 
     private void Awake()
@@ -17,17 +17,17 @@ public class ConfigManager : Singleton<ConfigManager>
     /// </summary>
     private void LoadGameConfig()
     {
-        this.LoadSettingConfig();
+        this.LoadVibrationConfig();
         this.LoadGameNumberConfig();
     }
 
     /// <summary>
     /// Setting config
     /// </summary>
-    private void LoadSettingConfig()
+    private void LoadVibrationConfig()
     {
-        var jsonContent = Resources.Load<TextAsset>("Configs/SettingConfig");
-        this.settingConfig = JsonUtility.FromJson<SettingConfig>(jsonContent.text);
+        var jsonContent = Resources.Load<TextAsset>("Configs/VibrationConfig");
+        this.vibrationConfig = JsonUtility.FromJson<VibrationConfig>(jsonContent.text);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class ConfigManager : Singleton<ConfigManager>
     }
 }
 
-public class SettingConfig
+public class VibrationConfig
 {
     public float Haptic_ContinuousIntensity;
     public float Haptic_ContinuousSharpness;

@@ -32,9 +32,9 @@ public class VibrationManager : Singleton<VibrationManager>
 
     private void Start()
     {
-        this.ContinuousIntensity = ConfigManager.Instance.settingConfig.Haptic_ContinuousIntensity;
-        this.ContinuousSharpness = ConfigManager.Instance.settingConfig.Haptic_ContinuousSharpness;
-        this.ContinuousDuration = ConfigManager.Instance.settingConfig.Haptic_ContinuousDuration;
+        this.ContinuousIntensity = ConfigManager.Instance.vibrationConfig.Haptic_ContinuousIntensity;
+        this.ContinuousSharpness = ConfigManager.Instance.vibrationConfig.Haptic_ContinuousSharpness;
+        this.ContinuousDuration = ConfigManager.Instance.vibrationConfig.Haptic_ContinuousDuration;
     }
     #endregion
 
