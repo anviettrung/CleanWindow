@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
 {
@@ -78,7 +79,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
 
                     foreach (Transform child in changeThemeTransform)
                     {
-                        if (child.name.Contains("Blue"))
+                        if (child.name.Contains("Blue") && child.GetComponent<Button>() != null)
                         {
                             child.transform.GetChild(0).gameObject.SetActive(true);
                         }
