@@ -86,7 +86,8 @@ public class LevelManager : Singleton<LevelManager>
 
 
 		// UI
-		UIManager.Instance.CallLayout("Main Menu");
+		StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 1f));
+		//UIManager.Instance.CallLayout("Main Menu");
 		UIManager.Instance.cityName.text = "???";
 
 		// Instantiate
@@ -237,7 +238,7 @@ public class LevelManager : Singleton<LevelManager>
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() =>
 			{
-				UIManager.Instance.CallLayout("Playing");
+				//UIManager.Instance.CallLayout("Playing");
 				currentWindow.ChangeState(Window.State.DIRTY);
 			})));
 

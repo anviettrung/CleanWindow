@@ -37,7 +37,6 @@ public class Window : MonoBehaviour
     public TextureDrawer tdWet;
 
     [Header("Break Glass Settings")]
-    //public ExplodeExe glassExplodeExe;
     public ExplodeWindow glassExplode;
     public float glassFallDuration = 2.5f;
     public float nextStateAfterBreakGlassTime = 1.0f;

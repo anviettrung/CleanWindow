@@ -6,16 +6,7 @@ public class AnimateButton : MonoBehaviour
 {
     public List<GameObject> listObjectToMove;
     public List<Transform> listInsideTransform;
-
-    private List<Vector3> listOriginPosition = new List<Vector3>();
-
-    private void Awake()
-    {
-        for (int i = 0; i < this.listObjectToMove.Count; i++)
-        {
-            this.listOriginPosition.Add(this.listObjectToMove[i].transform.position);
-        }
-    }
+    public List<Transform> listOutsideTransform;
 
     private void OnEnable()
     {
@@ -30,6 +21,24 @@ public class AnimateButton : MonoBehaviour
     {
         StopAllCoroutines();
         this.ResetAllTransform();
+    }
+
+    public void MoveButtonOutToScreen()
+    {
+        StartCoroutine(IEMoveAllButtonOuttoScreen());
+    }
+
+    private IEnumerator IEMoveAllButtonOuttoScreen()
+    {
+        for (int i = 0; i < this.listObjectToMove.Count; i++)
+        {
+            StartCoroutine(IEAnimateMoveObject(this.listObjectToMove[i],
+                this.listObjectToMove[i].transform,
+                this.listOutsideTransform[i],
+                2f));
+            yield return new WaitForSeconds(0.05f);
+            continue;
+        }
     }
 
     private IEnumerator IEMoveAllButtonIntoScreen()
@@ -60,7 +69,7 @@ public class AnimateButton : MonoBehaviour
     {
         for (int i = 0; i < this.listObjectToMove.Count; i++)
         {
-            this.listObjectToMove[i].transform.position = this.listOriginPosition[i];
+            this.listObjectToMove[i].transform.position = this.listOutsideTransform[i].position;
         }
     }
 }
