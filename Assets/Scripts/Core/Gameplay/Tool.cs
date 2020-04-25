@@ -27,6 +27,10 @@ public class Tool : MonoBehaviour
 	[Header("Glass Effect")]
 	public GlasserEffect glasserEffect;
 
+	[Header("Shaking Effect")]
+	public ShakeTransformS shakeTransform;
+	public ParticleSystem shakeEffect;
+
 	#endregion
 
 	#region EVENT

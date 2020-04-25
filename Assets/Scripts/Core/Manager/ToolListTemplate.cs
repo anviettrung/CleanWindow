@@ -154,17 +154,32 @@ public class ToolListTemplate : MonoBehaviour
 	public void MoveTool(Vector3 endPos, float time)
 	{
 		StartCoroutine(IEMoveTool(endPos, time));
+		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+		//{
+		//	StopAllCoroutines();
+		//	this.currentTool.shakeEffect.Play();
+		//	this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
+		//}, time));
 	}
 
 	private IEnumerator IEMoveTool(Vector3 endPos, float time)
 	{
 		float count = 0f;
-		while (count < time)
+		while (count <= time)
 		{
 			count += Time.deltaTime;
 			this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count/time);
 			yield return null;
 		}
+		//yield return StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+		//{
+		//	StopAllCoroutines();
+		//	this.currentTool.shakeEffect.Play();
+		//	this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
+		//}, 0f));
+		//StopAllCoroutines();
+		//this.currentTool.shakeEffect.Play();
+		//this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
 	}
 
 	public void StopCoroutineMoveTool()
