@@ -72,9 +72,13 @@ public class ToolListTemplate : MonoBehaviour
 		createdTool.Data = data;
 		currentTool = createdTool;
 
-		if (currentTool.Data.ToolType != ToolData.Type.BREAKER)
+		if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
 		{
-			this.MoveTool(GameManager.Instance.toolTransform.startTransform.position, 2f);
+			this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 2f);
+		}
+		else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
+		{
+			this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 2f);
 		}
 		else
 		{
@@ -153,7 +157,12 @@ public class ToolListTemplate : MonoBehaviour
 	#region MOVE_TOOL
 	public void MoveTool(Vector3 endPos, float time)
 	{
-		StartCoroutine(IEMoveTool(endPos, time));
+		StartCoroutine(IEMoveTool(endPos, time / 2f));
+		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+		//{
+		//	//StopAllCoroutines();
+		//	PlayerInput.Instance.tool = currentTool;
+		//}, 1f));
 		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
 		//{
 		//	StopAllCoroutines();
@@ -171,12 +180,15 @@ public class ToolListTemplate : MonoBehaviour
 			this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count/time);
 			yield return null;
 		}
+		this.currentTool.shakeEffect.Play();
+		this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
+		this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
 		//yield return StartCoroutine(CoroutineUtils.DelaySeconds(() =>
 		//{
-		//	StopAllCoroutines();
-		//	this.currentTool.shakeEffect.Play();
-		//	this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
-		//}, 0f));
+		//	//StopAllCoroutines();
+		//	PlayerInput.Instance.tool = currentTool;
+		//}, 1f));
+		//PlayerInput.Instance.tool = currentTool;
 		//StopAllCoroutines();
 		//this.currentTool.shakeEffect.Play();
 		//this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
