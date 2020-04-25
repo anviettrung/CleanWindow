@@ -159,7 +159,7 @@ public class LevelManager : Singleton<LevelManager>
 		//	Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
 		if (ToolManager.Instance.breaker.GetTool() != null)
 		{
-			ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 2f);
+			ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 5f);
 			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
 			{
 				ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
@@ -181,7 +181,7 @@ public class LevelManager : Singleton<LevelManager>
 
 		if (ToolManager.Instance.cleaner.GetTool() != null)
 		{
-			ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 2f);
+			ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
 		}
 	}
 
@@ -197,7 +197,7 @@ public class LevelManager : Singleton<LevelManager>
 		//	Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
 		if (ToolManager.Instance.glasser.GetTool() != null)
 		{
-			ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 2f);
+			ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
 		}
 	}
 
