@@ -86,7 +86,7 @@ public class LevelManager : Singleton<LevelManager>
 
 
 		// UI
-		//UIManager.Instance.startButton.gameObject.SetActive(true);
+		UIManager.Instance.startButton.gameObject.SetActive(true);
 		StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
 		//UIManager.Instance.CallLayout("Main Menu");
 		UIManager.Instance.cityName.text = "???";
