@@ -74,17 +74,30 @@ public class ToolListTemplate : MonoBehaviour
 
 		if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
 		{
-			this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 2f);
+			this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 1f);
+			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+			{
+				PlayerInput.Instance.tool = currentTool;
+			}, 3f));
 		}
 		else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
 		{
-			this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 2f);
+			this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 1f);
+			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+			{
+				PlayerInput.Instance.tool = currentTool;
+			}, 3f));
 		}
-		else
+		else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
 		{
-			this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 2f);
+			this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 1f);
+			PlayerInput.Instance.tool = currentTool;
 		}
-		PlayerInput.Instance.tool = currentTool;
+		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+		//{
+		//	PlayerInput.Instance.tool = currentTool;
+		//}, 3f));
+		//PlayerInput.Instance.tool = currentTool;
 		//t.Data = data; // Tool will automatic re-init
 
 		//currentTool = t; // track
@@ -160,6 +173,10 @@ public class ToolListTemplate : MonoBehaviour
 		StartCoroutine(IEMoveTool(endPos, time / 2f));
 		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
 		//{
+		//	PlayerInput.Instance.tool = currentTool;
+		//}, time));
+		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+		//{
 		//	//StopAllCoroutines();
 		//	PlayerInput.Instance.tool = currentTool;
 		//}, 1f));
@@ -180,9 +197,12 @@ public class ToolListTemplate : MonoBehaviour
 			this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count/time);
 			yield return null;
 		}
-		this.currentTool.shakeEffect.Play();
-		this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
-		this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
+		if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
+		{
+			this.currentTool.shakeEffect.Play();
+			this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
+			this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
+		}
 		//yield return StartCoroutine(CoroutineUtils.DelaySeconds(() =>
 		//{
 		//	//StopAllCoroutines();

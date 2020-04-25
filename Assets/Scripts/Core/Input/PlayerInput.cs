@@ -44,9 +44,7 @@ public class PlayerInput : Singleton<PlayerInput>
                         {
                             VibrationManager.Instance.OnCleanStep();
                         }
-                    }
-                    if (tool != null)
-                    {
+
                         if (tool.Data.ToolType != ToolData.Type.BREAKER)
                         {
                             tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
@@ -57,6 +55,18 @@ public class PlayerInput : Singleton<PlayerInput>
                             }
                         }
                     }
+                    //if (tool != null)
+                    //{
+                    //    if (tool.Data.ToolType != ToolData.Type.BREAKER)
+                    //    {
+                    //        tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
+                    //        if (tool.Data.ToolType == ToolData.Type.GLASSER)
+                    //        {
+                    //            if (tool.glasserEffect != null)
+                    //                tool.glasserEffect.PlayGlasserEffect(true);
+                    //        }
+                    //    }
+                    //}
                 }
             }
 
@@ -70,7 +80,7 @@ public class PlayerInput : Singleton<PlayerInput>
                         {
                             tool.glasserEffect.PlayGlasserEffect(false);
                         }
-                        if( AudioManager.Instance.audioSource.isPlaying)
+                        if (AudioManager.Instance.audioSource.isPlaying)
                         {
                             AudioManager.Instance.audioSource.Stop();
                         }

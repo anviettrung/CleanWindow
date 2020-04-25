@@ -141,6 +141,7 @@ public class ExplodeWindow : MonoBehaviour
                 }
                 audio.Play();
                 isBroken = true;
+                PlayerInput.Instance.tool = null;
             }
             if (glassSide == GlassSide.LEFT)
             {
