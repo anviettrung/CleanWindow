@@ -60,6 +60,11 @@ public class Window : MonoBehaviour
 
     [HideInInspector] public CinemachineImpulseSource impulseSource;
 
+    [Header("Effects")]
+    public ParticleSystem bubbleEffect;
+    public ParticleSystem starEffect;
+    public ParticleSystem twinkleEffect;
+
     #endregion
 
     #region EVENT
@@ -187,7 +192,7 @@ public class Window : MonoBehaviour
             case State.COMPLETE:
                 onEnterStateComplete.Invoke();
                 LevelManager.Instance.LevelCompleted(data.KeyName);
-               
+
                 break;
         }
 
@@ -200,14 +205,17 @@ public class Window : MonoBehaviour
         {
 
             case State.DIRTY:
+                this.bubbleEffect.Play();
                 ChangeState(State.WET);
                 break;
 
             case State.WET:
+                this.twinkleEffect.Play();
                 ChangeState(State.BREAK_GLASS);
                 break;
 
             case State.BREAK_GLASS:
+                this.starEffect.Play();
                 ChangeState(State.CAPTURE);
                 break;
 

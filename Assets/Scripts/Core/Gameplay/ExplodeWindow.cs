@@ -134,23 +134,13 @@ public class ExplodeWindow : MonoBehaviour
             //fragments.Clear();
             if (glassSide == GlassSide.RIGHT)
             {
-                var audio = this.glassRight.GetComponent<AudioSource>();
-                if (audio.clip == null)
-                {
-                    audio.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
-                }
-                audio.Play();
+                this.PlayAudioBreakGlass();
                 isBroken = true;
                 PlayerInput.Instance.tool = null;
             }
             if (glassSide == GlassSide.LEFT)
             {
-                var audio = this.glassLeft.GetComponent<AudioSource>();
-                if (audio.clip == null)
-                {
-                    audio.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
-                }
-                audio.Play();
+                this.PlayAudioBreakGlass();
                 changeSide = true;
             }
 
@@ -196,5 +186,18 @@ public class ExplodeWindow : MonoBehaviour
         }
         glassSide = GlassSide.RIGHT;
         forceBreak = 0f;
+    }
+
+    private void PlayAudioBreakGlass()
+    {
+        if (VibrationManager.Instance.sound.isOn)
+        {
+            var audio = this.glassRight.GetComponent<AudioSource>();
+            if (audio.clip == null)
+            {
+                audio.clip = AudioManager.Instance.cwSounds.Find(sound => sound.soundState == Window.State.BREAK_GLASS).clipAtState;
+            }
+            audio.Play();
+        }
     }
 }

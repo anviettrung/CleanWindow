@@ -21,14 +21,7 @@ public class GameCounter : Singleton<GameCounter>
     {
         get
         {
-            //if (this.totalGamePlayed > this.maxGameToGetGift)
-            //{
-            //    return this.totalGamePlayed = 1;
-            //}
-            //else
-            //{
             return this.totalGamePlayed;
-            //}
         }
         set
         {

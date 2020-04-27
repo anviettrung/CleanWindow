@@ -55,18 +55,6 @@ public class PlayerInput : Singleton<PlayerInput>
                             }
                         }
                     }
-                    //if (tool != null)
-                    //{
-                    //    if (tool.Data.ToolType != ToolData.Type.BREAKER)
-                    //    {
-                    //        tool.Move(InputMoveTrail.Instance.GetDeltaPosition(true));
-                    //        if (tool.Data.ToolType == ToolData.Type.GLASSER)
-                    //        {
-                    //            if (tool.glasserEffect != null)
-                    //                tool.glasserEffect.PlayGlasserEffect(true);
-                    //        }
-                    //    }
-                    //}
                 }
             }
 

@@ -51,7 +51,7 @@ public class LevelManager : Singleton<LevelManager>
 	#endregion
 
 	#region OPEN_LEVEL
-	public void OpenLevel(int x)
+	public void OpenLevel(int x, bool openAtStart)
 	{
 		//StopAllCoroutines();
 		var tool_list_template = FindObjectsOfType<ToolListTemplate>();
@@ -70,25 +70,17 @@ public class LevelManager : Singleton<LevelManager>
 				}
 			}
 		}
+		if (openAtStart == true)
+		{
+			// UI
+			UIManager.Instance.startButton.gameObject.SetActive(true);
+			StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
+		}
+		else
+		{
+			UIManager.Instance.CallLayout("Playing");
+		}
 
-		//var list_tools = FindObjectsOfType<Tool>();
-		//for (int i = 0; i < list_tools.Length; i++)
-		//{
-		//	if (list_tools[i].Data.ToolType != ToolData.Type.BREAKER)
-		//	{
-		//		list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-		//	}
-		//	else
-		//	{
-		//		list_tools[i].transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
-		//	}
-		//}
-
-
-		// UI
-		UIManager.Instance.startButton.gameObject.SetActive(true);
-		StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
-		//UIManager.Instance.CallLayout("Main Menu");
 		UIManager.Instance.cityName.text = "???";
 
 		// Instantiate
@@ -125,17 +117,17 @@ public class LevelManager : Singleton<LevelManager>
 	{
 		int x = GetLevelIndex(data);
 		if (x != -1)
-			OpenLevel(x);
+			OpenLevel(x, false);
 	}
 
 	public void OpenLastestLevel()
 	{
-		OpenLevel(lastestLevelIndex);
+		OpenLevel(lastestLevelIndex, true);
 	}
 
 	public void OpenNextLevel()
 	{
-		OpenLevel((lastestLevelIndex + 1) % levels.Count);
+		OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
 	}
 
 	#endregion
@@ -239,7 +231,6 @@ public class LevelManager : Singleton<LevelManager>
 		StartCoroutine(CoroutineUtils.Chain(
 			CoroutineUtils.Do(() =>
 			{
-				//UIManager.Instance.CallLayout("Playing");
 				currentWindow.ChangeState(Window.State.DIRTY);
 			})));
 

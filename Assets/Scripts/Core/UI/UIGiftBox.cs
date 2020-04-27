@@ -16,12 +16,6 @@ public class UIGiftBox : MonoBehaviour
     #endregion
 
     #region UNITY_CALLBACK
-    //private void Awake()
-    //{
-    //    GameCounter.Instance.LoadTotalGamePlayed();
-    //    this.uIProgressbar.ValueProgress = (float)GameCounter.Instance.TotalGamePlayed / (float)GameCounter.Instance.maxGameToGetGift;
-    //}
-
     private void OnEnable()
     {
         this.UpdateProgressGiftBox();

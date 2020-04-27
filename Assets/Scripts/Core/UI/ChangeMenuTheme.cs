@@ -113,7 +113,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
 
                     foreach (Transform child in changeThemeTransform)
                     {
-                        if (child.name.Contains(lasted_theme.name))
+                        if (child.name.Contains(lasted_theme.name) && child.transform.childCount > 0)
                         {
                             child.transform.GetChild(0).gameObject.SetActive(true);
                         }
@@ -140,7 +140,7 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
         selected_object.transform.GetChild(0).gameObject.SetActive(true);
         foreach (Transform child in selected_object.transform.parent)
         {
-            if (child.name != selected_object.name)
+            if (child.name != selected_object.name && child.transform.childCount > 0)
             {
                 child.transform.GetChild(0).gameObject.SetActive(false);
             }
