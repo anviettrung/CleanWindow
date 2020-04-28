@@ -17,6 +17,7 @@ public class UILayoutEndLevel : MonoBehaviour
 
     private IEnumerator IEUpdateLikes(float time)
     {
+        this.confettiEffect.Play();
         var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
         var level = LevelManager.Instance.currentLevel.Value;
         float count = 0f;
