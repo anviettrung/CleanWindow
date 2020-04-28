@@ -48,6 +48,7 @@ public class UIManager : Singleton<UIManager>
 	public List<UIShowStep> uIShowSteps;
 	public Image avatarPlayer;
 	public Text cityName;
+	public Text textLevel;
 
 	[Header("Capture Image")]
 	public Image captureImage;
@@ -172,6 +173,7 @@ public class UIManager : Singleton<UIManager>
 
 	public void BackToMainMenu()
 	{
+		this.textLevel.gameObject.SetActive(false);
 		PlayerInput.Instance.tool = null;
 		if (LevelManager.Instance.currentWindow != null)
 			Destroy(LevelManager.Instance.currentWindow.gameObject);

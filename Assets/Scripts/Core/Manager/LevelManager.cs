@@ -37,7 +37,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
             slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
-            slot_window.GetComponent<UIWindowShopItem>().levelText.text = "LEVEL " + i;
+            slot_window.GetComponent<UIWindowShopItem>().levelText.text = "LEVEL " + (i + 1);
             if (!UIManager.Instance.windowShop.items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
             {
                 UIManager.Instance.windowShop.items.Add(slot_window.GetComponent<UIWindowShopItem>());
@@ -59,6 +59,8 @@ public class LevelManager : Singleton<LevelManager>
     public void OpenLevel(int x, bool openAtStart)
     {
         this.SetCurrentLevel(x);
+        UIManager.Instance.textLevel.gameObject.SetActive(true);
+        UIManager.Instance.textLevel.text = "Level " + x.ToString();
 
         //StopAllCoroutines();
         var tool_list_template = FindObjectsOfType<ToolListTemplate>();
@@ -223,7 +225,6 @@ public class LevelManager : Singleton<LevelManager>
     public void PlayLevel()
     {
         currentWindow.gameObject.SetActive(true);
-
         PlayerInput.Instance.window = currentWindow;
 
         var all_winddows = FindObjectsOfType<Window>();
@@ -319,7 +320,7 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < levels.Count; i++)
         {
             if (levels[i].data.KeyName == keyName)
-                return i;
+                return i + 1;
         }
 
         return -1; // error 404

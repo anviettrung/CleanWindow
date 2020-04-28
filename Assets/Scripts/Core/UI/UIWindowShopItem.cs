@@ -53,7 +53,7 @@ public class UIWindowShopItem : MonoBehaviour
 
     public void UnlockLevel()
     {
-        LevelManager.Instance.UnlockLevel(levelData.data.KeyName);
+        //LevelManager.Instance.UnlockLevel(levelData.data.KeyName);
     }
 
     #endregion

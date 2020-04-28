@@ -23,7 +23,7 @@ public class UIGiftBox : MonoBehaviour
     #endregion
 
     #region UI CLICK BUTTON
-    public void OnClickGiftBox()
+    public void OnFullProgressGiftBox()
     {
         if (GameCounter.Instance.TotalGamePlayed == GameCounter.Instance.maxGameToGetGift)
         {
@@ -45,7 +45,6 @@ public class UIGiftBox : MonoBehaviour
         GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
 
         this.StartCoroutine(IEUpdateProgressGiftBox(2f));
-        //this.SaveProgressGiftBox();
     }
 
     private IEnumerator IEUpdateProgressGiftBox(float time)
@@ -63,23 +62,8 @@ public class UIGiftBox : MonoBehaviour
                 yield return null;
             }
         }
-    }
-    #endregion
 
-    #region SAVE/LOAD PROGRESS
-    private void LoadProgressGiftBox()
-    {
-
-        if (PlayerPrefs.HasKey(KEY_PROGRESS_GIFBOX))
-        {
-            GameCounter.Instance.TotalGamePlayed = PlayerPrefs.GetInt(KEY_PROGRESS_GIFBOX);
-            this.uIProgressbar.ValueProgress = GameCounter.Instance.TotalGamePlayed * ((float)1 / GameCounter.Instance.maxGameToGetGift);
-        }
-    }
-
-    private void SaveProgressGiftBox()
-    {
-        PlayerPrefs.SetInt(KEY_PROGRESS_GIFBOX, (int)GameCounter.Instance.TotalGamePlayed / (int)GameCounter.Instance.maxGameToGetGift);
+        this.OnFullProgressGiftBox();
     }
     #endregion
 }
