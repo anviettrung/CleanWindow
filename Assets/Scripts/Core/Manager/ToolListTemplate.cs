@@ -4,248 +4,222 @@ using UnityEngine;
 
 public class ToolListTemplate : MonoBehaviour
 {
-	#region DATA
-	[Header("Resources")]
-	public ToolListData toolsData;
-	[Header("Working data generated from resources")]
-	public List<ToolItem> tools;
+    #region DATA
+    [Header("Resources")]
+    public ToolListData toolsData;
+    [Header("Working data generated from resources")]
+    public List<ToolItem> tools;
 
-	[Header("Prefab")]
-	public GameObject toolPrefab;
+    [Header("Prefab")]
+    public GameObject toolPrefab;
 
-	// tracking
-	//protected Tool currentTool;
-	[HideInInspector] public Tool currentTool;
-	public int usingToolIndex;
-	private Tool createdTool;
+    // tracking
+    //protected Tool currentTool;
 
-	#endregion
+    [Header("Tracking")]
+    [HideInInspector] public Tool currentTool;
+    public int usingToolIndex;
+    private Tool createdTool;
+    #endregion
 
-	#region UNITY_CALLBACK
-	public void Awake()
-	{
-		Init();
-	}
-	#endregion
+    #region UNITY_CALLBACK
+    public void Awake()
+    {
+        Init();
+    }
+    #endregion
 
-	#region INITIALIZATION
-	public void Init()
-	{
-		tools = new List<ToolItem>();
-		for (int i = 0; i < toolsData.Tools.Length; i++) {
-			ToolItem t = new ToolItem(toolsData.Tools[i]);
-			tools.Add(t);
-		}
-		Tool tool = Instantiate(toolPrefab).GetComponent<Tool>();
-		if (tool.Data.ToolType != ToolData.Type.BREAKER)
-		{
-			tool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-		}
-		else if (tool.Data.ToolType == ToolData.Type.BREAKER)
-		{
-			tool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
-		}
-		createdTool = tool;
-	}
-	#endregion
+    #region INITIALIZATION
+    public void Init()
+    {
+        tools = new List<ToolItem>();
+        for (int i = 0; i < toolsData.Tools.Length; i++)
+        {
+            ToolItem t = new ToolItem(toolsData.Tools[i]);
+            tools.Add(t);
+        }
+        Tool tool = Instantiate(toolPrefab).GetComponent<Tool>();
+        if (tool.Data.ToolType != ToolData.Type.BREAKER)
+        {
+            tool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+        }
+        else if (tool.Data.ToolType == ToolData.Type.BREAKER)
+        {
+            tool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+        }
+        createdTool = tool;
+    }
+    #endregion
 
-	#region FUNCTION
+    #region FUNCTION
 
-	public void CreateTool(int x)
-	{
-		ToolData data = tools[x].data;
-		usingToolIndex = x;
+    public void CreateTool(int x)
+    {
+        ToolData data = tools[x].data;
+        usingToolIndex = x;
 
-		//if (currentTool != null)
-		//	Destroy(currentTool.gameObject);
+        //if (currentTool != null)
+        //	Destroy(currentTool.gameObject);
 
-		//Tool t = Instantiate(toolPrefab).GetComponent<Tool>();
-		//if (t.Data.ToolType != ToolData.Type.BREAKER)
-		//{
-		//	t.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-		//}
-		//else if (t.Data.ToolType == ToolData.Type.BREAKER)
-		//{
-		//	t.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
-		//}
+        //Tool t = Instantiate(toolPrefab).GetComponent<Tool>();
+        //if (t.Data.ToolType != ToolData.Type.BREAKER)
+        //{
+        //	t.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+        //}
+        //else if (t.Data.ToolType == ToolData.Type.BREAKER)
+        //{
+        //	t.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+        //}
 
-		createdTool.Data = data;
-		currentTool = createdTool;
+        createdTool.Data = data;
+        currentTool = createdTool;
 
-		if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
-		{
-			this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 1f);
-			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-			{
-				PlayerInput.Instance.tool = currentTool;
-			}, 3f));
-		}
-		else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
-		{
-			this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 1f);
-			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-			{
-				PlayerInput.Instance.tool = currentTool;
-			}, 3f));
-		}
-		else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
-		{
-			this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 1f);
-			PlayerInput.Instance.tool = currentTool;
-		}
-		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-		//{
-		//	PlayerInput.Instance.tool = currentTool;
-		//}, 3f));
-		//PlayerInput.Instance.tool = currentTool;
-		//t.Data = data; // Tool will automatic re-init
+        if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
+        {
+            this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 1f, true);
+            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+            {
+                PlayerInput.Instance.tool = currentTool;
+            }, 3f));
+        }
+        else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
+        {
+            this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 1f, true);
+            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+            {
+                PlayerInput.Instance.tool = currentTool;
+            }, 3f));
+        }
+        else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
+        {
+            this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 1f, true);
+            PlayerInput.Instance.tool = currentTool;
+        }
 
-		//currentTool = t; // track
-	}
+        //t.Data = data; // Tool will automatic re-init
 
-	public void CreateTool()
-	{
-		CreateTool(usingToolIndex);
-	}
+        //currentTool = t; // track
+    }
 
-	public void UnlockLevel(string keyName)
-	{
+    public void CreateTool()
+    {
+        CreateTool(usingToolIndex);
+    }
 
-	}
+    public void UnlockLevel(string keyName)
+    {
 
-	#endregion
+    }
 
-	#region GET/SET
-	public int GetToolIndex(ToolData data)
-	{
-		for (int i = 0; i < tools.Count; i++) {
-			if (tools[i].data.KeyName == data.KeyName)
-				return i;
-		}
+    #endregion
 
-		return -1; // error 404
-	}
+    #region GET/SET
+    public int GetToolIndex(ToolData data)
+    {
+        for (int i = 0; i < tools.Count; i++)
+        {
+            if (tools[i].data.KeyName == data.KeyName)
+                return i;
+        }
 
-	public Tool GetTool()
-	{
-		return currentTool;
-	}
+        return -1; // error 404
+    }
 
-	public ToolItem GetToolItem()
-	{
-		return tools[usingToolIndex];
-	}
+    public Tool GetTool()
+    {
+        return currentTool;
+    }
+
+    public ToolItem GetToolItem()
+    {
+        return tools[usingToolIndex];
+    }
 
 
-	#endregion
+    #endregion
 
-	#region SAVE/LOAD
+    #region SAVE/LOAD
 
-	public void Save()
-	{
-		for (int i = 0; i < tools.Count; i++) {
+    public void Save()
+    {
+        for (int i = 0; i < tools.Count; i++)
+        {
 
-			PlayerPrefs.SetInt("tool_" + tools[i].data.KeyName, (int)tools[i].status);
+            PlayerPrefs.SetInt("tool_" + tools[i].data.KeyName, (int)tools[i].status);
 
-		}
-	}
+        }
+    }
 
-	public void Load()
-	{
-		Debug.Log("Load Tool");
-		for (int i = 0; i < tools.Count; i++) {
+    public void Load()
+    {
+        Debug.Log("Load Tool");
+        for (int i = 0; i < tools.Count; i++)
+        {
 
-			string key = "tool_" + tools[i].data.KeyName;
-			if (PlayerPrefs.HasKey(key)) {
+            string key = "tool_" + tools[i].data.KeyName;
+            if (PlayerPrefs.HasKey(key))
+            {
 
-				int s = PlayerPrefs.GetInt(key);
-				tools[i].status = (ToolItem.Status)s;
+                int s = PlayerPrefs.GetInt(key);
+                tools[i].status = (ToolItem.Status)s;
 
-			}
+            }
 
-		}
-	}
-	#endregion
+        }
+    }
+    #endregion
 
-	#region MOVE_TOOL
-	public void MoveTool(Vector3 endPos, float time)
-	{
-		StartCoroutine(IEMoveTool(endPos, time / 2f));
-		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-		//{
-		//	PlayerInput.Instance.tool = currentTool;
-		//}, time));
-		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-		//{
-		//	//StopAllCoroutines();
-		//	PlayerInput.Instance.tool = currentTool;
-		//}, 1f));
-		//StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-		//{
-		//	StopAllCoroutines();
-		//	this.currentTool.shakeEffect.Play();
-		//	this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
-		//}, time));
-	}
+    #region MOVE_TOOL
+    public void MoveTool(Vector3 endPos, float time, bool moveInside)
+    {
+        StartCoroutine(IEMoveTool(endPos, time / 2f, moveInside));
+    }
 
-	private IEnumerator IEMoveTool(Vector3 endPos, float time)
-	{
-		float count = 0f;
-		while (count <= time)
-		{
-			count += Time.deltaTime;
-			this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count/time);
-			yield return null;
-		}
-		if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
-		{
-			this.currentTool.shakeEffect.Play();
-			this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
-			this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
-		}
-		//yield return StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-		//{
-		//	//StopAllCoroutines();
-		//	PlayerInput.Instance.tool = currentTool;
-		//}, 1f));
-		//PlayerInput.Instance.tool = currentTool;
-		//StopAllCoroutines();
-		//this.currentTool.shakeEffect.Play();
-		//this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1.5f, 1f, true);
-	}
+    private IEnumerator IEMoveTool(Vector3 endPos, float time, bool moveInside)
+    {
+        float count = 0f;
+        while (count <= time)
+        {
+            count += Time.deltaTime;
+            this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count / time);
+            yield return null;
+        }
+        if (moveInside == true)
+        {
+            this.currentTool.readyToUse = true;
+        }
+        else
+        {
+            this.currentTool.readyToUse = false;
+        }
+        if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
+        {
+            this.currentTool.shakeEffect.Play();
+            this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
+            this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
+        }
+    }
 
-	public void StopCoroutineMoveTool()
-	{
-		StopAllCoroutines();
-	}
-
-	//public void ResetPosition()
-	//{
-	//	if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
-	//	{
-	//		this.currentTool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-	//	}
-	//	else
-	//	{
-	//		this.currentTool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
-	//	}
-	//}
-	#endregion
+    public void StopCoroutineMoveTool()
+    {
+        StopAllCoroutines();
+    }
+    #endregion
 }
 
 [System.Serializable]
 public class ToolItem
 {
-	public ToolData data;
-	public Status status;
-	public enum Status
-	{
-		LOCK,
-		UNLOCK
-	}
+    public ToolData data;
+    public Status status;
+    public enum Status
+    {
+        LOCK,
+        UNLOCK
+    }
 
-	public ToolItem(ToolData d)
-	{
-		data = d;
-	}
+    public ToolItem(ToolData d)
+    {
+        data = d;
+    }
 }

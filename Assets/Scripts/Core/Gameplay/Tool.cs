@@ -8,6 +8,9 @@ public class Tool : MonoBehaviour
 	#region DATA
 	[Header("Data")]
 	[SerializeField] protected ToolData data;
+
+	[Header("Tracking")]
+	[HideInInspector] public bool readyToUse = false;
 	public ToolData Data {
 		get {
 			return data;

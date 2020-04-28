@@ -19,12 +19,12 @@ public class UIManager : Singleton<UIManager>
 	public GameObject layoutChangeTheme;
 	public GameObject layoutTopUIGameplay;
 
+	[Header("Layout money elemetns")]
+	public GameObject panelMoney;
+	public Text textMoneyNumber;
+
 	[Header("Top UI elements")]
-	public Image iconMoney;
-	public Text labelMoneyNumber;
-
 	public Button buttonSetting;
-
 	public Text labelLevelName;
 	public Slider progressBar;
 	public Image gameTitle;
@@ -172,12 +172,7 @@ public class UIManager : Singleton<UIManager>
 
 	public void BackToMainMenu()
 	{
-		//if (ToolManager.Instance.cleaner.GetTool() != null)
-		//	ToolManager.Instance.cleaner.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-		//if (ToolManager.Instance.glasser.GetTool() != null)
-		//	ToolManager.Instance.glasser.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-		//if (ToolManager.Instance.breaker.GetTool() != null)
-		//	ToolManager.Instance.breaker.GetTool().transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+		PlayerInput.Instance.tool = null;
 		if (LevelManager.Instance.currentWindow != null)
 			Destroy(LevelManager.Instance.currentWindow.gameObject);
 
@@ -216,6 +211,7 @@ public class UIManager : Singleton<UIManager>
 		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
 		this.cityCaption.text = this.cityName.text;
 		this.CallLayout("End Game");
+		this.panelMoney.SetActive(true);
 		count = 0f;
 		while (count < time)
 		{

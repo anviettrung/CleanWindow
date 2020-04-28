@@ -4,362 +4,392 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-	#region DATA
-	[Header("Resources")]
-	public LevelsData levelsData;
-	[Header("Working data generated from resources")]
-	public List<Level> levels;
+    #region DATA
+    [Header("Resources")]
+    public LevelsData levelsData;
+    [Header("Working data generated from resources")]
+    public List<Level> levels;
 
-	//[Header("Prefab")]
-	//public GameObject windowPrefab;
+    //[Header("Prefab")]
+    //public GameObject windowPrefab;
 
-	// tracking
-	[HideInInspector] public Window currentWindow;
-	protected int lastestLevelIndex;
+    // tracking
+    [HideInInspector] public Window currentWindow;
+    protected int lastestLevelIndex;
 
-	#endregion
+    /// <summary>
+    /// Current level
+    /// </summary>
+    public int? currentLevel;
+    #endregion
 
-	#region UNITY_CALLBACK
-	public void Awake()
-	{
-		Init();
-	}
-	#endregion
+    #region UNITY_CALLBACK
+    public void Awake()
+    {
+        Init();
+    }
+    #endregion
 
-	#region INITIALIZATION
-	public void Init()
-	{
-		for (int i = 0; i < this.levelsData.Windows.Length; i++)
-		{
-			var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
-			slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
-			slot_window.GetComponent<UIWindowShopItem>().levelText.text = "LEVEL " + i;
-			if (!UIManager.Instance.windowShop.items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
-			{
-				UIManager.Instance.windowShop.items.Add(slot_window.GetComponent<UIWindowShopItem>());
-			}
-		}
+    #region INITIALIZATION
+    public void Init()
+    {
+        for (int i = 0; i < this.levelsData.Windows.Length; i++)
+        {
+            var slot_window = Instantiate(UIManager.Instance.slotWindow, UIManager.Instance.contentWindow);
+            slot_window.GetComponent<UIWindowShopItem>().UpdateUI();
+            slot_window.GetComponent<UIWindowShopItem>().levelText.text = "LEVEL " + i;
+            if (!UIManager.Instance.windowShop.items.Contains(slot_window.GetComponent<UIWindowShopItem>()))
+            {
+                UIManager.Instance.windowShop.items.Add(slot_window.GetComponent<UIWindowShopItem>());
+            }
+        }
 
-		levels = new List<Level>();
-		for (int i = 0; i < levelsData.Windows.Length; i++) {
-			Level lvl = new Level(levelsData.Windows[i]);
-			levels.Add(lvl);
-		}
+        levels = new List<Level>();
+        for (int i = 0; i < levelsData.Windows.Length; i++)
+        {
+            Level lvl = new Level(levelsData.Windows[i]);
+            levels.Add(lvl);
+        }
 
-		UIManager.Instance.windowShop.SetData(levels);
-	}
-	#endregion
+        UIManager.Instance.windowShop.SetData(levels);
+    }
+    #endregion
 
-	#region OPEN_LEVEL
-	public void OpenLevel(int x, bool openAtStart)
-	{
-		//StopAllCoroutines();
-		var tool_list_template = FindObjectsOfType<ToolListTemplate>();
-		foreach (var tool in tool_list_template)
-		{
-			tool.StopCoroutineMoveTool();
-			if (tool.currentTool != null)
-			{
-				if (tool.currentTool.Data.ToolType != ToolData.Type.BREAKER)
-				{
-					tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
-				}
-				else
-				{
-					tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
-				}
-			}
-		}
-		if (openAtStart == true)
-		{
-			// UI
-			UIManager.Instance.startButton.gameObject.SetActive(true);
-			StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
-		}
-		else
-		{
-			UIManager.Instance.CallLayout("Playing");
-		}
+    #region OPEN_LEVEL
+    public void OpenLevel(int x, bool openAtStart)
+    {
+        this.SetCurrentLevel(x);
 
-		UIManager.Instance.cityName.text = "???";
+        //StopAllCoroutines();
+        var tool_list_template = FindObjectsOfType<ToolListTemplate>();
+        foreach (var tool in tool_list_template)
+        {
+            tool.StopCoroutineMoveTool();
+            if (tool.currentTool != null)
+            {
+                if (tool.currentTool.Data.ToolType != ToolData.Type.BREAKER)
+                {
+                    tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+                }
+                else
+                {
+                    tool.currentTool.transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+                }
+            }
+        }
+        if (openAtStart == true)
+        {
+            // UI
+            UIManager.Instance.startButton.gameObject.SetActive(true);
+            StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
+        }
+        else
+        {
+            UIManager.Instance.CallLayout("Playing");
+        }
 
-		// Instantiate
-		WindowData data = levels[x].data;
-		lastestLevelIndex = x;
+        UIManager.Instance.cityName.text = "???";
 
-		if (currentWindow != null)
-			Destroy(currentWindow.gameObject);
+        // Instantiate
+        WindowData data = levels[x].data;
+        lastestLevelIndex = x;
 
-		ChangeMenuTheme.Instance.CreateNewWindow();
+        if (currentWindow != null)
+            Destroy(currentWindow.gameObject);
 
-		//Window w = Instantiate(windowPrefab).GetComponent<Window>();
-		currentWindow.gameObject.SetActive(true);
-		Window w = currentWindow;
+        ChangeMenuTheme.Instance.CreateNewWindow();
 
-		// Setting
-		w.Data = data; // window will automatic re-init
-		PlayerInput.Instance.window = w;// set player input target to new window
+        //Window w = Instantiate(windowPrefab).GetComponent<Window>();
+        currentWindow.gameObject.SetActive(true);
+        Window w = currentWindow;
 
-		// Setting events
-		w.onEnterStateDirty.AddListener(UsingGlasserTool);
-		w.onEnterStateWet.AddListener(DestroyGlasserTool);
-		w.onEnterStateWet.AddListener(UsingCleanerTool);
-		w.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
-		w.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
-		w.onEnterStateCapture.AddListener(DestroyBreakerTool);
-		w.onEnterStateCapture.AddListener(EnableButtonCapture);
-		w.onEnterStateComplete.AddListener(DisableButtonCapture);
+        // Setting
+        w.Data = data; // window will automatic re-init
+        PlayerInput.Instance.window = w;// set player input target to new window
 
-		currentWindow = w; // track
-	}
+        // Setting events
+        w.onEnterStateDirty.AddListener(UsingGlasserTool);
+        w.onEnterStateWet.AddListener(DestroyGlasserTool);
+        w.onEnterStateWet.AddListener(UsingCleanerTool);
+        w.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
+        w.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
+        w.onEnterStateCapture.AddListener(DestroyBreakerTool);
+        w.onEnterStateCapture.AddListener(EnableButtonCapture);
+        w.onEnterStateComplete.AddListener(DisableButtonCapture);
 
-	public void OpenLevel(WindowData data)
-	{
-		int x = GetLevelIndex(data);
-		if (x != -1)
-			OpenLevel(x, false);
-	}
+        currentWindow = w; // track
+    }
 
-	public void OpenLastestLevel()
-	{
-		OpenLevel(lastestLevelIndex, true);
-	}
+    public void OpenLevel(WindowData data)
+    {
+        int x = GetLevelIndex(data);
+        if (x != -1)
+            OpenLevel(x, false);
+    }
 
-	public void OpenNextLevel()
-	{
-		OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
-	}
+    public void OpenLastestLevel()
+    {
+        OpenLevel(lastestLevelIndex, true);
+    }
 
-	#endregion
+    public void OpenNextLevel()
+    {
+        OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
+    }
 
-	#region FUNCTION
+    #endregion
 
-	protected void UsingBreakerTool()
-	{
-		ToolManager.Instance.breaker.CreateTool();
-		//PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
+    #region FUNCTION
 
-		ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
-		explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
+    protected void UsingBreakerTool()
+    {
+        ToolManager.Instance.breaker.CreateTool();
+        //PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
 
-		UIManager.Instance.tapAndHold.SetActive(true);
-	}
+        ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
+        explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
 
-	protected void DestroyBreakerTool()
-	{
-		//if (ToolManager.Instance.breaker.GetTool() != null)
-		//	Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
-		if (ToolManager.Instance.breaker.GetTool() != null)
-		{
-			ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 5f);
-			StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-			{
-				ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
-			},2f));
-			
-		}
-	}
+        UIManager.Instance.tapAndHold.SetActive(true);
+    }
 
-	protected void UsingCleanerTool()
-	{
-		ToolManager.Instance.cleaner.CreateTool();
-		//PlayerInput.Instance.tool = ToolManager.Instance.cleaner.GetTool();
-	}
+    protected void DestroyBreakerTool()
+    {
+        //if (ToolManager.Instance.breaker.GetTool() != null)
+        //	Destroy(ToolManager.Instance.breaker.GetTool().gameObject);
+        if (ToolManager.Instance.breaker.GetTool() != null)
+        {
+            ToolManager.Instance.breaker.GetTool().readyToUse = false;
+            PlayerInput.Instance.tool = null;
+            ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 5f, false);
+            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+            {
+                ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
+            }, 2f));
 
-	protected void DestroyCleanerTool()
-	{
-		//if (ToolManager.Instance.cleaner.GetTool() != null)
-		//	Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
+        }
+    }
 
-		if (ToolManager.Instance.cleaner.GetTool() != null)
-		{
-			ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
-		}
-	}
+    protected void UsingCleanerTool()
+    {
+        ToolManager.Instance.cleaner.CreateTool();
+        //PlayerInput.Instance.tool = ToolManager.Instance.cleaner.GetTool();
+    }
 
-	protected void UsingGlasserTool()
-	{
-		ToolManager.Instance.glasser.CreateTool();
-		//PlayerInput.Instance.tool = ToolManager.Instance.glasser.GetTool();
-	}
+    protected void DestroyCleanerTool()
+    {
+        //if (ToolManager.Instance.cleaner.GetTool() != null)
+        //	Destroy(ToolManager.Instance.cleaner.GetTool().gameObject);
 
-	protected void DestroyGlasserTool()
-	{
-		//if (ToolManager.Instance.glasser.GetTool() != null)
-		//	Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
-		if (ToolManager.Instance.glasser.GetTool() != null)
-		{
-			ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
-		}
-	}
+        if (ToolManager.Instance.cleaner.GetTool() != null)
+        {
+            ToolManager.Instance.cleaner.GetTool().readyToUse = false;
+            PlayerInput.Instance.tool = null;
+            ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f, false);
+        }
+    }
 
-	protected void EnableButtonCapture()
-	{
-		UIManager.Instance.layoutCapture.gameObject.SetActive(true);
-	}
+    protected void UsingGlasserTool()
+    {
+        ToolManager.Instance.glasser.CreateTool();
+        //PlayerInput.Instance.tool = ToolManager.Instance.glasser.GetTool();
+    }
 
-	protected void DisableButtonCapture()
-	{
-		UIManager.Instance.layoutCapture.gameObject.SetActive(false);
-	}
+    protected void DestroyGlasserTool()
+    {
+        //if (ToolManager.Instance.glasser.GetTool() != null)
+        //	Destroy(ToolManager.Instance.glasser.GetTool().gameObject);
+        if (ToolManager.Instance.glasser.GetTool() != null)
+        {
+            ToolManager.Instance.glasser.GetTool().readyToUse = false;
+            PlayerInput.Instance.tool = null;
+            ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f, false);
+            foreach (var effect in ToolManager.Instance.glasser.GetTool().glasserEffect.effects)
+            {
+                effect.Stop();
+            }
+        }
+    }
 
-	public void PlayLevel()
-	{
-		currentWindow.gameObject.SetActive(true);
+    protected void EnableButtonCapture()
+    {
+        UIManager.Instance.layoutCapture.gameObject.SetActive(true);
+    }
 
-		PlayerInput.Instance.window = currentWindow;
+    protected void DisableButtonCapture()
+    {
+        UIManager.Instance.layoutCapture.gameObject.SetActive(false);
+    }
 
-		var all_winddows = FindObjectsOfType<Window>();
-		foreach (var w in all_winddows)
-		{
-			if (w != currentWindow)
-			{
-				Destroy(w.gameObject);
-			}
-		}
+    public void PlayLevel()
+    {
+        currentWindow.gameObject.SetActive(true);
 
-		// Setting events
-		currentWindow.onEnterStateDirty.AddListener(UsingGlasserTool);
-		currentWindow.onEnterStateWet.AddListener(DestroyGlasserTool);
-		currentWindow.onEnterStateWet.AddListener(UsingCleanerTool);
-		currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
-		currentWindow.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
-		currentWindow.onEnterStateCapture.AddListener(DestroyBreakerTool);
-		currentWindow.onEnterStateCapture.AddListener(EnableButtonCapture);
-		currentWindow.onEnterStateComplete.AddListener(DisableButtonCapture);
+        PlayerInput.Instance.window = currentWindow;
 
-		StartCoroutine(CoroutineUtils.Chain(
-			CoroutineUtils.Do(() =>
-			{
-				currentWindow.ChangeState(Window.State.DIRTY);
-			})));
+        var all_winddows = FindObjectsOfType<Window>();
+        foreach (var w in all_winddows)
+        {
+            if (w != currentWindow)
+            {
+                Destroy(w.gameObject);
+            }
+        }
 
-		StartCoroutine(CoroutineUtils.Chain(
-			CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
-			CoroutineUtils.WaitForSeconds(2)
-			//CoroutineUtils.Do(() => { 
-			//	UIManager.Instance.CallLayout("Playing");
-			//	currentWindow.ChangeState(Window.State.DIRTY);
-			//})
-		));
+        // Setting events
+        currentWindow.onEnterStateDirty.AddListener(UsingGlasserTool);
+        currentWindow.onEnterStateWet.AddListener(DestroyGlasserTool);
+        currentWindow.onEnterStateWet.AddListener(UsingCleanerTool);
+        currentWindow.onEnterStateBreakGlass.AddListener(DestroyCleanerTool);
+        currentWindow.onEnterStateBreakGlass.AddListener(UsingBreakerTool);
+        currentWindow.onEnterStateCapture.AddListener(DestroyBreakerTool);
+        currentWindow.onEnterStateCapture.AddListener(EnableButtonCapture);
+        currentWindow.onEnterStateComplete.AddListener(DisableButtonCapture);
 
-		foreach (var window in ChangeMenuTheme.Instance.windows)
-		{
-			if (window.gameObject.activeInHierarchy == false)
-			{
-				Destroy(window.gameObject);
-			}
-		}
-		ChangeMenuTheme.Instance.windows.TrimExcess();
-	}
+        StartCoroutine(CoroutineUtils.Chain(
+            CoroutineUtils.Do(() =>
+            {
+                currentWindow.ChangeState(Window.State.DIRTY);
+            })));
 
-	public void UnlockLevel(int x)
-	{
-		if (x != -1) {
-			levels[x].ChangeStatus(Level.Status.UNLOCK);
-			Save();
-		}
-	}
+        StartCoroutine(CoroutineUtils.Chain(
+            CoroutineUtils.Do(() => CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT)),
+            CoroutineUtils.WaitForSeconds(2)
+        //CoroutineUtils.Do(() => { 
+        //	UIManager.Instance.CallLayout("Playing");
+        //	currentWindow.ChangeState(Window.State.DIRTY);
+        //})
+        ));
 
-	public void UnlockLevel(string keyName)
-	{
-		UnlockLevel(GetLevelIndex(keyName));
-	}
+        foreach (var window in ChangeMenuTheme.Instance.windows)
+        {
+            if (window.gameObject.activeInHierarchy == false)
+            {
+                Destroy(window.gameObject);
+            }
+        }
+        ChangeMenuTheme.Instance.windows.TrimExcess();
+    }
 
-	public void LevelCompleted(string keyName)
-	{
-		for (int i = 0; i < levels.Count; i++) {
-			if (levels[i].data.KeyName == keyName) {
-				levels[i].ChangeStatus(Level.Status.COMPLETE);
+    public void UnlockLevel(int x)
+    {
+        if (x != -1)
+        {
+            levels[x].ChangeStatus(Level.Status.UNLOCK);
+            Save();
+        }
+    }
 
-				// Auto unlock next level
-				if (i + 1 < levels.Count)
-					UnlockLevel(i + 1);
+    public void UnlockLevel(string keyName)
+    {
+        UnlockLevel(GetLevelIndex(keyName));
+    }
 
-				Save();
-				return;
-			}
-		}
+    public void LevelCompleted(string keyName)
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i].data.KeyName == keyName)
+            {
+                levels[i].ChangeStatus(Level.Status.COMPLETE);
 
-		//Add haptic:
-		VibrationManager.Instance.OnAfterTakePhoto();
+                // Auto unlock next level
+                if (i + 1 < levels.Count)
+                    UnlockLevel(i + 1);
 
-	}
-	#endregion
+                Save();
+                return;
+            }
+        }
 
-	#region GET/SET
-	public int GetLevelIndex(string keyName)
-	{
-		for (int i = 0; i < levels.Count; i++) {
-			if (levels[i].data.KeyName == keyName)
-				return i;
-		}
+        //Add haptic:
+        VibrationManager.Instance.OnAfterTakePhoto();
 
-		return -1; // error 404
-	}
+    }
 
-	public int GetLevelIndex(WindowData data)
-	{
-		return GetLevelIndex(data.KeyName);
-	}
+    private void SetCurrentLevel(int level)
+    {
+        this.currentLevel = null;
+        this.currentLevel = level;
+    }
+    #endregion
+
+    #region GET/SET
+    public int GetLevelIndex(string keyName)
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i].data.KeyName == keyName)
+                return i;
+        }
+
+        return -1; // error 404
+    }
+
+    public int GetLevelIndex(WindowData data)
+    {
+        return GetLevelIndex(data.KeyName);
+    }
 
 
-	#endregion
+    #endregion
 
-	#region SAVE/LOAD
+    #region SAVE/LOAD
 
-	public void Save()
-	{
-		for (int i = 0; i < levels.Count; i++) {
+    public void Save()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
 
-			PlayerPrefs.SetInt("lvl_" + levels[i].data.KeyName, (int)levels[i].status);
+            PlayerPrefs.SetInt("lvl_" + levels[i].data.KeyName, (int)levels[i].status);
 
-		}
+        }
 
-		PlayerPrefs.SetInt("lastest_lvl", lastestLevelIndex);
-	}
+        PlayerPrefs.SetInt("lastest_lvl", lastestLevelIndex);
+    }
 
-	public void Load()
-	{
-		for (int i = 0; i < levels.Count; i++) {
+    public void Load()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
 
-			string key = "lvl_" + levels[i].data.KeyName;
-			if (PlayerPrefs.HasKey(key)) {
+            string key = "lvl_" + levels[i].data.KeyName;
+            if (PlayerPrefs.HasKey(key))
+            {
 
-				int s = PlayerPrefs.GetInt(key);
-				levels[i].status = (Level.Status)s;
+                int s = PlayerPrefs.GetInt(key);
+                levels[i].status = (Level.Status)s;
 
-			}
+            }
 
-		}
+        }
 
-		if (PlayerPrefs.HasKey("lastest_lvl"))
-			lastestLevelIndex = PlayerPrefs.GetInt("lastest_lvl");
-	}
-	#endregion
+        if (PlayerPrefs.HasKey("lastest_lvl"))
+            lastestLevelIndex = PlayerPrefs.GetInt("lastest_lvl");
+    }
+    #endregion
 }
 
 [System.Serializable]
 public class Level
 {
-	public WindowData data;
-	public Status status;
-	public enum Status
-	{
-		LOCK,
-		UNLOCK,
-		COMPLETE
-	}
+    public WindowData data;
+    public Status status;
+    public enum Status
+    {
+        LOCK,
+        UNLOCK,
+        COMPLETE
+    }
 
-	public Level(WindowData d)
-	{
-		data = d;
-	}
+    public Level(WindowData d)
+    {
+        data = d;
+    }
 
-	public void ChangeStatus(Level.Status s)
-	{
-		// Once status is complete, it couldn't back to other status
-		if (status != Status.COMPLETE)
-			status = s;
-	}
+    public void ChangeStatus(Level.Status s)
+    {
+        // Once status is complete, it couldn't back to other status
+        if (status != Status.COMPLETE)
+            status = s;
+    }
 }

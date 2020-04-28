@@ -13,12 +13,15 @@ public class GameManager : Singleton<GameManager>
 	[Header("Tool Transform")]
 	public ToolTransform toolTransform;
 
+	[Header("Money")]
+	public int totalMoney;
+	private const string KEY_MONEY = "Total_Money";
 	#endregion
 
 	#region UNITY_CALLBACK
 	protected void Awake()
 	{
-		
+		this.LoadTotalMoney();
 	}
 
 	protected void Start()
@@ -57,6 +60,17 @@ public class GameManager : Singleton<GameManager>
 	#endregion
 
 	#region FUNCTION
+	public void LoadTotalMoney()
+	{
+		if (PlayerPrefs.HasKey(KEY_MONEY))
+		{
+			this.totalMoney = PlayerPrefs.GetInt(KEY_MONEY);
+		}
+	}
 
+	public void SaveTotalMoney()
+	{
+		PlayerPrefs.SetInt(KEY_MONEY, this.totalMoney);
+	}
 	#endregion
 }
