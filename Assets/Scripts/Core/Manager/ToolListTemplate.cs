@@ -76,7 +76,7 @@ public class ToolListTemplate : MonoBehaviour
 
         if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 1f, true);
+            this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 7f, true);
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
             {
                 PlayerInput.Instance.tool = currentTool;
@@ -84,7 +84,7 @@ public class ToolListTemplate : MonoBehaviour
         }
         else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 1f, true);
+            this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 7f, true);
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
             {
                 PlayerInput.Instance.tool = currentTool;
@@ -92,8 +92,15 @@ public class ToolListTemplate : MonoBehaviour
         }
         else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 1f, true);
+            this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 7f, true);
             PlayerInput.Instance.tool = currentTool;
+        }
+
+        if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
+        {
+            this.currentTool.shakeEffect.Play();
+            this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
+            this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
         }
 
         //t.Data = data; // Tool will automatic re-init
@@ -191,12 +198,6 @@ public class ToolListTemplate : MonoBehaviour
         else
         {
             this.currentTool.readyToUse = false;
-        }
-        if (this.currentTool.Data.ToolType != ToolData.Type.BREAKER)
-        {
-            this.currentTool.shakeEffect.Play();
-            this.currentTool.shakeTransform.ShakeGameObject(this.currentTool.shakeTransform.GameObjectToShake, 1f, 0.8f, true);
-            this.currentTool.GetComponentInChildren<ShakeTransformS>().gameObject.transform.eulerAngles = Vector3.zero;
         }
     }
 

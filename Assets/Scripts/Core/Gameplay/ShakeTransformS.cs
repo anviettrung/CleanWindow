@@ -13,9 +13,8 @@ public class ShakeTransformS : MonoBehaviour
             yield break; //Exit!
         }
 
-        //Get Original Pos and rot
+        //Get Original rot
         Transform objTransform = objectToShake.transform;
-        Vector3 defaultPos = objTransform.position;
         Quaternion defaultRot = objTransform.rotation;
 
         float counter = 0f;
@@ -30,17 +29,12 @@ public class ShakeTransformS : MonoBehaviour
         while (counter < totalShakeDuration)
         {
             counter += Time.deltaTime;
-            float decreaseSpeed = speed;
             float decreaseAngle = angleRot;
 
             //Shake GameObject
             if (objectIs2D)
             {
                 //Don't Translate the Z Axis if 2D Object
-                Vector3 tempPos = defaultPos; /*+ UnityEngine.Random.insideUnitSphere * decreaseSpeed;*/
-                tempPos.z = defaultPos.z;
-                objTransform.position = tempPos;
-
                 //Only Rotate the Z axis if 2D
                 objTransform.rotation = defaultRot * Quaternion.AngleAxis(UnityEngine.Random.Range(-angleRot, angleRot), new Vector3(0f, 0f, 20f));
             }
@@ -54,26 +48,16 @@ public class ShakeTransformS : MonoBehaviour
             //Check if we have reached the decreasePoint then start decreasing  decreaseSpeed value
             if (counter >= decreasePoint)
             {
-                //Debug.Log("Decreasing shake");
-
                 //Reset counter to 0 
                 counter = 0f;
                 while (counter <= decreasePoint)
                 {
                     counter += Time.deltaTime;
-                    decreaseSpeed = Mathf.Lerp(speed, 0, counter / decreasePoint);
                     decreaseAngle = Mathf.Lerp(angleRot, 0, counter / decreasePoint);
-
-                    //Debug.Log("Decrease Value: " + decreaseSpeed);
-
                     //Shake GameObject
                     if (objectIs2D)
                     {
                         //Don't Translate the Z Axis if 2D Object
-                        Vector3 tempPos = defaultPos; /*+ UnityEngine.Random.insideUnitSphere * decreaseSpeed;*/
-                        tempPos.z = defaultPos.z;
-                        objTransform.position = tempPos;
-
                         //Only Rotate the Z axis if 2D
                         objTransform.rotation = defaultRot * Quaternion.AngleAxis(UnityEngine.Random.Range(-decreaseAngle, decreaseAngle), new Vector3(0f, 0f, 20f));
                     }
@@ -88,10 +72,7 @@ public class ShakeTransformS : MonoBehaviour
                 break;
             }
         }
-        objTransform.position = defaultPos; //Reset to original postion
         objTransform.rotation = defaultRot;//Reset to original rotation
-
-        //Debug.Log("Done!");
     }
 
 

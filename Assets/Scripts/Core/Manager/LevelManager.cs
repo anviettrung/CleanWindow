@@ -60,9 +60,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         this.SetCurrentLevel(x);
         UIManager.Instance.textLevel.gameObject.SetActive(true);
-        UIManager.Instance.textLevel.text = "Level " + x.ToString();
+        UIManager.Instance.textLevel.text = "LEVEL " + x.ToString();
 
-        //StopAllCoroutines();
         var tool_list_template = FindObjectsOfType<ToolListTemplate>();
         foreach (var tool in tool_list_template)
         {
@@ -82,7 +81,7 @@ public class LevelManager : Singleton<LevelManager>
         if (openAtStart == true)
         {
             // UI
-            UIManager.Instance.startButton.gameObject.SetActive(true);
+            StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
         }
         else

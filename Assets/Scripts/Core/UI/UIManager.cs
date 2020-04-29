@@ -20,7 +20,8 @@ public class UIManager : Singleton<UIManager>
 	public GameObject layoutTopUIGameplay;
 
 	[Header("Layout money elemetns")]
-	public GameObject panelMoney;
+	//public GameObject panelMoney;
+	public GameObject layoutMoney;
 	public Text textMoneyNumber;
 
 	[Header("Top UI elements")]
@@ -97,6 +98,7 @@ public class UIManager : Singleton<UIManager>
 		tapAndHold.SetActive(s);
 		layoutTopUIGameplay.SetActive(s);
 		layoutCapture.SetActive(s);
+		layoutMoney.SetActive(s);
 	}
 
 	public void SelectTabCleanerTool()
@@ -213,7 +215,8 @@ public class UIManager : Singleton<UIManager>
 		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
 		this.cityCaption.text = this.cityName.text;
 		this.CallLayout("End Game");
-		this.panelMoney.SetActive(true);
+		//this.panelMoney.SetActive(true);
+		this.layoutMoney.SetActive(true);
 		count = 0f;
 		while (count < time)
 		{
