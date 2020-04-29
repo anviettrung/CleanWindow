@@ -23,6 +23,10 @@ public class UIWindowShopItem : MonoBehaviour
     [Header("Lock button elements")]
     public Text levelText;
 
+    [Header("Avatar")]
+    public Image avatar;
+    public int avatarID;
+
     #endregion
 
     #region EVENT
@@ -86,6 +90,11 @@ public class UIWindowShopItem : MonoBehaviour
                 lockButton.gameObject.SetActive(true);
 
                 break;
+        }
+
+        if (this.levelData.status == Level.Status.COMPLETE)
+        {
+            this.avatar.sprite = UIListAvatar.Instance.GetAvatar(this.levelText.text);
         }
     }
 

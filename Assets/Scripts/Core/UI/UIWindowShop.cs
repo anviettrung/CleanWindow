@@ -39,6 +39,10 @@ public class UIWindowShop : MonoBehaviour
         for (int i = 0, j = from; i < items.Count && j <= to; i++, j++)
         {
             items[i].levelData = allData[j];
+            if (items[i].levelData.status == Level.Status.COMPLETE)
+            {
+                this.items[i].avatar.sprite = UIListAvatar.Instance.GetAvatar(this.items[i].levelText.text);
+            }
         }
     }
 

@@ -33,7 +33,7 @@ public class PlayerInput : Singleton<PlayerInput>
             {
                 if (UIManager.Instance.IsPointerUIsObject() == false)
                 {
-                    if (window.GetCurrentTextureDrawer() != null && tool != null && tool.readyToUse == true)
+                    if (window.GetCurrentTextureDrawer() != null && tool != null/* && tool.readyToUse == true*/)
                     {
                         window.GetCurrentTextureDrawer().DrawAt(tool.GetTargetPosition());
                         if (window.state == Window.State.DIRTY)

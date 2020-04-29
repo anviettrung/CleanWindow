@@ -76,23 +76,15 @@ public class ToolListTemplate : MonoBehaviour
 
         if (currentTool.Data.ToolType == ToolData.Type.GLASSER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 7f, true);
-            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-            {
-                PlayerInput.Instance.tool = currentTool;
-            }, 3f));
+            this.MoveTool(GameManager.Instance.toolTransform.startGlasserTransform.position, 7f);
         }
         else if (currentTool.Data.ToolType == ToolData.Type.CLEANER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 7f, true);
-            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-            {
-                PlayerInput.Instance.tool = currentTool;
-            }, 3f));
+            this.MoveTool(GameManager.Instance.toolTransform.startCleanerTransform.position, 7f);
         }
         else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
         {
-            this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 7f, true);
+            this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 7f);
             PlayerInput.Instance.tool = currentTool;
         }
 
@@ -177,27 +169,24 @@ public class ToolListTemplate : MonoBehaviour
     #endregion
 
     #region MOVE_TOOL
-    public void MoveTool(Vector3 endPos, float time, bool moveInside)
+    public void MoveTool(Vector3 endPos, float time)
     {
-        StartCoroutine(IEMoveTool(endPos, time / 2f, moveInside));
+        StartCoroutine(IEMoveTool(endPos, time / 2f));
     }
 
-    private IEnumerator IEMoveTool(Vector3 endPos, float time, bool moveInside)
+    private IEnumerator IEMoveTool(Vector3 endPos, float time)
     {
         float count = 0f;
-        while (count <= time)
+        while (count < time)
         {
             count += Time.deltaTime;
             this.currentTool.transform.position = Vector3.Lerp(this.currentTool.transform.position, endPos, count / time);
+            if (count >= time * 0.5f)
+            {
+                PlayerInput.Instance.tool = this.currentTool;
+                yield break;
+            }
             yield return null;
-        }
-        if (moveInside == true)
-        {
-            this.currentTool.readyToUse = true;
-        }
-        else
-        {
-            this.currentTool.readyToUse = false;
         }
     }
 

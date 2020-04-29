@@ -1,112 +1,94 @@
 {
   "CityHashTag": [
     {
-      "CityName": "NEWYORK",
-      "HashTag": "#newyork #libertystatue"
-    },
-    {
-      "CityName": "ATHENS",
-      "HashTag": "#athens #pantheo"
-    },
-    {
+      "Level": 1,
       "CityName": "PARIS",
-      "HashTag": "#paris #eiffeltower"
+      "HashTag": "#EiffelTower #Paris"
     },
     {
+      "Level": 2,
+      "CityName": "NEWYORK",
+      "HashTag": "#StatueofLiberty  #NewYork"
+    },
+    {
+      "Level": 3,
       "CityName": "LONDON",
-      "HashTag": "#london #bigben"
+      "HashTag": "#BigBen #London"
     },
     {
-      "CityName": "ISTANBUL",
-      "HashTag": "#istanbul #sultanahmed"
+      "Level": 4,
+      "CityName": "HANOI",
+      "HashTag": "#HoanKiemLake #Hanoi"
     },
     {
-      "CityName": "COPENHAGEN",
-      "HashTag": "#copenhagen #mermaidstatue"
+      "Level": 5,
+      "CityName": "BERLIN",
+      "HashTag": "#BrandenburgGate #Berlin"
     },
     {
-      "CityName": "ROMA",
-      "HashTag": "#roma #amphitheatrumflavium"
+      "Level": 6,
+      "CityName": "ROME",
+      "HashTag": "#Colosseum #Rome"
     },
     {
+      "Level": 7,
       "CityName": "TOKYO",
-      "HashTag": "#tokyo #tokyotower"
+      "HashTag": "#TokyoTower #Tokyo"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 8,
+      "CityName": "STPETERSBURG",
+      "HashTag": "#BronzeHorseman #StPetersburg"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 9,
+      "CityName": "TORONTO",
+      "HashTag": "#TorontoCityHall #Toronto"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 10,
+      "CityName": "AMSTERDAM",
+      "HashTag": "#Tulipfields #Amsterdam"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 11,
+      "CityName": "MADRID",
+      "HashTag": "#PlazadeCibeles #Madrid"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 12,
+      "CityName": "COPENHAGEN",
+      "HashTag": "#TheLittleMermaid #Copenhagen"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 13,
+      "CityName": "MOSCOW",
+      "HashTag": "#St.Basil'sCathedral #Moscow"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 14,
+      "CityName": "ATHENS",
+      "HashTag": "#Parthenon #Athens"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 15,
+      "CityName": "ISTANBUL",
+      "HashTag": "#TheBlueMosque #Istanbul"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 16,
+      "CityName": "CAPETOWN",
+      "HashTag": "#TableMountain #CapeTown"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 17,
+      "CityName": "LISBON",
+      "HashTag": "#CastelodeS.Jorge #Lisbon"
     },
     {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
-    },
-    {
-      "CityName": "HANOI",
-      "HashTag": "#hanoi #thanglong"
+      "Level": 18,
+      "CityName": "SINGAPORE",
+      "HashTag": "#GardensbytheBay #Singapore"
     }
   ]
 }

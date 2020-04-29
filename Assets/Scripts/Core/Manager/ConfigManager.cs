@@ -81,6 +81,7 @@ public class ArrayHashTagConfig
 [System.Serializable]
 public class HashTagConfig
 {
+    public int Level;
     public string CityName;
     public string HashTag;
 }

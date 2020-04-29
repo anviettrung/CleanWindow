@@ -19,12 +19,12 @@ public class UIGridContentSize : MonoBehaviour
         var screen_ratio = (float)Screen.height / (float)Screen.width;
         if (Math.Round(screen_ratio, 1) == Math.Round(SCREEN_SIZE_PORTRAIT_4_3, 1))
         {
-            this.gridLayoutGroup.cellSize = new Vector2(450f, 450f);
+            this.gridLayoutGroup.cellSize = new Vector2(500F, 650f);
             this.gridLayoutGroup.spacing = new Vector2(150f, 150f);
         }
         else
         {
-            this.gridLayoutGroup.cellSize = new Vector2(400f, 400f);
+            this.gridLayoutGroup.cellSize = new Vector2(400f, 550f);
             this.gridLayoutGroup.spacing = new Vector2(100f, 100f);
         }
     }

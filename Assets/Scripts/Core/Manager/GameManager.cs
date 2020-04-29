@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
 		if (PlayerPrefs.HasKey(KEY_MONEY))
 		{
 			this.totalMoney = PlayerPrefs.GetInt(KEY_MONEY);
+			UIManager.Instance.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(this.totalMoney);
 		}
 	}
 

@@ -200,6 +200,8 @@ public class UIManager : Singleton<UIManager>
 		StartCoroutine(CoroutineUtils.DelaySeconds(
 				LevelManager.Instance.currentWindow.NextState,
 				LevelManager.Instance.currentWindow.nextStateAfterBreakGlassTime));
+
+		UIListAvatar.Instance.SaveAvatar();
 	}
 
 	private IEnumerator ShowFlash(float time)

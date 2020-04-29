@@ -7,17 +7,38 @@ public class UILayoutEndLevel : MonoBehaviour
 {
     public Text numberOfLikes;
     public Text hashTag;
-    public ParticleSystem confettiEffect;
+    public ParticleSystem[] confettiEffects;
 
     private void OnEnable()
     {
         this.StartCoroutine(IEAutoWriteHashTag());
         this.StartCoroutine(IEUpdateLikes(1f));
+
+        this.EnableButtons();
+    }
+
+    private void EnableButtons()
+    {
+        var length = this.confettiEffects[0].main.duration;
+        StartCoroutine(CoroutineUtils.WaitForSeconds(length * 0.75f));
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.uIGiftBox.gameObject.SetActive(true);
+        }, length * 0.8f));
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.nextButton.gameObject.SetActive(true);
+            UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
+        }, length * 1.2f));
     }
 
     private IEnumerator IEUpdateLikes(float time)
     {
-        this.confettiEffect.Play();
+        //this.confettiEffect.Play();
+        foreach (var particle in this.confettiEffects)
+        {
+            particle.Play();
+        }
         var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
         var level = LevelManager.Instance.currentLevel.Value;
         float count = 0f;

@@ -15,7 +15,7 @@ public class LevelManager : Singleton<LevelManager>
 
     // tracking
     [HideInInspector] public Window currentWindow;
-    protected int lastestLevelIndex;
+    [HideInInspector] public int lastestLevelIndex;
 
     /// <summary>
     /// Current level
@@ -60,7 +60,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         this.SetCurrentLevel(x);
         UIManager.Instance.textLevel.gameObject.SetActive(true);
-        UIManager.Instance.textLevel.text = "LEVEL " + x.ToString();
+        UIManager.Instance.textLevel.text = "LEVEL " + (x + 1).ToString();
 
         var tool_list_template = FindObjectsOfType<ToolListTemplate>();
         foreach (var tool in tool_list_template)
@@ -136,6 +136,9 @@ public class LevelManager : Singleton<LevelManager>
     public void OpenNextLevel()
     {
         OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
+        UIManager.Instance.uIGiftBox.gameObject.SetActive(false);
+        UIManager.Instance.nextButton.gameObject.SetActive(false);
+        UIManager.Instance.watchAdsButton.gameObject.SetActive(false);
     }
 
     #endregion
@@ -161,7 +164,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             ToolManager.Instance.breaker.GetTool().readyToUse = false;
             PlayerInput.Instance.tool = null;
-            ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 5f, false);
+            ToolManager.Instance.breaker.MoveTool(GameManager.Instance.toolTransform.spawnBreakerTransform.position, 5f);
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
             {
                 ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
@@ -185,7 +188,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             ToolManager.Instance.cleaner.GetTool().readyToUse = false;
             PlayerInput.Instance.tool = null;
-            ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f, false);
+            ToolManager.Instance.cleaner.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
         }
     }
 
@@ -203,7 +206,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             ToolManager.Instance.glasser.GetTool().readyToUse = false;
             PlayerInput.Instance.tool = null;
-            ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f, false);
+            ToolManager.Instance.glasser.MoveTool(GameManager.Instance.toolTransform.endTransform.position, 5f);
             foreach (var effect in ToolManager.Instance.glasser.GetTool().glasserEffect.effects)
             {
                 effect.Stop();

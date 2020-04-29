@@ -20,7 +20,7 @@ public class ShakeTransformS : MonoBehaviour
         float counter = 0f;
 
         //Shake Speed
-        const float speed = 0.1f;
+        //const float speed = 0.1f;
 
         //Angle Rotation(Optional)
         const float angleRot = 10f;

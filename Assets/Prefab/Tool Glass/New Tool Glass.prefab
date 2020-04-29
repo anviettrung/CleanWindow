@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876245948182413901}
   m_LocalRotation: {x: -0.13989638, y: -0.26040974, z: 0.038165096, w: 0.95454663}
-  m_LocalPosition: {x: 1.31, y: -0.6, z: -0.24}
+  m_LocalPosition: {x: 1.321, y: -0.605, z: -0.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9164884162332158839}
@@ -4728,9 +4728,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1991697951
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -2127847769
+  m_SortingLayer: 3
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -14331,9 +14331,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1991697951
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -2127847769
+  m_SortingLayer: 3
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0.1
@@ -14406,6 +14406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 130c182d2676e4c13ae7d7656de4aa77, type: 2}
+  readyToUse: 0
   srMain: {fileID: 5953734228315057408}
   glasserEffect: {fileID: 7480124192335110446}
   shakeTransform: {fileID: 2214348746524766155}
