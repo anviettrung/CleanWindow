@@ -1,3 +1,4 @@
 {
-  "BonusPerLevel": 100
+  "BonusPerLevel": 100,
+  "PriceToUnlockItem": 500
 }

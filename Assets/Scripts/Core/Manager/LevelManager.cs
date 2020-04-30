@@ -280,7 +280,7 @@ public class LevelManager : Singleton<LevelManager>
                 Destroy(window.gameObject);
             }
         }
-        ChangeMenuTheme.Instance.windows.TrimExcess();
+        //ChangeMenuTheme.Instance.windows.TrimExcess();
     }
 
     public void UnlockLevel(int x)

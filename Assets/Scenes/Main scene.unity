@@ -17196,7 +17196,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 491, y: 874}
+  m_SizeDelta: {x: 1125, y: 2436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451110488
 MonoBehaviour:
@@ -22430,6 +22430,7 @@ GameObject:
   - component: {fileID: 2688302399997407482}
   - component: {fileID: 2688302399997407483}
   - component: {fileID: 2688302399997407484}
+  - component: {fileID: 2688302399997407485}
   m_Layer: 5
   m_Name: 'Layout: Tool Shop'
   m_TagString: Untagged
@@ -22485,6 +22486,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 1451110488}
+--- !u!114 &2688302399997407485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688302399997407481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6c670c32609654d9f85241d830264f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uIToolShop: {fileID: 2688302401149926770}
+  unlockRandomItem: {fileID: 2688302400173377010}
 --- !u!1 &2688302400173377008
 GameObject:
   m_ObjectHideFlags: 0
@@ -22578,12 +22593,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2688302401149926768}
-        m_MethodName: 
+      - m_Target: {fileID: 2688302399997407485}
+        m_MethodName: StartUnlockRandom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -23321,6 +23336,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2688302400173377008}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2688302401210435296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23606,6 +23632,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2688302400173377008}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2688302401441454494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23807,6 +23844,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2688302400173377008}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2688302401552500490
 MonoBehaviour:
@@ -26880,8 +26928,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062445991018559}
   lockButton: {fileID: 5345182423226454693}
   toolImage: {fileID: 8563062444943522060}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925224806294565}
 --- !u!114 &8057218114199675050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26901,8 +26950,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062446064718878}
   lockButton: {fileID: 5345182423191094916}
   toolImage: {fileID: 64057105}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925224762552324}
 --- !u!114 &8057218114885027997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26922,8 +26972,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062445643054121}
   lockButton: {fileID: 5345182423574507187}
   toolImage: {fileID: 8563062444478055706}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925224340903987}
 --- !u!114 &8057218115105000959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26943,8 +26994,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444823886155}
   lockButton: {fileID: 5345182424431881169}
   toolImage: {fileID: 1745049643}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925226207010129}
 --- !u!114 &8057218115474498789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26964,8 +27016,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444118315089}
   lockButton: {fileID: 5345182425136906955}
   toolImage: {fileID: 8563062445235104098}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925225634624587}
 --- !u!114 &8057218115506596591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26985,8 +27038,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444149628507}
   lockButton: {fileID: 5345182425101995201}
   toolImage: {fileID: 626723467}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925225532865089}
 --- !u!114 &8057218115531090441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27006,8 +27060,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444191686333}
   lockButton: {fileID: 5345182425059413031}
   toolImage: {fileID: 8563062445157410702}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925225557129895}
 --- !u!114 &8057218115692573427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27027,8 +27082,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444302829127}
   lockButton: {fileID: 5345182424918906077}
   toolImage: {fileID: 8563062445285343092}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925225685049949}
 --- !u!114 &8057218115931942947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27048,8 +27104,9 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444542198935}
   lockButton: {fileID: 5345182424679994893}
   toolImage: {fileID: 8563062445591887268}
-  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
-  imgButtonLock: {fileID: 0}
+  iconGift: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
+  iconLock: {fileID: 21300000, guid: 86b0876292ffe453190dbb7530541645, type: 3}
+  imgButtonLock: {fileID: 6049925225387417741}
 --- !u!4 &8180387147370511290
 Transform:
   m_ObjectHideFlags: 0

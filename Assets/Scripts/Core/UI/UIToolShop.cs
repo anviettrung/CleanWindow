@@ -19,10 +19,10 @@ public class UIToolShop : MonoBehaviour
 		UpdateUI();
 	}
 
-	protected void Update()
-	{
-		UpdateUI();
-	}
+	//protected void Update()
+	//{
+	//	UpdateUI();
+	//}
 
 	#endregion
 
@@ -31,6 +31,7 @@ public class UIToolShop : MonoBehaviour
 	{
 		allData = datas;
 		UpdateItemData();
+		UpdateUI();
 	}
 
 	public virtual void UpdateItemData(int from, int to)

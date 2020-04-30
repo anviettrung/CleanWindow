@@ -71,6 +71,7 @@ public class GameNumberConfig
 public class BonusConfig
 {
     public int BonusPerLevel;
+    public int PriceToUnlockItem;
 }
 
 public class ArrayHashTagConfig
