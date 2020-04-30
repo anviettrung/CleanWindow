@@ -82,7 +82,11 @@ public class LevelManager : Singleton<LevelManager>
         {
             // UI
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
-            StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.CallLayout("Main Menu"); }, 0.5f));
+            StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+            {
+                //UIManager.Instance.startButton.gameObject.SetActive(true);
+                UIManager.Instance.CallLayout("Main Menu");
+            }, 0.5f));
         }
         else
         {
