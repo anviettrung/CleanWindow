@@ -181,6 +181,7 @@ public class UIManager : Singleton<UIManager>
 			Destroy(LevelManager.Instance.currentWindow.gameObject);
 
 		LevelManager.Instance.OpenLastestLevel();
+		//LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.lastestLevelIndex);
 
 		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
 	}

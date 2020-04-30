@@ -119,8 +119,9 @@ public class VibrationManager : Singleton<VibrationManager>
     {
         if (this.vibration.isOn)
         {
-            //Haptic: continuous
-            MMVibrationManager.ContinuousHaptic(this.ContinuousIntensity, this.ContinuousSharpness, this.ContinuousDuration, HapticTypes.LightImpact, this, true);
+            //Haptic: rigid impact
+            MMVibrationManager.Haptic(HapticTypes.RigidImpact, false, true, this);
+            //MMVibrationManager.ContinuousHaptic(this.ContinuousIntensity, this.ContinuousSharpness, this.ContinuousDuration, HapticTypes.LightImpact, this, true);
             //Debug.Log("<b> Onclick: Clean Step </b>");
         }
         if (this.sound.isOn)

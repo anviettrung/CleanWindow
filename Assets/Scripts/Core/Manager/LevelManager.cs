@@ -80,6 +80,8 @@ public class LevelManager : Singleton<LevelManager>
         }
         if (openAtStart == true)
         {
+            lastestLevelIndex = x;
+
             // UI
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
@@ -97,7 +99,7 @@ public class LevelManager : Singleton<LevelManager>
 
         // Instantiate
         WindowData data = levels[x].data;
-        lastestLevelIndex = x;
+        //lastestLevelIndex = x;
 
         if (currentWindow != null)
             Destroy(currentWindow.gameObject);
@@ -316,7 +318,7 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-    private void SetCurrentLevel(int level)
+    public void SetCurrentLevel(int level)
     {
         this.currentLevel = null;
         this.currentLevel = level;
@@ -350,9 +352,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         for (int i = 0; i < levels.Count; i++)
         {
-
             PlayerPrefs.SetInt("lvl_" + levels[i].data.KeyName, (int)levels[i].status);
-
         }
 
         PlayerPrefs.SetInt("lastest_lvl", lastestLevelIndex);
