@@ -4793,7 +4793,7 @@ Transform:
   m_Children:
   - {fileID: 23716384913012834}
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &23716384454501077
 Rigidbody2D:
@@ -7497,7 +7497,7 @@ Transform:
   m_Children:
   - {fileID: 23716385356987578}
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &23716385886663482
 Rigidbody2D:
@@ -12658,7 +12658,7 @@ Transform:
   m_LocalScale: {x: 2.0913696, y: 2.0452485, z: 1}
   m_Children: []
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!331 &1113536967011383078
 SpriteMask:
@@ -17495,13 +17495,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7217188188747409967}
+  - {fileID: 1451859559157473396}
   - {fileID: 23716385886663484}
   - {fileID: 23716384454501078}
   - {fileID: 7217188188941739358}
   - {fileID: 7217188188109799650}
   - {fileID: 7217188188019532110}
   - {fileID: 7217188188336325144}
-  - {fileID: 1451859559157473396}
   - {fileID: 1604746035}
   - {fileID: 6448502093297133335}
   - {fileID: 7485710007308415763}
@@ -17637,7 +17637,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7217188188019532111
 SpriteRenderer:
@@ -17720,7 +17720,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7217188188109799649
 SpriteRenderer:
@@ -17859,7 +17859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7217188188336325143
 SpriteRenderer:
@@ -18042,7 +18042,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7217188187272414948}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7217188188941739357
 SpriteRenderer:
