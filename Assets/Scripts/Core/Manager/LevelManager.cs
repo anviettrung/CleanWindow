@@ -147,13 +147,23 @@ public class LevelManager : Singleton<LevelManager>
 
     protected void UsingBreakerTool()
     {
-        ToolManager.Instance.breaker.CreateTool();
-        //PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            ToolManager.Instance.breaker.CreateTool();
+            //PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
 
-        ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
-        explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
+            ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
+            explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
 
-        UIManager.Instance.tapAndHold.SetActive(true);
+            UIManager.Instance.tapAndHold.SetActive(true);
+        }, 1f));
+        //ToolManager.Instance.breaker.CreateTool();
+        ////PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
+
+        //ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
+        //explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
+
+        //UIManager.Instance.tapAndHold.SetActive(true);
     }
 
     protected void DestroyBreakerTool()

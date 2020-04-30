@@ -9,7 +9,8 @@ public class CameraMaster : Singleton<CameraMaster>
 	public enum View
 	{
 		FULL_SHOT,
-		MEDIUM_SHOT
+		MEDIUM_SHOT,
+		MEDIUM_SHOT_1
 	}
 	protected Dictionary<View, string> views = new Dictionary<View, string>();
 
@@ -17,6 +18,7 @@ public class CameraMaster : Singleton<CameraMaster>
 	{
 		views.Add(View.FULL_SHOT, "FullShot");
 		views.Add(View.MEDIUM_SHOT, "MediumShot");
+		views.Add(View.MEDIUM_SHOT_1, "MediumShot_1");
 	}
 
 	public void TransitionToView(View v)

@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8a2c7b2c65f21224ea262dcc2c093cf0, type: 2}
+  readyToUse: 0
   srMain: {fileID: 6179052012808041620}
   glasserEffect: {fileID: 0}
+  shakeTransform: {fileID: 0}
+  shakeEffect: {fileID: 0}
 --- !u!1 &6179052012730114611
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,13 +91,13 @@ Animation:
   m_GameObject: {fileID: 6179052012730114611}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 730afed819637534faf796f1490a1241, type: 2}
+  m_Animation: {fileID: 7400000, guid: 30f989693af1e5f4b961c6f85b88a73d, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 730afed819637534faf796f1490a1241, type: 2}
+  - {fileID: 7400000, guid: 30f989693af1e5f4b961c6f85b88a73d, type: 2}
+  - {fileID: 7400000, guid: 9877a0652076d5b48aeb077106e89fda, type: 2}
+  - {fileID: 7400000, guid: bf51682f10240dc4ba1aa59f3e3f0c74, type: 2}
+  - {fileID: 7400000, guid: e3aa37ae20d69e94e884487b56f34baf, type: 2}
   - {fileID: 7400000, guid: 88b12f16ef6b93742ae8f247918969eb, type: 2}
-  - {fileID: 7400000, guid: b50b353bede905345bf95a9882525dd6, type: 2}
-  - {fileID: 7400000, guid: 53ffda19532973143bb7b1d6417565cb, type: 2}
-  - {fileID: 7400000, guid: 33706c15e06056d40ac5ed68fadc8308, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

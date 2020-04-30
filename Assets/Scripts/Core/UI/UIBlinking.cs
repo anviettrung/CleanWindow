@@ -46,7 +46,6 @@ public class UIBlinking : MonoBehaviour
         this.thisCanvasGr = GetComponent<CanvasGroup>();
         this.thisCanvasGr.alpha = MIN_ALPHA;
         this.StartBlinking();
-        StartBlinking();
     }
 
     private void OnDisable()

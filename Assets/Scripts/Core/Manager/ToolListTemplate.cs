@@ -84,6 +84,11 @@ public class ToolListTemplate : MonoBehaviour
         }
         else if (currentTool.Data.ToolType == ToolData.Type.BREAKER)
         {
+            //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+            //{
+            //    this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 7f);
+            //    PlayerInput.Instance.tool = currentTool;
+            //}, 1f));
             this.MoveTool(GameManager.Instance.toolTransform.startBreakerTransform.position, 7f);
             PlayerInput.Instance.tool = currentTool;
         }

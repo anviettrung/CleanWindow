@@ -182,6 +182,7 @@ public class Window : MonoBehaviour
                 onEnterStateBreakGlass.Invoke();
                 srDirty.gameObject.SetActive(false);
                 srWet.gameObject.SetActive(false);
+                CameraMaster.Instance.TransitionToView(CameraMaster.View.MEDIUM_SHOT_1);
                 break;
 
             case State.CAPTURE:
