@@ -16,7 +16,7 @@ public class GlasserEffect : MonoBehaviour
 
     public void PlayGlasserEffect(bool isTouching)
     {
-        if (isTouching && !UIManager.Instance.IsPointerUIsObject())
+        if (isTouching == true && UIManager.Instance.IsPointerUIsObject() == false)
         {
             foreach (var effect in effects)
             {

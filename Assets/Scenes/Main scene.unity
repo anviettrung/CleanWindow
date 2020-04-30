@@ -17196,7 +17196,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1125, y: 2436}
+  m_SizeDelta: {x: 491, y: 874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451110488
 MonoBehaviour:
@@ -21936,7 +21936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f066055d617a846842996ce7e94f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 41347221}
+  cam: {fileID: 1325334804}
 --- !u!212 &1157122991421658624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22521,8 +22521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 141}
-  m_SizeDelta: {x: 561, y: 192}
+  m_AnchoredPosition: {x: 14.4, y: 126.5}
+  m_SizeDelta: {x: 532.2, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2688302400173377010
 MonoBehaviour:
@@ -26852,7 +26852,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5427038876556653896}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!222 &8049122795749511765
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26880,7 +26880,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062445991018559}
   lockButton: {fileID: 5345182423226454693}
   toolImage: {fileID: 8563062444943522060}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218114199675050
 MonoBehaviour:
@@ -26901,7 +26901,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062446064718878}
   lockButton: {fileID: 5345182423191094916}
   toolImage: {fileID: 64057105}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218114885027997
 MonoBehaviour:
@@ -26922,7 +26922,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062445643054121}
   lockButton: {fileID: 5345182423574507187}
   toolImage: {fileID: 8563062444478055706}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115105000959
 MonoBehaviour:
@@ -26943,7 +26943,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444823886155}
   lockButton: {fileID: 5345182424431881169}
   toolImage: {fileID: 1745049643}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115474498789
 MonoBehaviour:
@@ -26964,7 +26964,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444118315089}
   lockButton: {fileID: 5345182425136906955}
   toolImage: {fileID: 8563062445235104098}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115506596591
 MonoBehaviour:
@@ -26985,7 +26985,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444149628507}
   lockButton: {fileID: 5345182425101995201}
   toolImage: {fileID: 626723467}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115531090441
 MonoBehaviour:
@@ -27006,7 +27006,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444191686333}
   lockButton: {fileID: 5345182425059413031}
   toolImage: {fileID: 8563062445157410702}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115692573427
 MonoBehaviour:
@@ -27027,7 +27027,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444302829127}
   lockButton: {fileID: 5345182424918906077}
   toolImage: {fileID: 8563062445285343092}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!114 &8057218115931942947
 MonoBehaviour:
@@ -27048,7 +27048,7 @@ MonoBehaviour:
   unlockButton: {fileID: 8563062444542198935}
   lockButton: {fileID: 5345182424679994893}
   toolImage: {fileID: 8563062445591887268}
-  iconLockBreaker: {fileID: 21300000, guid: 7f4cc2e282fdc59489e20fe9b69881d7, type: 3}
+  iconLockBreaker: {fileID: 21300000, guid: 361b5a8a0af94c041b0a6a39d75894c9, type: 3}
   imgButtonLock: {fileID: 0}
 --- !u!4 &8180387147370511290
 Transform:

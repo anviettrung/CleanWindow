@@ -52,7 +52,7 @@ public class UIToolShopItem : MonoBehaviour
 
 	public void UnlockItem()
 	{
-		toolData.status = ToolItem.Status.UNLOCK;
+		//toolData.status = ToolItem.Status.UNLOCK;
 	}
 
 	#endregion
@@ -85,7 +85,11 @@ public class UIToolShopItem : MonoBehaviour
 
 			case ToolItem.Status.LOCK:
 				lockButton.gameObject.SetActive(true);
-
+				if (this.toolData.data.ToolType == ToolData.Type.BREAKER)
+				{
+					this.imgButtonLock.sprite = this.iconLockBreaker;
+					this.imgButtonLock.SetNativeSize();
+				}
 				break;
 		}
 	}
