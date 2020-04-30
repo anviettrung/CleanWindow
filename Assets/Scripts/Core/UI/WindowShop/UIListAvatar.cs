@@ -9,7 +9,7 @@ public class UIListAvatar : Singleton<UIListAvatar>
     public void SaveAvatar()
     {
         var level = LevelManager.Instance.currentLevel.Value;
-        var slot_window = UIManager.Instance.windowShop.items[level - 1];
+        var slot_window = UIManager.Instance.windowShop.items[level];
         slot_window.avatar.sprite = UIManager.Instance.avatarPlayer.sprite;
         slot_window.avatarID = this.avatarDatas.Find(ava => ava.Avatar == UIManager.Instance.avatarPlayer.sprite).ID;
         PlayerPrefs.SetInt(slot_window.levelText.text, slot_window.avatarID);

@@ -18,6 +18,10 @@ public class UIToolShopItem : MonoBehaviour
 	[Header("Unlock button elements")]
 	public Image toolImage;
 
+	[Header("Breaker tool")]
+	public Sprite iconLockBreaker;
+	public Image imgButtonLock;
+
 	//[Header("Lock button elements")]
 
 	#endregion
@@ -31,6 +35,12 @@ public class UIToolShopItem : MonoBehaviour
 	{
 		this.unlockButton.onClick.AddListener(() => VibrationManager.Instance.OnClickButton());
 		this.lockButton.onClick.AddListener(() => VibrationManager.Instance.OnClickButton());
+		this.imgButtonLock = this.lockButton.transform.GetChild(0).GetComponent<Image>();
+		if (this.toolData.data.ToolType == ToolData.Type.BREAKER)
+		{
+			this.imgButtonLock.sprite = this.iconLockBreaker;
+			this.imgButtonLock.SetNativeSize();
+		}
 	}
 	#endregion
 
@@ -60,10 +70,10 @@ public class UIToolShopItem : MonoBehaviour
 		HideAllButton();
 
 		//for testing
-		if (toolData.data.ToolType != ToolData.Type.BREAKER)
-		{
-			toolData.status = ToolItem.Status.UNLOCK;
-		}
+		//if (toolData.data.ToolType != ToolData.Type.BREAKER)
+		//{
+		//	toolData.status = ToolItem.Status.UNLOCK;
+		//}
 
 		switch (toolData.status) {
 			case ToolItem.Status.UNLOCK:

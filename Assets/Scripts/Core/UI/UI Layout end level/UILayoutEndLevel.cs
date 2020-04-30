@@ -40,7 +40,7 @@ public class UILayoutEndLevel : MonoBehaviour
             particle.Play();
         }
         var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
-        var level = LevelManager.Instance.currentLevel.Value;
+        var level = LevelManager.Instance.currentLevel.Value + 1;
         float count = 0f;
         while (count < time)
         {
