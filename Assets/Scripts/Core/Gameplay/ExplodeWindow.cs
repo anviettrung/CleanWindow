@@ -137,6 +137,7 @@ public class ExplodeWindow : MonoBehaviour
                 this.PlayAudioBreakGlass();
                 isBroken = true;
                 PlayerInput.Instance.tool = null;
+                UIManager.Instance.tapAndHold.SetActive(false);
             }
             if (glassSide == GlassSide.LEFT)
             {
@@ -148,11 +149,11 @@ public class ExplodeWindow : MonoBehaviour
         }
         else
         {
-            UIManager.Instance.tapAndHold.SetActive(true);
-            if (isBroken == true)
-            {
-                UIManager.Instance.tapAndHold.SetActive(false);
-            }
+            //UIManager.Instance.tapAndHold.SetActive(true);
+            //if (isBroken == true)
+            //{
+            //    UIManager.Instance.tapAndHold.SetActive(false);
+            //}
         }
     }
 

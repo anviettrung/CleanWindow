@@ -157,13 +157,6 @@ public class LevelManager : Singleton<LevelManager>
 
             UIManager.Instance.tapAndHold.SetActive(true);
         }, 1f));
-        //ToolManager.Instance.breaker.CreateTool();
-        ////PlayerInput.Instance.tool = ToolManager.Instance.breaker.GetTool();
-
-        //ExplodeWindow explode = FindObjectOfType<ExplodeWindow>();
-        //explode.breakerAnim = PlayerInput.Instance.tool.transform.GetComponentInChildren<Animation>();
-
-        //UIManager.Instance.tapAndHold.SetActive(true);
     }
 
     protected void DestroyBreakerTool()
@@ -332,7 +325,8 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < levels.Count; i++)
         {
             if (levels[i].data.KeyName == keyName)
-                return i + 1;
+                //return i + 1;
+                return i;
         }
 
         return -1; // error 404
