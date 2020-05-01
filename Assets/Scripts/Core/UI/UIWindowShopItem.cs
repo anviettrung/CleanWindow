@@ -48,6 +48,8 @@ public class UIWindowShopItem : MonoBehaviour
         if (levelData != null)
         {
             LevelManager.Instance.OpenLevel(levelData.data);
+            UIManager.Instance.textLevel.gameObject.SetActive(true);
+            UIManager.Instance.textLevel.text = "LEVEL " + (LevelManager.Instance.GetLevelIndex(levelData.data) + 1).ToString();
             LevelManager.Instance.PlayLevel();
         }
 

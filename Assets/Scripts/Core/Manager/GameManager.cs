@@ -45,7 +45,8 @@ public class GameManager : Singleton<GameManager>
 		// Game Intro
 
 		// Open level
-		LevelManager.Instance.OpenLastestLevel();
+		//LevelManager.Instance.OpenLastestLevel();
+		LevelManager.Instance.OpenHighestLevel();
 	}
 
 	private void OnApplicationQuit()

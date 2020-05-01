@@ -175,13 +175,13 @@ public class UIManager : Singleton<UIManager>
 
 	public void BackToMainMenu()
 	{
-		this.textLevel.gameObject.SetActive(false);
 		PlayerInput.Instance.tool = null;
 		if (LevelManager.Instance.currentWindow != null)
 			Destroy(LevelManager.Instance.currentWindow.gameObject);
 
-		LevelManager.Instance.OpenLastestLevel();
-		//LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.lastestLevelIndex);
+		LevelManager.Instance.OpenHighestLevel();
+		LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.HighestLevel);
+		this.textLevel.gameObject.SetActive(false);
 
 		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
 	}
@@ -190,11 +190,6 @@ public class UIManager : Singleton<UIManager>
 	{
 		//Add haptic:
 		VibrationManager.Instance.OnTakePhoto();
-
-		//count number of game played
-		//GameCounter.Instance.TotalGamePlayed++;
-		//GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
-		//uIGiftBox.UpdateProgressGiftBox();
 
 		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
 		StartCoroutine(ShowFlash(0.5f));

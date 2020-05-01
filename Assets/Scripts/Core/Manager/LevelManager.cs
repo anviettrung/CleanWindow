@@ -16,6 +16,14 @@ public class LevelManager : Singleton<LevelManager>
     // tracking
     [HideInInspector] public Window currentWindow;
     [HideInInspector] public int lastestLevelIndex;
+    private int highestLevel;
+    public int HighestLevel
+    {
+        get
+        {
+            return this.highestLevel = this.levels.FindAll(lv => lv.status == Level.Status.COMPLETE).Count;
+        }
+    }
 
     /// <summary>
     /// Current level
@@ -59,8 +67,6 @@ public class LevelManager : Singleton<LevelManager>
     public void OpenLevel(int x, bool openAtStart)
     {
         this.SetCurrentLevel(x);
-        UIManager.Instance.textLevel.gameObject.SetActive(true);
-        UIManager.Instance.textLevel.text = "LEVEL " + (x + 1).ToString();
 
         var tool_list_template = FindObjectsOfType<ToolListTemplate>();
         foreach (var tool in tool_list_template)
@@ -80,7 +86,10 @@ public class LevelManager : Singleton<LevelManager>
         }
         if (openAtStart == true)
         {
-            lastestLevelIndex = x;
+            //lastestLevelIndex = x;
+
+            UIManager.Instance.textLevel.gameObject.SetActive(true);
+            UIManager.Instance.textLevel.text = "LEVEL " + (x + 1).ToString();
 
             // UI
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
@@ -98,8 +107,10 @@ public class LevelManager : Singleton<LevelManager>
         UIManager.Instance.cityName.text = "???";
 
         // Instantiate
+
+        //Create data
         WindowData data = levels[x].data;
-        //lastestLevelIndex = x;
+        lastestLevelIndex = x;
 
         if (currentWindow != null)
             Destroy(currentWindow.gameObject);
@@ -132,19 +143,33 @@ public class LevelManager : Singleton<LevelManager>
         int x = GetLevelIndex(data);
         if (x != -1)
             OpenLevel(x, false);
+
+        UIManager.Instance.textLevel.gameObject.SetActive(true);
+        UIManager.Instance.textLevel.text = "LEVEL " + x.ToString();
     }
 
     public void OpenLastestLevel()
     {
-        OpenLevel(lastestLevelIndex, true);
+        this.OpenHighestLevel();
+        //OpenLevel(lastestLevelIndex, true); 
+        UIManager.Instance.textLevel.gameObject.SetActive(true);
+        if (lastestLevelIndex == 0) lastestLevelIndex = 1;
+        UIManager.Instance.textLevel.text = "LEVEL " + lastestLevelIndex.ToString();
     }
 
     public void OpenNextLevel()
     {
-        OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
+        this.OpenHighestLevel();
+
         UIManager.Instance.uIGiftBox.gameObject.SetActive(false);
         UIManager.Instance.nextButton.gameObject.SetActive(false);
         UIManager.Instance.watchAdsButton.gameObject.SetActive(false);
+    }
+
+    public void OpenHighestLevel()
+    {
+        this.OpenLevel(this.HighestLevel, true);
+        this.lastestLevelIndex = this.HighestLevel;
     }
 
     #endregion
@@ -235,6 +260,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public void PlayLevel()
     {
+        UIManager.Instance.textLevel.gameObject.SetActive(true);
+        //UIManager.Instance.textLevel.text = "LEVEL " + HighestLevel.ToString();
+
         currentWindow.gameObject.SetActive(true);
         PlayerInput.Instance.window = currentWindow;
 
@@ -308,7 +336,7 @@ public class LevelManager : Singleton<LevelManager>
                 if (i + 1 < levels.Count)
                     UnlockLevel(i + 1);
 
-                Save();
+                //Save();
                 return;
             }
         }
@@ -331,7 +359,6 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < levels.Count; i++)
         {
             if (levels[i].data.KeyName == keyName)
-                //return i + 1;
                 return i;
         }
 
