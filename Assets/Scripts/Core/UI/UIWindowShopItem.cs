@@ -53,14 +53,6 @@ public class UIWindowShopItem : MonoBehaviour
             LevelManager.Instance.PlayLevel();
         }
 
-        if (ToolManager.Instance.glasser.GetTool() != null)
-        {
-            foreach (var effect in ToolManager.Instance.glasser.GetTool().glasserEffect.effects)
-            {
-                effect.Stop();
-            }
-        }
-
         //if (levelData != null)
         //	LevelManager.Instance.OpenLevel(levelData.data);
     }

@@ -68,6 +68,18 @@ public class LevelManager : Singleton<LevelManager>
     {
         this.SetCurrentLevel(x);
 
+        var tool_glasser = ToolManager.Instance.glasser.GetTool();
+        if (tool_glasser != null)
+        {
+            foreach (var effect in tool_glasser.glasserEffect.effects)
+            {
+                if (effect.isPlaying == true)
+                {
+                    effect.Stop();
+                }
+            }
+        }
+
         var tool_list_template = FindObjectsOfType<ToolListTemplate>();
         foreach (var tool in tool_list_template)
         {
