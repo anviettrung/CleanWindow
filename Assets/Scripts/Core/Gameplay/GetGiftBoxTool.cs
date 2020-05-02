@@ -16,6 +16,20 @@ public class GetGiftBoxTool : MonoBehaviour
         this.toolCustomize.sprite = ToolManager.Instance.breaker.toolsData.Tools[tool_index].Art;
         this.toolCustomize.SetNativeSize();
 
+        ToolManager.Instance.SelectThisTool(lock_tool);
+
+        for (int i = 0; i < UIManager.Instance.toolShop.items.Count; i++)
+        {
+            if (lock_tool.data.KeyName == UIManager.Instance.toolShop.items[i].toolData.data.KeyName)
+            {
+                UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(true);
+            }
+            else
+            {
+                UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(false);
+            }
+        }
+
         ToolManager.Instance.Save();
     }
 }

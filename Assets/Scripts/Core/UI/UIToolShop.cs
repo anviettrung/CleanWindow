@@ -16,6 +16,7 @@ public class UIToolShop : MonoBehaviour
 	#region UNITY_CALLBACK
 	protected void OnEnable()
 	{
+		ToolManager.Instance.Load();
 		UpdateUI();
 	}
 

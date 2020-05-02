@@ -48,6 +48,13 @@ public class UIUnlockRandomItem : MonoBehaviour
 
     public void StartUnlockRandom()
     {
+        foreach (var item in this.uIToolShop.items)
+        {
+            if (item.gameObject.activeInHierarchy == true)
+            {
+                item.selectingVisual.SetActive(false);
+            }
+        }
         StartCoroutine(IEStartSelectRandomItem(2f));
     }
 
@@ -69,8 +76,11 @@ public class UIUnlockRandomItem : MonoBehaviour
             continue;
         }
 
+        ToolManager.Instance.SelectThisTool(this.lastItemRandom.toolData);
         this.lastItemRandom.toolData.status = ToolItem.Status.UNLOCK;
         this.lastItemRandom.UpdateUI();
+        this.lastItemRandom.selectingVisual.SetActive(true);
+        ToolManager.Instance.Save();
     }
 
     private int GetRandomNumber(int max_range)
