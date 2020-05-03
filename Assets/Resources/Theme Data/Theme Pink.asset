@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   themeID: 5
   themeName: Pink
-  wallSprite: {fileID: 21300000, guid: 87431ba1a823b2b4486536ef88683ebd, type: 3}
+  wallSprite: {fileID: 21300000, guid: 85dd112fdf63b03479712093465259b7, type: 3}
   avatarPlayer: {fileID: 21300000, guid: 9312ec10e5d43d44dbb5478819beb463, type: 3}
   windowPrefab: {fileID: 8699805533163371262, guid: 7c4a07016fbd9aa4bbcc43e3a44564ae,
     type: 3}
