@@ -7,6 +7,7 @@ using System.Linq;
 public class GetGiftBoxTool : MonoBehaviour
 {
     public Image toolCustomize;
+    public GameObject giftBox;
 
     public void OnClickButtonGiftBox()
     {
@@ -15,6 +16,11 @@ public class GetGiftBoxTool : MonoBehaviour
         var tool_index = ToolManager.Instance.breaker.tools.IndexOf(lock_tool);
         this.toolCustomize.sprite = ToolManager.Instance.breaker.toolsData.Tools[tool_index].Art;
         this.toolCustomize.SetNativeSize();
+
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            this.giftBox.gameObject.SetActive(false);
+        },0.2f));
 
         ToolManager.Instance.SelectThisTool(lock_tool);
 
@@ -31,5 +37,6 @@ public class GetGiftBoxTool : MonoBehaviour
         }
 
         ToolManager.Instance.Save();
+        UIManager.Instance.uIGiftBox.ResetProgressGiftBox();
     }
 }
