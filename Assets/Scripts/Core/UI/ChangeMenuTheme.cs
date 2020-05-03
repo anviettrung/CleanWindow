@@ -12,7 +12,8 @@ public class ChangeMenuTheme : Singleton<ChangeMenuTheme>
     public ListThemeData themeDatas;
 
     [Header("Home Background")]
-    public SpriteRenderer wall;
+    //public SpriteRenderer wall;
+    public Image wall;
 
     [Header("List Window")]
     public List<Window> windows = new List<Window>();
