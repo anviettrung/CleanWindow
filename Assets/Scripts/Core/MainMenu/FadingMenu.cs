@@ -17,7 +17,7 @@ public class FadingMenu : MonoBehaviour
     {
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
-            this.FadeIn();
+            this.FadeInByImageColor();
         }, this.delayTime));
     }
 
@@ -27,11 +27,11 @@ public class FadingMenu : MonoBehaviour
         this.thisImage.color = new Color(1f, 1f, 1f, 0f);
     }
 
-    public void FadeIn()
+    public void FadeInByImageColor()
     {
         Color startColor = new Color(1f, 1f, 1f, 0f);
         Color endColor = new Color(1f, 1f, 1f, 1f);
-        StartCoroutine(IEFading(startColor, endColor, 1.5f));
+        StartCoroutine(IEFadingByImageColor(startColor, endColor, 1.5f));
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             UIManager.Instance.startButton.interactable = true;
@@ -39,7 +39,7 @@ public class FadingMenu : MonoBehaviour
         1.5f));
     }
 
-    private IEnumerator IEFading(Color startColor, Color endColor, float time)
+    private IEnumerator IEFadingByImageColor(Color startColor, Color endColor, float time)
     {
         float counter = 0f;
         while (counter < time)
@@ -48,14 +48,13 @@ public class FadingMenu : MonoBehaviour
             this.thisImage.color = Color.Lerp(startColor, endColor, counter / time);
             yield return null;
         }
-        //UIManager.Instance.startButton.interactable = true;
     }
 
-    public void FadeOut()
+    public void FadeOutByImageColor()
     {
         Color startColor = new Color(1f, 1f, 1f, 0f);
         Color endColor = new Color(1f, 1f, 1f, 1f);
-        StartCoroutine(IEFading(endColor, startColor, 1f));
+        StartCoroutine(IEFadingByImageColor(endColor, startColor, 1f));
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             UIManager.Instance.CallLayout("Playing");

@@ -174,7 +174,7 @@ public class LevelManager : Singleton<LevelManager>
         this.OpenHighestLevel();
 
         UIManager.Instance.uIGiftBox.gameObject.SetActive(false);
-        UIManager.Instance.nextButton.gameObject.SetActive(false);
+        //UIManager.Instance.nextButton.gameObject.SetActive(false);
         UIManager.Instance.watchAdsButton.gameObject.SetActive(false);
     }
 

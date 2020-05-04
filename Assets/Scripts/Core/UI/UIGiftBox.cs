@@ -45,13 +45,21 @@ public class UIGiftBox : MonoBehaviour
         GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
 
         this.StartCoroutine(IEUpdateProgressGiftBox(2f));
+
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
+        }, 0.5f));
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.nextButton.gameObject.SetActive(true);
+        }, 1.5f));
     }
 
     public void ResetProgressGiftBox()
     {
         this.uIProgressbar.ValueProgress = 0f;
         this.textPercent.text = "0%";
-        //this.StartCoroutine(IEResetProgressGiftBox(2.5f));
     }
 
     private IEnumerator IEUpdateProgressGiftBox(float time)
@@ -71,10 +79,6 @@ public class UIGiftBox : MonoBehaviour
         }
 
         this.OnFullProgressGiftBox();
-        yield return new WaitForSeconds(0.2f);
-        UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        UIManager.Instance.nextButton.gameObject.SetActive(true);
     }
 
     private IEnumerator IEResetProgressGiftBox(float time)

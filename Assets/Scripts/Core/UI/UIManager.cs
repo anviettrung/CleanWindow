@@ -191,6 +191,9 @@ public class UIManager : Singleton<UIManager>
 		//Add haptic:
 		VibrationManager.Instance.OnTakePhoto();
 
+		//Destroy banner ad
+		AdmobManager.Instance.DestroyBannerView();
+
 		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
 		StartCoroutine(ShowFlash(0.5f));
 		StartCoroutine(CoroutineUtils.DelaySeconds(
@@ -223,6 +226,32 @@ public class UIManager : Singleton<UIManager>
 			yield return null;
 		}
 	}
+
+	#region ADMOB & IAP
+	public void OnClickRestorePurchase()
+	{
+		//IAPMa
+	}
+
+	public void OnClickWatchRewardAdBasedVideo()
+	{
+#if UNITY_EDITOR
+		this.OnWatchAdsDone();
+#else
+		AdmobManager.Instance.ShowVideoReward(() => OnWatchAdsDone());
+#endif
+	}
+
+	private void OnWatchAdsDone()
+	{
+		var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
+		var level = LevelManager.Instance.currentLevel.Value + 1;
+
+		GameManager.Instance.totalMoney += bonus * level;
+		this.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
+		GameManager.Instance.SaveTotalMoney();
+	} 
+	#endregion
 
 	#endregion
 }

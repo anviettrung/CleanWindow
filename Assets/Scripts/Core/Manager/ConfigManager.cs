@@ -8,6 +8,7 @@ public class ConfigManager : Singleton<ConfigManager>
     public GameNumberConfig gameNumberConfig;
     public BonusConfig bonusConfig;
     public ArrayHashTagConfig arrayHashTagConfig;
+    public AdmobConfig admobConfig;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class ConfigManager : Singleton<ConfigManager>
         this.LoadGameNumberConfig();
         this.LoadBonusConfig();
         this.LoadHashTagConfig();
+        this.LoadAdmobConfig();
     }
 
     /// <summary>
@@ -53,6 +55,12 @@ public class ConfigManager : Singleton<ConfigManager>
     {
         var jsonContent = Resources.Load<TextAsset>("Configs/HashTagConfig");
         this.arrayHashTagConfig = JsonUtility.FromJson<ArrayHashTagConfig>(jsonContent.text);
+    }
+
+    private void LoadAdmobConfig()
+    {
+        var jsonContent = Resources.Load<TextAsset>("Configs/AdmobConfig");
+        this.admobConfig = JsonUtility.FromJson<AdmobConfig>(jsonContent.text);
     }
 }
 
@@ -85,4 +93,18 @@ public class HashTagConfig
     public int Level;
     public string CityName;
     public string HashTag;
+}
+
+public class AdmobConfig
+{
+    public string AppURL_Android;
+    public string AppURL_iOS;
+    public string AdmobAppID_Android;
+    public string AdmobAppID_iOS;
+    public string AdmobRewardVideoID_Android;
+    public string AdmobRewardVideoID_iOS;
+    public string AdmobBannerID_Android;
+    public string AdmobBannerID_iOS;
+    public string AdmobInterstitialID_Android;
+    public string AdmobInterstitialID_iOS;
 }

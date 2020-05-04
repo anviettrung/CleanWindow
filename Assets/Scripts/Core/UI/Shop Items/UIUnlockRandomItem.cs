@@ -48,14 +48,32 @@ public class UIUnlockRandomItem : MonoBehaviour
 
     public void StartUnlockRandom()
     {
-        foreach (var item in this.uIToolShop.items)
+        this.GetItem();
+
+        if (this.uIToolShopItems.Count == 1)
         {
-            if (item.gameObject.activeInHierarchy == true)
-            {
-                item.selectingVisual.SetActive(false);
-            }
+            this.SubtractMoney();
+            this.unlockRandomItem.enabled = false;
+            this.DeSelectItems();
+            this.lastItemRandom = this.uIToolShopItems[0];
+            ToolManager.Instance.SelectThisTool(this.lastItemRandom.toolData);
+            this.lastItemRandom.toolData.status = ToolItem.Status.UNLOCK;
+            this.lastItemRandom.UpdateUI();
+            this.lastItemRandom.selectingVisual.SetActive(true);
+            ToolManager.Instance.Save();
         }
-        StartCoroutine(IEStartSelectRandomItem(2f));
+        else if (this.uIToolShopItems.Count > 1)
+        {
+            this.SubtractMoney();
+            this.unlockRandomItem.enabled = false;
+            this.DeSelectItems();
+            StartCoroutine(IEStartSelectRandomItem(1.2f));
+        }
+        else
+        {
+            //do nothing
+            return;
+        }
     }
 
     private IEnumerator IEStartSelectRandomItem(float time)
@@ -81,6 +99,7 @@ public class UIUnlockRandomItem : MonoBehaviour
         this.lastItemRandom.UpdateUI();
         this.lastItemRandom.selectingVisual.SetActive(true);
         ToolManager.Instance.Save();
+        this.unlockRandomItem.enabled = true;
     }
 
     private int GetRandomNumber(int max_range)
@@ -94,8 +113,40 @@ public class UIUnlockRandomItem : MonoBehaviour
         return random_number;
     }
 
+    /// <summary>
+    /// DeSelected items not in use
+    /// </summary>
+    private void DeSelectItems()
+    {
+        if (this.uIToolShop != null || this.uIToolShop.items.Count > 0)
+        {
+            foreach (var item in this.uIToolShop.items)
+            {
+                if (item.gameObject.activeInHierarchy == true)
+                {
+                    item.selectingVisual.SetActive(false);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Subtract money when unlock an item
+    /// </summary>
+    private void SubtractMoney()
+    {
+        GameManager.Instance.totalMoney -= ConfigManager.Instance.bonusConfig.PriceToUnlockItem;
+        GameManager.Instance.SaveTotalMoney();
+        UIManager.Instance.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
+    }
+
     private void GetItem()
     {
+        if (this.uIToolShopItems != null || this.uIToolShopItems.Count > 0)
+        {
+            this.uIToolShopItems.Clear();
+        }
+
         for (int i = 0; i < this.uIToolShop.items.Count; i++)
         {
             if (this.uIToolShop.items[i].gameObject.activeInHierarchy == true)
