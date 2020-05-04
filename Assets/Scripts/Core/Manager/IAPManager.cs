@@ -9,7 +9,7 @@ using System.Collections.Generic;
 // #define RECEIPT_VALIDATION
 #endif
 
-#if INAPP
+//#if INAPP
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 #if RECEIPT_VALIDATION
@@ -24,7 +24,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
     public void OnPurchaseSuccess(int index)
     {
-       
+        PlayerPrefs.SetInt("purchased", 1);
     }
 
     public void PurchaseProductIndex(int index)
@@ -233,4 +233,4 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
 #endif
 }
-#endif
+//#endif

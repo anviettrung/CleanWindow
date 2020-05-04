@@ -231,9 +231,14 @@ public class UIManager : Singleton<UIManager>
 	}
 
 	#region ADMOB & IAP
+	public void OnClickRemoveAds()
+	{
+		IAPManager.Instance.PurchaseProductIndex(0);
+	}
+
 	public void OnClickRestorePurchase()
 	{
-		//IAPMa
+		IAPManager.Instance.RestorePurchased();
 	}
 
 	public void OnClickWatchVideoReward()

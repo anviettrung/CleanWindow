@@ -30,14 +30,19 @@ public class AdmobManager : Singleton<AdmobManager>
 #else
         appId = "unexpected_platform";
 #endif
-        //MobileAds.Initialize(appId);
-
         MobileAds.Initialize(initStatus =>
         {
 
         });
-        this.RequestBanner();
-        this.RequestInterstitial();
+
+        if (PlayerPrefs.HasKey("purchased"))
+        {
+            if (PlayerPrefs.GetInt("purchased") != 1)
+            {
+                this.RequestBanner();
+                this.RequestInterstitial();
+            }
+        }
         this.RequestRewardBasedVideo();
     }
 
