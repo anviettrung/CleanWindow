@@ -1,4 +1,3 @@
-#if !UNITY_IOS
 // Copyright (C) 2015 Google, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using UnityEngine;
-using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 
@@ -24,74 +21,92 @@ namespace GoogleMobileAds
     {
         public static IBannerClient BuildBannerClient()
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.DummyClient();
+            #elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.BannerClient();
-            }
-            else
-            {
-              return new GoogleMobileAds.Common.DummyClient();
-            }
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return new GoogleMobileAds.iOS.BannerClient();
+            #else
+                return new GoogleMobileAds.Common.DummyClient();
+            #endif
         }
 
         public static IInterstitialClient BuildInterstitialClient()
         {
-          if (Application.platform == RuntimePlatform.Android)
-          {
-              return new GoogleMobileAds.Android.InterstitialClient();
-          }
-          else
-          {
-            return new GoogleMobileAds.Common.DummyClient();
-          }
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.DummyClient();
+            #elif UNITY_ANDROID
+                return new GoogleMobileAds.Android.InterstitialClient();
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return new GoogleMobileAds.iOS.InterstitialClient();
+            #else
+                return new GoogleMobileAds.Common.DummyClient();
+            #endif
         }
 
         public static IRewardBasedVideoAdClient BuildRewardBasedVideoAdClient()
         {
-          if (Application.platform == RuntimePlatform.Android)
-          {
-              return new GoogleMobileAds.Android.RewardBasedVideoAdClient();
-          }
-          else
-          {
-            return new GoogleMobileAds.Common.DummyClient();
-          }
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.DummyClient();
+            #elif UNITY_ANDROID
+                return new GoogleMobileAds.Android.RewardBasedVideoAdClient();
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return new GoogleMobileAds.iOS.RewardBasedVideoAdClient();
+            #else
+                return new GoogleMobileAds.Common.DummyClient();
+            #endif
         }
 
         public static IRewardedAdClient BuildRewardedAdClient()
         {
-          if (Application.platform == RuntimePlatform.Android)
-          {
-              return new GoogleMobileAds.Android.RewardedAdClient();
-          }
-          else
-          {
-            return new GoogleMobileAds.Common.RewardedAdDummyClient();
-          }
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.RewardedAdDummyClient();
+            #elif UNITY_ANDROID
+                return new GoogleMobileAds.Android.RewardedAdClient();
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return new GoogleMobileAds.iOS.RewardedAdClient();
+            #else
+                return new GoogleMobileAds.Common.RewardedAdDummyClient();
+            #endif
         }
 
-        public static IAdLoaderClient BuildAdLoaderClient(AdLoaderClientArgs args)
+        public static IAdLoaderClient BuildAdLoaderClient(AdLoader adLoader)
         {
-          if (Application.platform == RuntimePlatform.Android)
-          {
-              return new GoogleMobileAds.Android.AdLoaderClient(args);
-          }
-          {
-            return new GoogleMobileAds.Common.DummyClient();
-          }
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.DummyClient();
+            #elif UNITY_ANDROID
+                return new GoogleMobileAds.Android.AdLoaderClient(adLoader);
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return new GoogleMobileAds.iOS.AdLoaderClient(adLoader);
+            #else
+                return new GoogleMobileAds.Common.DummyClient();
+            #endif
         }
 
         public static IMobileAdsClient MobileAdsInstance()
         {
-          if (Application.platform == RuntimePlatform.Android)
-          {
-              return GoogleMobileAds.Android.MobileAdsClient.Instance;
-          }
-          else
-          {
-            return new GoogleMobileAds.Common.DummyClient();
-          }
+            #if UNITY_EDITOR
+                // Testing UNITY_EDITOR first because the editor also responds to the currently
+                // selected platform.
+                return new GoogleMobileAds.Common.DummyClient();
+            #elif UNITY_ANDROID
+                return GoogleMobileAds.Android.MobileAdsClient.Instance;
+            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+                return GoogleMobileAds.iOS.MobileAdsClient.Instance;
+            #else
+                return new GoogleMobileAds.Common.DummyClient();
+            #endif
         }
     }
 }
-#endif

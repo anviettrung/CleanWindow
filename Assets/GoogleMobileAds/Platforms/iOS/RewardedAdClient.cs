@@ -1,4 +1,3 @@
-#if UNITY_IOS
 // Copyright (C) 2018 Google, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+#if UNITY_IOS
 
 using System;
 using System.Collections.Generic;
@@ -48,10 +49,6 @@ namespace GoogleMobileAds.iOS
         internal delegate void GADUUserEarnedRewardCallback(
             IntPtr rewardedAdClient, string rewardType, double rewardAmount);
 
-
-        internal delegate void GADURewardedAdPaidEventCallback(
-            IntPtr rewardedAdClient, int precision, long value, string currencyCode);
-
         #endregion
 
         public event EventHandler<EventArgs> OnAdLoaded;
@@ -67,8 +64,6 @@ namespace GoogleMobileAds.iOS
         public event EventHandler<EventArgs> OnAdClosed;
 
         public event EventHandler<Reward> OnUserEarnedReward;
-
-        public event EventHandler<AdValueEventArgs> OnPaidEvent;
 
 
         // This property should be used when setting the rewardedAdPtr.
@@ -99,8 +94,7 @@ namespace GoogleMobileAds.iOS
                 RewardedAdDidFailToShowAdWithErrorCallback,
                 RewardedAdDidOpenCallback,
                 RewardedAdDidCloseCallback,
-                RewardedAdUserDidEarnRewardCallback,
-                RewardedAdPaidEventCallback);
+                RewardedAdUserDidEarnRewardCallback);
         }
 
         // Load an ad.
@@ -248,29 +242,6 @@ namespace GoogleMobileAds.iOS
             }
         }
 
-
-        [MonoPInvokeCallback(typeof(GADURewardedAdPaidEventCallback))]
-        private static void RewardedAdPaidEventCallback(
-            IntPtr rewardedAdClient, int precision, long value, string currencyCode)
-        {
-            RewardedAdClient client = IntPtrToRewardedAdClient(rewardedAdClient);
-            if (client.OnPaidEvent != null)
-            {
-                AdValue adValue = new AdValue()
-                {
-                    Precision = (AdValue.PrecisionType)precision,
-                    Value = value,
-                    CurrencyCode = currencyCode
-                };
-                AdValueEventArgs args = new AdValueEventArgs() {
-                    AdValue = adValue
-                };
-
-                client.OnPaidEvent(client, args);
-            }
-        }
-
-
         private static RewardedAdClient IntPtrToRewardedAdClient(
             IntPtr rewardedAdClient)
         {
@@ -281,4 +252,5 @@ namespace GoogleMobileAds.iOS
         #endregion
     }
 }
+
 #endif

@@ -156,7 +156,7 @@ public class ToolListTemplate : MonoBehaviour
 
     public void Load()
     {
-        Debug.Log("Load Tool");
+        //Debug.Log("Load Tool");
         for (int i = 0; i < tools.Count; i++)
         {
 

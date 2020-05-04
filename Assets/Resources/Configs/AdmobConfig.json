@@ -1,6 +1,8 @@
 {
   "AppURL_Android": "",
-  "AppURL_iOS": "ca-app-pub-2210513256218688~2405756314",
+  "AppURL_iOS": "",
+  "AdmobAppID_Android": "",
+  "AdmobAppID_iOS": "ca-app-pub-2210513256218688~2405756314",
   "AdmobRewardVideoID_Android": "",
   "AdmobRewardVideoID_iOS": "ca-app-pub-2210513256218688/4840347965",
   "AdmobBannerID_Android": "",

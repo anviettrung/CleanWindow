@@ -1,4 +1,3 @@
-#if UNITY_IOS
 // Copyright (C) 2016 Google, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if UNITY_IOS
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -25,9 +26,9 @@ namespace GoogleMobileAds.iOS
 {
     internal class CustomNativeTemplateClient : ICustomNativeTemplateClient, IDisposable
     {
-        public Action<string> clickHandler;
         private IntPtr customNativeAdPtr;
         private IntPtr customNativeTemplateAdClientPtr;
+        private Action<CustomNativeTemplateAd, string> clickHandler;
 
         // This property should be used when setting the customNativeAdPtr.
         private IntPtr CustomNativeAdPtr
@@ -45,9 +46,10 @@ namespace GoogleMobileAds.iOS
         }
 
         public CustomNativeTemplateClient(
-            IntPtr customNativeAd)
+            IntPtr customNativeAd, Action<CustomNativeTemplateAd, string> clickHandler)
         {
             this.customNativeAdPtr = customNativeAd;
+            this.clickHandler = clickHandler;
 
             this.customNativeTemplateAdClientPtr = (IntPtr)GCHandle.Alloc(this);
 
@@ -128,15 +130,16 @@ namespace GoogleMobileAds.iOS
         private static void NativeCustomTemplateDidReceiveClickCallback(
             IntPtr nativeCustomAd, string assetName)
         {
-            CustomNativeTemplateClient client = IntPtrToCustomTemplateAdClient(nativeCustomAd);
+            CustomNativeTemplateClient client = IntPtrToAdLoaderClient(nativeCustomAd);
             if (client.clickHandler != null)
             {
-                client.clickHandler(assetName);
+                CustomNativeTemplateAd nativeAd = new CustomNativeTemplateAd(client);
+                client.clickHandler(nativeAd, assetName);
             }
 
         }
 
-        private static CustomNativeTemplateClient IntPtrToCustomTemplateAdClient(
+        private static CustomNativeTemplateClient IntPtrToAdLoaderClient(
             IntPtr customNativeTemplateAd)
         {
             GCHandle handle = (GCHandle)customNativeTemplateAd;
@@ -144,4 +147,5 @@ namespace GoogleMobileAds.iOS
         }
     }
 }
+
 #endif

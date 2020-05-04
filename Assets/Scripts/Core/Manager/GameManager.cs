@@ -47,6 +47,9 @@ public class GameManager : Singleton<GameManager>
 		// Open level
 		//LevelManager.Instance.OpenLastestLevel();
 		LevelManager.Instance.OpenHighestLevel();
+
+		//Show banner ad
+		AdmobManager.Instance.ShowBannerAd();
 	}
 
 	private void OnApplicationQuit()

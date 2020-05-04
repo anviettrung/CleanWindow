@@ -184,6 +184,9 @@ public class UIManager : Singleton<UIManager>
 		this.textLevel.gameObject.SetActive(false);
 
 		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
+
+		//Show interstitial ad
+		AdmobManager.Instance.ShowInterstitialAd();
 	}
 
 	public void TakePhoto()
@@ -191,8 +194,8 @@ public class UIManager : Singleton<UIManager>
 		//Add haptic:
 		VibrationManager.Instance.OnTakePhoto();
 
-		//Destroy banner ad
-		AdmobManager.Instance.DestroyBannerView();
+		//Hide banner ad
+		AdmobManager.Instance.HideBannerAd();
 
 		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
 		StartCoroutine(ShowFlash(0.5f));
@@ -233,7 +236,7 @@ public class UIManager : Singleton<UIManager>
 		//IAPMa
 	}
 
-	public void OnClickWatchRewardAdBasedVideo()
+	public void OnClickWatchVideoReward()
 	{
 #if UNITY_EDITOR
 		this.OnWatchAdsDone();
@@ -250,6 +253,11 @@ public class UIManager : Singleton<UIManager>
 		GameManager.Instance.totalMoney += bonus * level;
 		this.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
 		GameManager.Instance.SaveTotalMoney();
+
+		CameraMaster.Instance.TransitionToView("FullShot");
+		LevelManager.Instance.OpenNextLevel();
+		this.layouts.Find(layout => layout.layoutName == "End Game").elements[0].gameObject.SetActive(false);
+		this.nextButton.gameObject.SetActive(false);
 	} 
 	#endregion
 

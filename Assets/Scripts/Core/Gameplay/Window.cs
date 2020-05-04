@@ -247,7 +247,6 @@ public class Window : MonoBehaviour
         {
             onEnterStateCapture.Invoke();
             UIManager.Instance.cityName.text = this.Data.WindowName;
-            //UIManager.Instance.cityName.text.
         }, 1f));
 
         //Add haptic:

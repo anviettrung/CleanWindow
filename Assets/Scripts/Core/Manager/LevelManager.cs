@@ -66,6 +66,9 @@ public class LevelManager : Singleton<LevelManager>
     #region OPEN_LEVEL
     public void OpenLevel(int x, bool openAtStart)
     {
+        //Show banner ad
+        AdmobManager.Instance.ShowBannerAd();
+
         this.SetCurrentLevel(x);
 
         var tool_glasser = ToolManager.Instance.glasser.GetTool();
@@ -262,7 +265,13 @@ public class LevelManager : Singleton<LevelManager>
 
     protected void EnableButtonCapture()
     {
-        UIManager.Instance.layoutCapture.gameObject.SetActive(true);
+        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        {
+            UIManager.Instance.layoutCapture.gameObject.SetActive(true);
+
+            //Show interstitial ad
+            AdmobManager.Instance.ShowInterstitialAd();
+        }, 1f));
     }
 
     protected void DisableButtonCapture()

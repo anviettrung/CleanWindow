@@ -58,7 +58,7 @@
     GADUObjectCache *cache = [GADUObjectCache sharedInstance];
     GADUNativeCustomTemplateAd *internalNativeAd =
         [[GADUNativeCustomTemplateAd alloc] initWithAd:nativeCustomTemplateAd];
-    cache[internalNativeAd.gadu_referenceKey] = internalNativeAd;
+    [cache.references setObject:internalNativeAd forKey:[internalNativeAd gadu_referenceKey]];
     self.customTemplateAdReceivedCallback(
         self.adLoaderClient, (__bridge GADUTypeNativeCustomTemplateAdRef)internalNativeAd,
         [nativeCustomTemplateAd.templateID cStringUsingEncoding:NSUTF8StringEncoding]);

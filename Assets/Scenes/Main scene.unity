@@ -7805,7 +7805,7 @@ RectTransform:
   m_Children:
   - {fileID: 805839914}
   m_Father: {fileID: 2074857123}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -8199,8 +8199,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 619315509}
+  - component: {fileID: 619315510}
   m_Layer: 0
-  m_Name: IAP Manager
+  m_Name: Admob & IAP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8220,6 +8221,18 @@ Transform:
   m_Father: {fileID: 280797509}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619315510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619315508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c237886525ad14b83f1ced7c13b3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &623437916
 GameObject:
   m_ObjectHideFlags: 0
@@ -9649,6 +9662,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2074857125}
         m_MethodName: OnClickButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2074857124}
+        m_MethodName: OnClickWatchVideoReward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21895,8 +21919,8 @@ RectTransform:
   m_Children:
   - {fileID: 2028077233}
   - {fileID: 1812243643}
-  - {fileID: 6255746388004875434}
   - {fileID: 594362485}
+  - {fileID: 6255746388004875434}
   - {fileID: 992336491}
   - {fileID: 1794160754}
   - {fileID: 1611631984}
@@ -31540,7 +31564,7 @@ RectTransform:
   - {fileID: 702679508}
   - {fileID: 1079309923}
   m_Father: {fileID: 2074857123}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}

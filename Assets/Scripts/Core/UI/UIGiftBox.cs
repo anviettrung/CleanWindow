@@ -78,6 +78,9 @@ public class UIGiftBox : MonoBehaviour
         StopCoroutine("IEUpdateProgressGiftBox");
         this.uIProgressbar.ValueProgress = 0f;
         this.textPercent.text = "0%";
+
+        //Show interstitial ad
+        AdmobManager.Instance.ShowInterstitialAd();
     }
 
     private IEnumerator IEUpdateProgressGiftBox(float time)

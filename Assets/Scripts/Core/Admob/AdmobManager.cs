@@ -30,8 +30,11 @@ public class AdmobManager : Singleton<AdmobManager>
 #else
         appId = "unexpected_platform";
 #endif
+        //MobileAds.Initialize(appId);
+
         MobileAds.Initialize(initStatus =>
         {
+
         });
         this.RequestBanner();
         this.RequestInterstitial();
@@ -40,14 +43,17 @@ public class AdmobManager : Singleton<AdmobManager>
 
     public void ShowBannerAd()
     {
-        this.bannerView.Show();
+        if (this.bannerView != null)
+        {
+            this.bannerView.Show();
+        }
     }
 
-    public void DestroyBannerView()
+    public void HideBannerAd()
     {
         if (this.bannerView != null)
         {
-            this.bannerView.Destroy();
+            this.bannerView.Hide();
         }
     }
 
@@ -170,81 +176,81 @@ public class AdmobManager : Singleton<AdmobManager>
     #region BANNER AD HANDLER
     public void HandleAdLoaded(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleAdLoaded event received");
+        MonoBehaviour.print("HandleAdLoaded event received");
     }
 
     public void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        //MonoBehaviour.print("HandleFailedToReceiveAd event received with message: " + args.Message);
+        MonoBehaviour.print("HandleFailedToReceiveAd event received with message: " + args.Message);
     }
 
     public void HandleAdOpened(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleAdOpened event received");
+        MonoBehaviour.print("HandleAdOpened event received");
     }
 
     public void HandleAdClosed(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleAdClosed event received");
+        MonoBehaviour.print("HandleAdClosed event received");
     }
 
     public void HandleAdLeftApplication(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleAdLeftApplication event received");
+        MonoBehaviour.print("HandleAdLeftApplication event received");
     }
     #endregion
 
     #region INTERSTITIAL AD HANDLER
     public void HandleInterstitialLoaded(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleInterstitialLoaded event received");
+        MonoBehaviour.print("HandleInterstitialLoaded event received");
     }
 
     public void HandleInterstitialFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        //MonoBehaviour.print(
-        //    "HandleInterstitialFailedToLoad event received with message: " + args.Message);
+        MonoBehaviour.print(
+            "HandleInterstitialFailedToLoad event received with message: " + args.Message);
     }
 
     public void HandleInterstitialOpened(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleInterstitialOpened event received");
+        MonoBehaviour.print("HandleInterstitialOpened event received");
     }
 
     public void HandleInterstitialClosed(object sender, EventArgs args)
     {
-        //this.RequestInterstitial();
+        this.RequestInterstitial();
     }
 
     public void HandleInterstitialLeftApplication(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleInterstitialLeftApplication event received");
-    } 
+        MonoBehaviour.print("HandleInterstitialLeftApplication event received");
+    }
     #endregion
 
     #region REWARD AD HANDLER
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleRewardedAdLoaded event received");
+        MonoBehaviour.print("HandleRewardedAdLoaded event received");
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
-        //MonoBehaviour.print(
-        //    "HandleRewardedAdFailedToLoad event received with message: "
-        //                     + args.Message);
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToLoad event received with message: "
+                             + args.Message);
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
-        //MonoBehaviour.print("HandleRewardedAdOpening event received");
+        MonoBehaviour.print("HandleRewardedAdOpening event received");
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
-        //MonoBehaviour.print(
-        //    "HandleRewardedAdFailedToShow event received with message: "
-        //                     + args.Message);
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToShow event received with message: "
+                             + args.Message);
     }
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
@@ -257,7 +263,7 @@ public class AdmobManager : Singleton<AdmobManager>
         }
         this.RequestRewardBasedVideo();
 
-        //MonoBehaviour.print("HandleRewardedAdClosed event received");
+        MonoBehaviour.print("HandleRewardedAdClosed event received");
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -266,9 +272,9 @@ public class AdmobManager : Singleton<AdmobManager>
         double amount = args.Amount;
 
         this.isWatchedVideoComplete = true;
-        //MonoBehaviour.print(
-        //    "HandleRewardedAdRewarded event received for "
-        //                + amount.ToString() + " " + type);
-    } 
+        MonoBehaviour.print(
+            "HandleRewardedAdRewarded event received for "
+                        + amount.ToString() + " " + type);
+    }
     #endregion
 }

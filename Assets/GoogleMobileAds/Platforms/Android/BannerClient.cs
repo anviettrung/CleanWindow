@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if UNITY_ANDROID
+
 using System;
 
 using GoogleMobileAds.Api;
@@ -42,8 +44,6 @@ namespace GoogleMobileAds.Android
         public event EventHandler<EventArgs> OnAdClosed;
 
         public event EventHandler<EventArgs> OnAdLeavingApplication;
-
-        public event EventHandler<AdValueEventArgs> OnPaidEvent;
 
         // Creates a banner view.
         public void CreateBannerView(string adUnitId, AdSize adSize, AdPosition position)
@@ -161,27 +161,8 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        public void onPaidEvent(int precision, long valueInMicros, string currencyCode)
-        {
-            if (this.OnPaidEvent != null)
-            {
-              AdValue adValue = new AdValue()
-              {
-                  Precision = (AdValue.PrecisionType)precision,
-                  Value = valueInMicros,
-                  CurrencyCode = currencyCode
-              };
-              AdValueEventArgs args = new AdValueEventArgs() {
-                  AdValue = adValue
-              };
-
-              this.OnPaidEvent(this, args);
-            }
-        }
-
-
 #endregion
     }
 }
 
-
+#endif
