@@ -25,14 +25,6 @@ public class UILayoutEndLevel : MonoBehaviour
         {
             UIManager.Instance.uIGiftBox.gameObject.SetActive(true);
         }, length * 0.8f));
-        //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-        //{
-        //    UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
-        //}, length * 1.2f));
-        //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-        //{
-        //    UIManager.Instance.nextButton.gameObject.SetActive(true);
-        //}, length * 1.2f + 1f));
     }
 
     private IEnumerator IEUpdateLikes(float time)

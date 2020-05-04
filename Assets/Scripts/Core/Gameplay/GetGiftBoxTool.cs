@@ -7,7 +7,17 @@ using System.Linq;
 public class GetGiftBoxTool : MonoBehaviour
 {
     public Image toolCustomize;
+    public Sprite spriteGiftBox;
     public GameObject giftBox;
+
+    private void OnDisable()
+    {
+        if (this.toolCustomize.sprite != null)
+        {
+            this.toolCustomize.sprite = this.spriteGiftBox;
+            this.toolCustomize.SetNativeSize();
+        }
+    }
 
     public void OnClickButtonGiftBox()
     {
@@ -37,6 +47,6 @@ public class GetGiftBoxTool : MonoBehaviour
         }
 
         ToolManager.Instance.Save();
-        UIManager.Instance.uIGiftBox.ResetProgressGiftBox();
+        //UIManager.Instance.uIGiftBox.ResetProgressGiftBox();
     }
 }

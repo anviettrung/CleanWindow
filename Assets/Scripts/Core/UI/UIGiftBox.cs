@@ -13,12 +13,29 @@ public class UIGiftBox : MonoBehaviour
     public UIProgressbar uIProgressbar;
     public GameObject layoutGiftBox;
     public Text textPercent;
+
+    private bool isFullProgressBar = true;
     #endregion
 
     #region UNITY_CALLBACK
     private void OnEnable()
     {
         this.UpdateProgressGiftBox();
+    }
+
+    private void OnDisable()
+    {
+        this.isFullProgressBar = true;
+        StopAllCoroutines();
+    }
+
+    private void Update()
+    {
+        if (this.uIProgressbar.ValueProgress == 1 && this.isFullProgressBar == true)
+        {
+            this.OnFullProgressGiftBox();
+            this.isFullProgressBar = false;
+        }
     }
     #endregion
 
@@ -58,6 +75,7 @@ public class UIGiftBox : MonoBehaviour
 
     public void ResetProgressGiftBox()
     {
+        StopCoroutine("IEUpdateProgressGiftBox");
         this.uIProgressbar.ValueProgress = 0f;
         this.textPercent.text = "0%";
     }
@@ -76,9 +94,8 @@ public class UIGiftBox : MonoBehaviour
                 this.uIProgressbar.ValueProgress = Mathf.Lerp(this.uIProgressbar.ValueProgress, game_played / max_game_number, count / time);
                 yield return null;
             }
+            //this.OnFullProgressGiftBox();
         }
-
-        this.OnFullProgressGiftBox();
     }
 
     private IEnumerator IEResetProgressGiftBox(float time)
