@@ -23,7 +23,7 @@ public class Window : MonoBehaviour
     }
 
     [Header("General setting")]
-    public float targetProgress = 0.95f;
+    [HideInInspector] public float targetProgress;
 
     [Header("Sprite Renderers")]
     public SpriteRenderer srMainPicture;
@@ -141,6 +141,8 @@ public class Window : MonoBehaviour
     protected void Init()
     {
         if (data == null) return;
+
+        this.targetProgress = ConfigManager.Instance.gameNumberConfig.TargetProgress;
 
         srMainPicture.sprite = data.Picture;
         //srWindow.sprite = GameManager.Instance.GeneralResources.CloseWindowSprite;

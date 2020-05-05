@@ -73,7 +73,8 @@ public class VibrationConfig
 
 public class GameNumberConfig
 {
-    public float MaxGameToGetGiftBox;
+    public int MaxGameToGetGiftBox;
+    public float TargetProgress;
 }
 
 public class BonusConfig

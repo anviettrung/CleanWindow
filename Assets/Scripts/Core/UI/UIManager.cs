@@ -247,6 +247,9 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickWatchVideoReward()
     {
+        this.watchAdsButton.gameObject.SetActive(false);
+        this.nextButton.gameObject.SetActive(false);
+
 #if UNITY_EDITOR
         this.ActionAfterWatchVideoAd();
 #else
