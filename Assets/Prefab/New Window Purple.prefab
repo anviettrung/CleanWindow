@@ -5082,6 +5082,7 @@ MonoBehaviour:
   whitePixel: 0
   blackPixel: 0
   cutoutThresh: 0.2
+  spriteMaskTexture: {fileID: 0}
   sr: {fileID: 0}
   isFillAnything: 0
   onDrawStart:
@@ -5404,6 +5405,7 @@ MonoBehaviour:
   whitePixel: 0
   blackPixel: 0
   cutoutThresh: 0.2
+  spriteMaskTexture: {fileID: 0}
   sr: {fileID: 0}
   isFillAnything: 0
   onDrawStart:

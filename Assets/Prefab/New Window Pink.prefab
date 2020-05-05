@@ -17400,7 +17400,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!114 &8699805531628296536
 MonoBehaviour:
@@ -17422,6 +17422,7 @@ MonoBehaviour:
   whitePixel: 0
   blackPixel: 0
   cutoutThresh: 0.2
+  spriteMaskTexture: {fileID: 3203548431786469954}
   sr: {fileID: 0}
   isFillAnything: 0
   onDrawStart:
@@ -17803,7 +17804,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!114 &8699805532401483004
 MonoBehaviour:
@@ -17825,6 +17826,7 @@ MonoBehaviour:
   whitePixel: 0
   blackPixel: 0
   cutoutThresh: 0.2
+  spriteMaskTexture: {fileID: 3203548431786469954}
   sr: {fileID: 0}
   isFillAnything: 0
   onDrawStart:

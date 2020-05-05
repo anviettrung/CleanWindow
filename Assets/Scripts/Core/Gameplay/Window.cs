@@ -23,7 +23,7 @@ public class Window : MonoBehaviour
     }
 
     [Header("General setting")]
-    [HideInInspector] public float targetProgress;
+    public float targetProgress;
 
     [Header("Sprite Renderers")]
     public SpriteRenderer srMainPicture;
