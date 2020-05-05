@@ -35,7 +35,7 @@ public class AdmobManager : Singleton<AdmobManager>
 
         });
 
-        if (PlayerPrefs.HasKey("purchased"))
+        if (!PlayerPrefs.HasKey("purchased"))
         {
             if (PlayerPrefs.GetInt("purchased") != 1)
             {
