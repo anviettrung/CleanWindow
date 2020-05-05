@@ -57,7 +57,11 @@ public class ToolListTemplate : MonoBehaviour
     {
         ToolData data = tools[x].data;
         usingToolIndex = x;
-
+        
+        if (data.KeyName == "cleaner7")
+        {
+            this.createdTool.transform.GetChild(0).transform.localScale = new Vector2(1.4f, 1.4f);
+        }
         //if (currentTool != null)
         //	Destroy(currentTool.gameObject);
 

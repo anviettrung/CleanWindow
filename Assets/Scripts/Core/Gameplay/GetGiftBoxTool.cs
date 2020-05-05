@@ -30,19 +30,22 @@ public class GetGiftBoxTool : MonoBehaviour
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             this.giftBox.gameObject.SetActive(false);
-        },0.2f));
+        }, 0.2f));
 
         ToolManager.Instance.SelectThisTool(lock_tool);
 
         for (int i = 0; i < UIManager.Instance.toolShop.items.Count; i++)
         {
-            if (lock_tool.data.KeyName == UIManager.Instance.toolShop.items[i].toolData.data.KeyName)
+            if (UIManager.Instance.toolShop.items[i].toolData.data != null)
             {
-                UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(true);
-            }
-            else
-            {
-                UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(false);
+                if (lock_tool.data.KeyName == UIManager.Instance.toolShop.items[i].toolData.data.KeyName)
+                {
+                    UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(true);
+                }
+                else
+                {
+                    UIManager.Instance.toolShop.items[i].selectingVisual.gameObject.SetActive(false);
+                }
             }
         }
 

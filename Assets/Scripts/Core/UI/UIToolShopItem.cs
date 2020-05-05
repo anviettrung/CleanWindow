@@ -43,15 +43,17 @@ public class UIToolShopItem : MonoBehaviour
     public void SelectItem()
     {
         ToolManager.Instance.SelectThisTool(toolData);
-        this.toolData.status = ToolItem.Status.UNLOCK;
-        this.UpdateUI();
+        //this.toolData.status = ToolItem.Status.UNLOCK;
+        //this.UpdateUI();
         this.selectingVisual.SetActive(true);
         ToolManager.Instance.Save();
     }
 
     public void UnlockItem()
     {
+        //for testing
         //toolData.status = ToolItem.Status.UNLOCK;
+        //this.UpdateUI();
     }
 
     #endregion
@@ -86,15 +88,18 @@ public class UIToolShopItem : MonoBehaviour
 
             case ToolItem.Status.LOCK:
                 lockButton.gameObject.SetActive(true);
-                if (this.toolData.data.ToolType == ToolData.Type.BREAKER)
+                if (this.toolData.data != null)
                 {
-                    this.imgButtonLock.sprite = this.iconGift;
-                    this.imgButtonLock.SetNativeSize();
-                }
-                else
-                {
-                    this.imgButtonLock.sprite = this.iconLock;
-                    this.imgButtonLock.GetComponent<RectTransform>().sizeDelta = new Vector2(35f, 52.5f);
+                    if (this.toolData.data.ToolType == ToolData.Type.BREAKER)
+                    {
+                        this.imgButtonLock.sprite = this.iconGift;
+                        this.imgButtonLock.SetNativeSize();
+                    }
+                    else
+                    {
+                        this.imgButtonLock.sprite = this.iconLock;
+                        this.imgButtonLock.GetComponent<RectTransform>().sizeDelta = new Vector2(35f, 52.5f);
+                    }
                 }
                 break;
         }
