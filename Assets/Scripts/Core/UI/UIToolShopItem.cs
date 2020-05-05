@@ -43,6 +43,10 @@ public class UIToolShopItem : MonoBehaviour
     public void SelectItem()
     {
         ToolManager.Instance.SelectThisTool(toolData);
+        this.toolData.status = ToolItem.Status.UNLOCK;
+        this.UpdateUI();
+        this.selectingVisual.SetActive(true);
+        ToolManager.Instance.Save();
     }
 
     public void UnlockItem()

@@ -74,5 +74,18 @@ public class Tool : MonoBehaviour
 		return Camera.main.WorldToScreenPoint(transform.position);
 	}
 
+	public Vector3 ClampPosition(Vector3 originalPosition)
+	{
+		Vector3 worldPosition = Camera.main.WorldToScreenPoint(originalPosition);
+
+		worldPosition.x = Mathf.Clamp(worldPosition.x, 0, Screen.width);
+		worldPosition.y = Mathf.Clamp(worldPosition.y, 0, Screen.height / 2);
+		worldPosition = Camera.main.ScreenToWorldPoint(worldPosition);
+
+		worldPosition.z = originalPosition.z;
+
+		return worldPosition;
+	}
+
 	#endregion
 }

@@ -4,74 +4,99 @@ using UnityEngine;
 
 public class UIToolShop : MonoBehaviour
 {
-	#region DATA
-	public List<UIToolShopItem> items;
-	protected List<ToolItem> allData;
-	#endregion
+    #region DATA
+    public List<UIToolShopItem> items;
+    protected List<ToolItem> allData;
+    #endregion
 
-	#region EVENT
+    #region EVENT
 
-	#endregion
+    #endregion
 
-	#region UNITY_CALLBACK
-	protected void OnEnable()
-	{
-		ToolManager.Instance.Load();
-		UpdateUI();
-	}
+    #region UNITY_CALLBACK
+    private void Start()
+    {
+        this.AddListenerForItem();
+    }
 
-	//protected void Update()
-	//{
-	//	UpdateUI();
-	//}
+    protected void OnEnable()
+    {
+        ToolManager.Instance.Load();
+        UpdateUI();
+    }
 
-	#endregion
+    //protected void Update()
+    //{
+    //	UpdateUI();
+    //}
 
-	#region FUNCTION
-	public virtual void SetData(List<ToolItem> datas)
-	{
-		allData = datas;
-		UpdateItemData();
-		UpdateUI();
-	}
+    #endregion
 
-	public virtual void UpdateItemData(int from, int to)
-	{
-		ResetItemData();
-		for (int i = 0, j = from; i < items.Count && j <= to; i++, j++) {
-			items[i].toolData = allData[j];
-		}
-	}
+    #region FUNCTION
+    public virtual void SetData(List<ToolItem> datas)
+    {
+        allData = datas;
+        UpdateItemData();
+        UpdateUI();
+    }
 
-	// all
-	public void UpdateItemData()
-	{
-		UpdateItemData(0, allData.Count - 1);
-	}
+    public virtual void UpdateItemData(int from, int to)
+    {
+        ResetItemData();
+        for (int i = 0, j = from; i < items.Count && j <= to; i++, j++)
+        {
+            items[i].toolData = allData[j];
+        }
+    }
 
-	protected void ResetItemData()
-	{
-		for (int i = 0; i < items.Count; i++)
-			items[i].toolData = null;
-	}
+    // all
+    public void UpdateItemData()
+    {
+        UpdateItemData(0, allData.Count - 1);
+    }
 
-	public virtual void UpdateUI()
-	{
-		//this.UnlockAllItemForTesting();
-		foreach (UIToolShopItem item in items) {
-			item.UpdateUI();
-		}
-	}
+    protected void ResetItemData()
+    {
+        for (int i = 0; i < items.Count; i++)
+            items[i].toolData = null;
+    }
 
-	#endregion
+    public virtual void UpdateUI()
+    {
+        //this.UnlockAllItemForTesting();
+        foreach (UIToolShopItem item in items)
+        {
+            item.UpdateUI();
+        }
+    }
 
-	#region Testing
-	private void UnlockAllItemForTesting()
-	{
-		foreach (UIToolShopItem item in items)
-		{
-			item.toolData.status = ToolItem.Status.UNLOCK;
-		}
-	}
-	#endregion
+    private void AddListenerForItem()
+    {
+        for (int i = 0; i < this.items.Count; i++)
+        {
+            this.items[i].unlockButton.onClick.AddListener(() => this.UpdateUI());
+        }
+    }
+
+    //private void DeSelectItems(UIToolShopItem selected_item)
+    //{
+    //    foreach (var item in this.items)
+    //    {
+    //        if (item.gameObject.activeInHierarchy == true && item != selected_item)
+    //        {
+    //            item.selectingVisual.SetActive(false);
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region Testing
+    private void UnlockAllItemForTesting()
+    {
+        foreach (UIToolShopItem item in items)
+        {
+            item.toolData.status = ToolItem.Status.UNLOCK;
+        }
+    }
+    #endregion
 }
