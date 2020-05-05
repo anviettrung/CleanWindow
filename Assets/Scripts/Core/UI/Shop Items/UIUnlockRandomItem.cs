@@ -14,15 +14,13 @@ public class UIUnlockRandomItem : MonoBehaviour
     private int prevNumber;
     private int priceOfAnItem;
 
-    private void Awake()
+    private void Start()
     {
         this.Init();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        //this.uIToolShopItems.AddRange(this.uIToolShop.items.FindAll(item => item.toolData.status == ToolItem.Status.LOCK));
-        this.GetItem();
         if (GameManager.Instance.totalMoney >= this.priceOfAnItem)
         {
             this.unlockRandomItem.interactable = true;
@@ -31,7 +29,11 @@ public class UIUnlockRandomItem : MonoBehaviour
         {
             this.unlockRandomItem.interactable = false;
         }
+    }
 
+    private void OnEnable()
+    {
+        this.GetItem();
     }
 
     private void OnDisable()
@@ -61,6 +63,14 @@ public class UIUnlockRandomItem : MonoBehaviour
             this.lastItemRandom.UpdateUI();
             this.lastItemRandom.selectingVisual.SetActive(true);
             ToolManager.Instance.Save();
+            if (GameManager.Instance.totalMoney >= this.priceOfAnItem)
+            {
+                this.unlockRandomItem.interactable = true;
+            }
+            else
+            {
+                this.unlockRandomItem.interactable = false;
+            }
         }
         else if (this.uIToolShopItems.Count > 1)
         {
@@ -68,6 +78,14 @@ public class UIUnlockRandomItem : MonoBehaviour
             this.unlockRandomItem.enabled = false;
             this.DeSelectItems();
             StartCoroutine(IEStartSelectRandomItem(1.2f));
+            if (GameManager.Instance.totalMoney >= this.priceOfAnItem)
+            {
+                this.unlockRandomItem.interactable = true;
+            }
+            else
+            {
+                this.unlockRandomItem.interactable = false;
+            }
         }
         else
         {
@@ -135,9 +153,12 @@ public class UIUnlockRandomItem : MonoBehaviour
     /// </summary>
     private void SubtractMoney()
     {
-        GameManager.Instance.totalMoney -= ConfigManager.Instance.bonusConfig.PriceToUnlockItem;
-        GameManager.Instance.SaveTotalMoney();
-        UIManager.Instance.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
+        if (GameManager.Instance.totalMoney >= ConfigManager.Instance.bonusConfig.PriceToUnlockItem)
+        {
+            GameManager.Instance.totalMoney -= ConfigManager.Instance.bonusConfig.PriceToUnlockItem;
+            GameManager.Instance.SaveTotalMoney();
+            UIManager.Instance.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
+        }
     }
 
     private void GetItem()

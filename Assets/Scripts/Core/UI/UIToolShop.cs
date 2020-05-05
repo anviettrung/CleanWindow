@@ -77,17 +77,6 @@ public class UIToolShop : MonoBehaviour
             this.items[i].unlockButton.onClick.AddListener(() => this.UpdateUI());
         }
     }
-
-    //private void DeSelectItems(UIToolShopItem selected_item)
-    //{
-    //    foreach (var item in this.items)
-    //    {
-    //        if (item.gameObject.activeInHierarchy == true && item != selected_item)
-    //        {
-    //            item.selectingVisual.SetActive(false);
-    //        }
-    //    }
-    //}
     #endregion
 
     #region Testing
