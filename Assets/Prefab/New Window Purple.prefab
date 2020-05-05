@@ -4811,7 +4811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b70c0ab9216144c6fb0bc5b899d5f202, type: 2}
-  targetProgress: 0.3
+  targetProgress: 0.95
   srMainPicture: {fileID: 1056981462671005985}
   srWet: {fileID: 1056981463410857580}
   srDirty: {fileID: 1056981462100521936}
