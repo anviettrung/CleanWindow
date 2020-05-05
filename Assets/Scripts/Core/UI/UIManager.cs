@@ -6,265 +6,283 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-	#region REFERENCE
+    #region REFERENCE
 
-	[Header("All layout elements")]
-	public GameObject layoutTopUI;
-	public GameObject layoutProgress;
-	public GameObject layoutShopButton;
-	public GameObject layoutLevelEnd;
-	public GameObject layoutWindowShop;
-	public GameObject layoutToolShop;
-	public GameObject layoutSettingPanel;
-	public GameObject layoutChangeTheme;
-	public GameObject layoutTopUIGameplay;
+    [Header("All layout elements")]
+    public GameObject layoutTopUI;
+    public GameObject layoutProgress;
+    public GameObject layoutShopButton;
+    public GameObject layoutLevelEnd;
+    public GameObject layoutWindowShop;
+    public GameObject layoutToolShop;
+    public GameObject layoutSettingPanel;
+    public GameObject layoutChangeTheme;
+    public GameObject layoutTopUIGameplay;
 
-	[Header("Layout money elemetns")]
-	//public GameObject panelMoney;
-	public GameObject layoutMoney;
-	public Text textMoneyNumber;
+    [Header("Layout money elemetns")]
+    //public GameObject panelMoney;
+    public GameObject layoutMoney;
+    public Text textMoneyNumber;
 
-	[Header("Top UI elements")]
-	public Button buttonSetting;
-	public Text labelLevelName;
-	public Slider progressBar;
-	public Image gameTitle;
+    [Header("Top UI elements")]
+    public Button buttonSetting;
+    public Text labelLevelName;
+    public Slider progressBar;
+    public Image gameTitle;
 
-	[Header("Bot UI elements")]
-	public Button startButton;
-	public GameObject layoutCapture;
-	public GameObject tapAndHold;
+    [Header("Bot UI elements")]
+    public Button startButton;
+    public GameObject layoutCapture;
+    public GameObject tapAndHold;
 
-	[Header("Shop UI elements")]
-	public UIWindowShop windowShop;
-	public UIToolShop toolShop;
+    [Header("Shop UI elements")]
+    public UIWindowShop windowShop;
+    public UIToolShop toolShop;
 
-	public Text labelWindowShopPageIndex;
+    public Text labelWindowShopPageIndex;
 
-	[Header("Navigator button")]
-	public Button nextButton;
-	public Button watchAdsButton;
+    [Header("Navigator button")]
+    public Button nextButton;
+    public Button watchAdsButton;
 
-	[Header("Top UI in Gameplay")]
-	public List<UIShowStep> uIShowSteps;
-	public Image avatarPlayer;
-	public Text cityName;
-	public Text textLevel;
+    [Header("Top UI in Gameplay")]
+    public List<UIShowStep> uIShowSteps;
+    public Image avatarPlayer;
+    public Text cityName;
+    public Text textLevel;
 
-	[Header("Capture Image")]
-	public Image captureImage;
-	public Image avatarInCapture;
-	public CanvasGroup flashImage;
-	public Text cityCaption;
+    [Header("Capture Image")]
+    public Image captureImage;
+    public Image avatarInCapture;
+    public CanvasGroup flashImage;
+    public Text cityCaption;
 
-	[Header("Layout Window Shop")]
-	public GameObject slotWindow;
-	public Transform contentWindow;
+    [Header("Layout Window Shop")]
+    public GameObject slotWindow;
+    public Transform contentWindow;
 
-	[Header("Gift Box")]
-	public Transform panelGiftBox;
-	public UIGiftBox uIGiftBox;
+    [Header("Gift Box")]
+    public Transform panelGiftBox;
+    public UIGiftBox uIGiftBox;
 
-	#endregion
+    [Header("EndLevel")]
+    public UILayoutEndLevel uILayoutEndLevel;
 
-	#region FUNCTION
+    #endregion
 
-	public void SetLabelLevelName(string s)
-	{
-		labelLevelName.text = s;
-	}
+    #region FUNCTION
 
-	public void SetProgressBar(float v)
-	{
-		v = Mathf.Clamp01(v);
-		progressBar.value = v;
-	}
+    public void SetLabelLevelName(string s)
+    {
+        labelLevelName.text = s;
+    }
 
-	#endregion
+    public void SetProgressBar(float v)
+    {
+        v = Mathf.Clamp01(v);
+        progressBar.value = v;
+    }
 
-	#region SHOW/HIDE
-	public void ShowAll(bool s)
-	{
-		layoutTopUI.SetActive(s);
-		layoutProgress.SetActive(s);
-		layoutShopButton.SetActive(s);
-		layoutLevelEnd.SetActive(s);
-		layoutWindowShop.SetActive(s);
-		layoutToolShop.SetActive(s);
-		layoutSettingPanel.SetActive(s);
-		startButton.gameObject.SetActive(s);
-		layoutChangeTheme.SetActive(s);
-		gameTitle.gameObject.SetActive(s);
-		tapAndHold.SetActive(s);
-		layoutTopUIGameplay.SetActive(s);
-		layoutCapture.SetActive(s);
-		layoutMoney.SetActive(s);
-	}
+    #endregion
 
-	public void SelectTabCleanerTool()
-	{
-		toolShop.SetData(ToolManager.Instance.cleaner.tools);
-	}
+    #region SHOW/HIDE
+    public void ShowAll(bool s)
+    {
+        layoutTopUI.SetActive(s);
+        layoutProgress.SetActive(s);
+        layoutShopButton.SetActive(s);
+        layoutLevelEnd.SetActive(s);
+        layoutWindowShop.SetActive(s);
+        layoutToolShop.SetActive(s);
+        layoutSettingPanel.SetActive(s);
+        startButton.gameObject.SetActive(s);
+        layoutChangeTheme.SetActive(s);
+        gameTitle.gameObject.SetActive(s);
+        tapAndHold.SetActive(s);
+        layoutTopUIGameplay.SetActive(s);
+        layoutCapture.SetActive(s);
+        layoutMoney.SetActive(s);
+    }
 
-	public void SelectTabGlasserTool()
-	{
-		toolShop.SetData(ToolManager.Instance.glasser.tools);
-	}
+    public void SelectTabCleanerTool()
+    {
+        toolShop.SetData(ToolManager.Instance.cleaner.tools);
+    }
 
-	public void SelectTabCustomizeTool()
-	{
-		toolShop.SetData(ToolManager.Instance.breaker.tools);
-	}
+    public void SelectTabGlasserTool()
+    {
+        toolShop.SetData(ToolManager.Instance.glasser.tools);
+    }
 
-	#endregion
+    public void SelectTabCustomizeTool()
+    {
+        toolShop.SetData(ToolManager.Instance.breaker.tools);
+    }
 
-	#region LAYOUT MANAGER
-	[System.Serializable]
-	public class UILayoutInfo
-	{
-		public string layoutName;
-		public GameObject[] elements;
-	}
+    #endregion
 
-	[Header("UI Layouts")]
-	public List<UILayoutInfo> layouts;
+    #region LAYOUT MANAGER
+    [System.Serializable]
+    public class UILayoutInfo
+    {
+        public string layoutName;
+        public GameObject[] elements;
+    }
 
-	public UILayoutInfo GetLayout(string name)
-	{
-		foreach (UILayoutInfo layout in layouts)
-			if (layout.layoutName == name)
-				return layout;
+    [Header("UI Layouts")]
+    public List<UILayoutInfo> layouts;
 
-		return null;
-	}
+    public UILayoutInfo GetLayout(string name)
+    {
+        foreach (UILayoutInfo layout in layouts)
+            if (layout.layoutName == name)
+                return layout;
 
-	public void CallLayout(string name)
-	{
-		UILayoutInfo layoutInf = GetLayout(name);
-		if (layoutInf == null) return;
+        return null;
+    }
 
-		ShowAll(false);
-		for (int i = 0; i < layoutInf.elements.Length; i++) {
-			layoutInf.elements[i].SetActive(true);
-		}
-	}
+    public void CallLayout(string name)
+    {
+        UILayoutInfo layoutInf = GetLayout(name);
+        if (layoutInf == null) return;
 
-	public void ShowNextStepProgress(Window.State windowState)
-	{
-		for (int i = 0; i < this.uIShowSteps.Count;i++)
-		{
-			if (this.uIShowSteps[i].state == windowState)
-			{
-				this.uIShowSteps[i].highlight.SetActive(true);
-			}
-			else
-			{
-				this.uIShowSteps[i].highlight.SetActive(false);
-			}
-		}
-	}
+        ShowAll(false);
+        for (int i = 0; i < layoutInf.elements.Length; i++)
+        {
+            layoutInf.elements[i].SetActive(true);
+        }
+    }
 
-	public bool IsPointerUIsObject()
-	{
-		PointerEventData eventData = new PointerEventData(EventSystem.current);
-		eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-		List<RaycastResult> results = new List<RaycastResult>();
-		EventSystem.current.RaycastAll(eventData, results);
-		return results.FindAll(result => result.gameObject.layer == LayerMask.NameToLayer("UI")).Count > 0;
-	}
+    public void ShowNextStepProgress(Window.State windowState)
+    {
+        for (int i = 0; i < this.uIShowSteps.Count; i++)
+        {
+            if (this.uIShowSteps[i].state == windowState)
+            {
+                this.uIShowSteps[i].highlight.SetActive(true);
+            }
+            else
+            {
+                this.uIShowSteps[i].highlight.SetActive(false);
+            }
+        }
+    }
 
-	public void BackToMainMenu()
-	{
-		PlayerInput.Instance.tool = null;
-		if (LevelManager.Instance.currentWindow != null)
-			Destroy(LevelManager.Instance.currentWindow.gameObject);
+    public bool IsPointerUIsObject()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.FindAll(result => result.gameObject.layer == LayerMask.NameToLayer("UI")).Count > 0;
+    }
 
-		LevelManager.Instance.OpenHighestLevel();
-		LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.HighestLevel);
-		this.textLevel.gameObject.SetActive(false);
+    public void BackToMainMenu()
+    {
+        PlayerInput.Instance.tool = null;
+        if (LevelManager.Instance.currentWindow != null)
+            Destroy(LevelManager.Instance.currentWindow.gameObject);
 
-		CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
+        LevelManager.Instance.OpenHighestLevel();
+        LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.HighestLevel);
+        this.textLevel.gameObject.SetActive(false);
 
-		//Show interstitial ad
-		AdmobManager.Instance.ShowInterstitialAd();
-	}
+        CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
 
-	public void TakePhoto()
-	{
-		//Add haptic:
-		VibrationManager.Instance.OnTakePhoto();
+        //Show interstitial ad
+        AdmobManager.Instance.ShowInterstitialAd();
+    }
 
-		//Hide banner ad
-		AdmobManager.Instance.HideBannerAd();
+    public void TakePhoto()
+    {
+        //Add haptic:
+        VibrationManager.Instance.OnTakePhoto();
 
-		LevelManager.Instance.currentWindow.gameObject.SetActive(false);
-		StartCoroutine(ShowFlash(0.5f));
-		StartCoroutine(CoroutineUtils.DelaySeconds(
-				LevelManager.Instance.currentWindow.NextState,
-				LevelManager.Instance.currentWindow.nextStateAfterBreakGlassTime));
+        //Hide banner ad
+        AdmobManager.Instance.HideBannerAd();
 
-		UIListAvatar.Instance.SaveAvatar();
-	}
+        LevelManager.Instance.currentWindow.gameObject.SetActive(false);
+        StartCoroutine(ShowFlash(0.5f));
+        StartCoroutine(CoroutineUtils.DelaySeconds(
+                LevelManager.Instance.currentWindow.NextState,
+                LevelManager.Instance.currentWindow.nextStateAfterBreakGlassTime));
 
-	private IEnumerator ShowFlash(float time)
-	{
-		float count = 0f;
-		while (count < time)
-		{
-			count += Time.deltaTime;
-			this.flashImage.alpha = Mathf.Lerp(0f, 1f, count / time);
-			yield return null;
-		}
-		this.captureImage.sprite = LevelManager.Instance.currentWindow.srMainPicture.sprite;
-		this.avatarInCapture.sprite = this.avatarPlayer.sprite;
-		this.cityCaption.text = this.cityName.text;
-		this.CallLayout("End Game");
-		//this.panelMoney.SetActive(true);
-		this.layoutMoney.SetActive(true);
-		count = 0f;
-		while (count < time)
-		{
-			count += Time.deltaTime;
-			this.flashImage.alpha = Mathf.Lerp(1f, 0f, count / time);
-			yield return null;
-		}
-	}
+        UIListAvatar.Instance.SaveAvatar();
+    }
 
-	#region ADMOB & IAP
-	public void OnClickRemoveAds()
-	{
-		IAPManager.Instance.PurchaseProductIndex(0);
-	}
+    private IEnumerator ShowFlash(float time)
+    {
+        float count = 0f;
+        while (count < time)
+        {
+            count += Time.deltaTime;
+            this.flashImage.alpha = Mathf.Lerp(0f, 1f, count / time);
+            yield return null;
+        }
+        this.captureImage.sprite = LevelManager.Instance.currentWindow.srMainPicture.sprite;
+        this.avatarInCapture.sprite = this.avatarPlayer.sprite;
+        this.cityCaption.text = this.cityName.text;
+        this.CallLayout("End Game");
+        //this.panelMoney.SetActive(true);
+        this.layoutMoney.SetActive(true);
+        count = 0f;
+        while (count < time)
+        {
+            count += Time.deltaTime;
+            this.flashImage.alpha = Mathf.Lerp(1f, 0f, count / time);
+            yield return null;
+        }
+    }
 
-	public void OnClickRestorePurchase()
-	{
-		IAPManager.Instance.RestorePurchased();
-	}
+    #region ADMOB & IAP
+    public void OnClickRemoveAds()
+    {
+        IAPManager.Instance.PurchaseProductIndex(0);
+    }
 
-	public void OnClickWatchVideoReward()
-	{
+    public void OnClickRestorePurchase()
+    {
+        IAPManager.Instance.RestorePurchased();
+    }
+
+    public void OnClickWatchVideoReward()
+    {
 #if UNITY_EDITOR
-		this.OnWatchAdsDone();
+        this.ActionAfterWatchVideoAd();
 #else
-		AdmobManager.Instance.ShowVideoReward(() => OnWatchAdsDone());
+		AdmobManager.Instance.ShowVideoReward(() => ActionAfterWatchVideoAd());
 #endif
-	}
+    }
 
-	private void OnWatchAdsDone()
-	{
-		var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
-		var level = LevelManager.Instance.currentLevel.Value + 1;
+    private void ActionAfterWatchVideoAd()
+    {
+        StartCoroutine(IEActionAfterWatchVideoAd(1f));
+    }
 
-		GameManager.Instance.totalMoney += bonus * level;
-		this.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
-		GameManager.Instance.SaveTotalMoney();
+    private IEnumerator IEActionAfterWatchVideoAd(float time)
+    {
+        var bonus = ConfigManager.Instance.bonusConfig.BonusPerLevel;
+        var level = LevelManager.Instance.currentLevel.Value + 1;
+        var watched_ad_bonus = (bonus * level) * 2f;
+        float count = 0f;
+        while (count < time)
+        {
+            count += Time.deltaTime;
+            int likes = (int)Mathf.Lerp(bonus * level, watched_ad_bonus, count / time);
+            this.uILayoutEndLevel.numberOfLikes.text = likes.ToString();
+            yield return null;
+        }
+        GameManager.Instance.totalMoney += bonus * level;
+        this.textMoneyNumber.text = ConvertNumber.Instance.ConvertLargeNumber(GameManager.Instance.totalMoney);
+        this.layoutMoney.gameObject.SetActive(false);
+        GameManager.Instance.SaveTotalMoney();
 
-		CameraMaster.Instance.TransitionToView("FullShot");
-		LevelManager.Instance.OpenNextLevel();
-		this.layouts.Find(layout => layout.layoutName == "End Game").elements[0].gameObject.SetActive(false);
-		this.nextButton.gameObject.SetActive(false);
-	} 
-	#endregion
+        CameraMaster.Instance.TransitionToView("FullShot");
+        LevelManager.Instance.OpenNextLevel();
+        this.layouts.Find(layout => layout.layoutName == "End Game").elements[0].gameObject.SetActive(false);
+        this.nextButton.gameObject.SetActive(false);
+    }
+    #endregion
 
-	#endregion
+    #endregion
 }

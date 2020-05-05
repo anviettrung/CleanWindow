@@ -21996,6 +21996,7 @@ MonoBehaviour:
   contentWindow: {fileID: 1853046307}
   panelGiftBox: {fileID: 1352025598}
   uIGiftBox: {fileID: 1935978147}
+  uILayoutEndLevel: {fileID: 1611631985}
   layouts:
   - layoutName: Main Menu
     elements:

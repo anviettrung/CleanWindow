@@ -61,12 +61,15 @@ public class UIGiftBox : MonoBehaviour
         }
         GameCounter.Instance.SaveTotalGamePlayed(GameCounter.Instance.TotalGamePlayed);
 
-        this.StartCoroutine(IEUpdateProgressGiftBox(2f));
+        if (this.CheckUnlockAllToolBreaker() == true)
+        {
+            this.StartCoroutine(IEUpdateProgressGiftBox(2f));
+        }
 
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
-        }, 0.5f));
+        }, 1f));
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             UIManager.Instance.nextButton.gameObject.SetActive(true);
@@ -111,6 +114,12 @@ public class UIGiftBox : MonoBehaviour
             yield return null;
         }
         this.textPercent.text = "0%";
+    }
+
+    private bool CheckUnlockAllToolBreaker()
+    {
+        var check_unlock_all = ToolManager.Instance.breaker.tools.FindAll(tool => tool.status == ToolItem.Status.LOCK).Count > 0;
+        return check_unlock_all;
     }
     #endregion
 }

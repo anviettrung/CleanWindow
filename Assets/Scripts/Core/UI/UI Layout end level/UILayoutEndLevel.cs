@@ -29,7 +29,6 @@ public class UILayoutEndLevel : MonoBehaviour
 
     private IEnumerator IEUpdateLikes(float time)
     {
-        //this.confettiEffect.Play();
         foreach (var particle in this.confettiEffects)
         {
             particle.Play();
