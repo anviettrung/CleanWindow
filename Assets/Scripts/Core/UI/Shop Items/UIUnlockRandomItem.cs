@@ -31,11 +31,6 @@ public class UIUnlockRandomItem : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        this.GetItem();
-    }
-
     private void OnDisable()
     {
         this.uIToolShopItems.Clear();
@@ -55,7 +50,6 @@ public class UIUnlockRandomItem : MonoBehaviour
         if (this.uIToolShopItems.Count == 1)
         {
             this.SubtractMoney();
-            this.unlockRandomItem.enabled = false;
             this.DeSelectItems();
             this.lastItemRandom = this.uIToolShopItems[0];
             ToolManager.Instance.SelectThisTool(this.lastItemRandom.toolData);
@@ -63,14 +57,6 @@ public class UIUnlockRandomItem : MonoBehaviour
             this.lastItemRandom.UpdateUI();
             this.lastItemRandom.selectingVisual.SetActive(true);
             ToolManager.Instance.Save();
-            if (GameManager.Instance.totalMoney >= this.priceOfAnItem)
-            {
-                this.unlockRandomItem.interactable = true;
-            }
-            else
-            {
-                this.unlockRandomItem.interactable = false;
-            }
         }
         else if (this.uIToolShopItems.Count > 1)
         {
@@ -78,14 +64,6 @@ public class UIUnlockRandomItem : MonoBehaviour
             this.unlockRandomItem.enabled = false;
             this.DeSelectItems();
             StartCoroutine(IEStartSelectRandomItem(1.2f));
-            if (GameManager.Instance.totalMoney >= this.priceOfAnItem)
-            {
-                this.unlockRandomItem.interactable = true;
-            }
-            else
-            {
-                this.unlockRandomItem.interactable = false;
-            }
         }
         else
         {
@@ -161,7 +139,7 @@ public class UIUnlockRandomItem : MonoBehaviour
         }
     }
 
-    private void GetItem()
+    public void GetItem()
     {
         if (this.uIToolShopItems != null || this.uIToolShopItems.Count > 0)
         {

@@ -21976,6 +21976,7 @@ MonoBehaviour:
   tapAndHold: {fileID: 651778376}
   windowShop: {fileID: 1010602571}
   toolShop: {fileID: 2688302401149926770}
+  unlockRandomItem: {fileID: 2688302399997407485}
   labelWindowShopPageIndex: {fileID: 0}
   nextButton: {fileID: 1794160756}
   watchAdsButton: {fileID: 992336493}
