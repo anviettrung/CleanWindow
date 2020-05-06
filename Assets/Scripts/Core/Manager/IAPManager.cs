@@ -178,7 +178,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.productIds = new List<string>();
-
+        this.productIds.Add("product_0");
+        Debug.Log(this.productIds[0]);
         var module = StandardPurchasingModule.Instance();
 
         // The FakeStore supports: no-ui (always succeeding), basic ui (purchase pass/fail), and 

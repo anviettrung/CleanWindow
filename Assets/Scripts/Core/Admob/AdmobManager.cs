@@ -35,13 +35,11 @@ public class AdmobManager : Singleton<AdmobManager>
 
         });
 
-        if (!PlayerPrefs.HasKey("purchased"))
+
+        if (PlayerPrefs.GetInt("purchased") != 1)
         {
-            if (PlayerPrefs.GetInt("purchased") != 1)
-            {
-                this.RequestBanner();
-                this.RequestInterstitial();
-            }
+            this.RequestBanner();
+            this.RequestInterstitial();
         }
         this.RequestRewardBasedVideo();
     }
@@ -50,23 +48,37 @@ public class AdmobManager : Singleton<AdmobManager>
     {
         if (this.bannerView != null)
         {
-            this.bannerView.Show();
+            if (PlayerPrefs.GetInt("purchased") != 1)
+            {
+                this.bannerView.Show();
+                Debug.Log("Show Banner");
+            }
         }
     }
 
     public void HideBannerAd()
     {
-        if (this.bannerView != null)
+        if (PlayerPrefs.GetInt("purchased") != 1)
         {
-            this.bannerView.Hide();
+            if (this.bannerView != null)
+            {
+                this.bannerView.Hide();
+            }
         }
     }
 
     public void ShowInterstitialAd()
     {
-        if (this.interstitial.IsLoaded())
+        if (PlayerPrefs.GetInt("purchased") != 1)
         {
-            this.interstitial.Show();
+            if (this.interstitial != null)
+            {
+                if (this.interstitial.IsLoaded())
+                {
+                    this.interstitial.Show();
+                    Debug.Log("Show Interstitial Ad");
+                }
+            }
         }
     }
 
