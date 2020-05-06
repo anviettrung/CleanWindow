@@ -80,6 +80,10 @@ public class LevelManager : Singleton<LevelManager>
 
         this.SetCurrentLevel(x);
 
+        //Create data
+        WindowData data = levels[x].data;
+        lastestLevelIndex = x;
+
         var tool_glasser = ToolManager.Instance.glasser.GetTool();
         if (tool_glasser != null)
         {
@@ -128,9 +132,9 @@ public class LevelManager : Singleton<LevelManager>
 
         // Instantiate
 
-        //Create data
-        WindowData data = levels[x].data;
-        lastestLevelIndex = x;
+        ////Create data
+        //WindowData data = levels[x].data;
+        //lastestLevelIndex = x;
 
         if (currentWindow != null)
             Destroy(currentWindow.gameObject);
