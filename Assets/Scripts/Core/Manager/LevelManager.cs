@@ -115,6 +115,7 @@ public class LevelManager : Singleton<LevelManager>
         if (openAtStart == true)
         {
             // UI
+            StopAllCoroutines();
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
             {
