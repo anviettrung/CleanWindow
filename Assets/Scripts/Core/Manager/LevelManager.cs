@@ -22,10 +22,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         get
         {
-            this.highestLevel = this.levels.FindAll(lv => lv.status == Level.Status.COMPLETE).Count;
-            if (this.highestLevel + 1 < this.levels.Count)
+            this.highestLevel = this.levels.FindAll(lv => lv.status != Level.Status.LOCK).Count - 1;
+            if (this.highestLevel < this.levels.Count)
             {
-                return this.highestLevel + 1;
+                return this.highestLevel;
             }
             else
             {
