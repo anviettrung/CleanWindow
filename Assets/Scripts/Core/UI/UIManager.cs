@@ -262,6 +262,11 @@ public class UIManager : Singleton<UIManager>
         IAPManager.Instance.RestorePurchased();
     }
 
+    public void OnClickRateUs()
+    {
+        EPPZ.Rate.Rate.RequestReviewIfAppropriate();
+    }
+
     public void OnClickWatchVideoReward()
     {
         this.watchAdsButton.gameObject.SetActive(false);
