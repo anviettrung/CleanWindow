@@ -16,12 +16,21 @@ public class LevelManager : Singleton<LevelManager>
     // tracking
     [HideInInspector] public Window currentWindow;
     [HideInInspector] public int lastestLevelIndex;
+
     private int highestLevel;
     public int HighestLevel
     {
         get
         {
-            return this.highestLevel = this.levels.FindAll(lv => lv.status == Level.Status.COMPLETE).Count;
+            this.highestLevel = this.levels.FindAll(lv => lv.status == Level.Status.COMPLETE).Count;
+            if (this.highestLevel + 1 < this.levels.Count)
+            {
+                return this.highestLevel + 1;
+            }
+            else
+            {
+                return this.highestLevel = (lastestLevelIndex) % levels.Count;
+            }
         }
     }
 
@@ -101,16 +110,10 @@ public class LevelManager : Singleton<LevelManager>
         }
         if (openAtStart == true)
         {
-            //lastestLevelIndex = x;
-
-            UIManager.Instance.textLevel.gameObject.SetActive(true);
-            UIManager.Instance.textLevel.text = "LEVEL " + (x + 1).ToString();
-
             // UI
             StartCoroutine(CoroutineUtils.DelaySeconds(() => { UIManager.Instance.startButton.gameObject.SetActive(true); }, 0.2f));
             StartCoroutine(CoroutineUtils.DelaySeconds(() =>
             {
-                //UIManager.Instance.startButton.gameObject.SetActive(true);
                 UIManager.Instance.CallLayout("Main Menu");
             }, 0.5f));
         }
@@ -119,6 +122,8 @@ public class LevelManager : Singleton<LevelManager>
             UIManager.Instance.CallLayout("Playing");
         }
 
+        UIManager.Instance.textLevel.gameObject.SetActive(true);
+        UIManager.Instance.textLevel.text = "LEVEL " + (x + 1).ToString();
         UIManager.Instance.cityName.text = "???";
 
         // Instantiate
@@ -158,30 +163,28 @@ public class LevelManager : Singleton<LevelManager>
         int x = GetLevelIndex(data);
         if (x != -1)
             OpenLevel(x, false);
-
-        UIManager.Instance.textLevel.gameObject.SetActive(true);
-        UIManager.Instance.textLevel.text = "LEVEL " + x.ToString();
     }
 
     public void OpenLastestLevel()
     {
-        this.OpenHighestLevel();
-        //OpenLevel(lastestLevelIndex, true); 
-        UIManager.Instance.textLevel.gameObject.SetActive(true);
-        if (lastestLevelIndex == 0) lastestLevelIndex = 1;
-        UIManager.Instance.textLevel.text = "LEVEL " + lastestLevelIndex.ToString();
+        if (this.IsCompleteAllLevel() == true)
+        {
+            OpenLevel(lastestLevelIndex, true);
+        }
+        else
+        {
+            OpenHighestLevel();
+        }
     }
 
     public void OpenNextLevel()
     {
-        this.OpenHighestLevel();
-
+        OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
         UIManager.Instance.uIGiftBox.gameObject.SetActive(false);
-        //UIManager.Instance.nextButton.gameObject.SetActive(false);
         UIManager.Instance.watchAdsButton.gameObject.SetActive(false);
     }
 
-    public void OpenHighestLevel()
+    private void OpenHighestLevel()
     {
         this.OpenLevel(this.HighestLevel, true);
         this.lastestLevelIndex = this.HighestLevel;
@@ -263,6 +266,11 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    protected bool IsCompleteAllLevel()
+    {
+        return this.levels.FindAll(lv => lv.status == Level.Status.COMPLETE).Count >= this.levels.Count;
+    }
+
     protected void EnableButtonCapture()
     {
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
@@ -328,7 +336,6 @@ public class LevelManager : Singleton<LevelManager>
                 Destroy(window.gameObject);
             }
         }
-        //ChangeMenuTheme.Instance.windows.TrimExcess();
     }
 
     public void UnlockLevel(int x)
@@ -357,7 +364,7 @@ public class LevelManager : Singleton<LevelManager>
                 if (i + 1 < levels.Count)
                     UnlockLevel(i + 1);
 
-                //Save();
+                Save();
                 return;
             }
         }

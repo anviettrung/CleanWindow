@@ -183,14 +183,31 @@ public class UIManager : Singleton<UIManager>
         if (LevelManager.Instance.currentWindow != null)
             Destroy(LevelManager.Instance.currentWindow.gameObject);
 
-        LevelManager.Instance.OpenHighestLevel();
-        LevelManager.Instance.SetCurrentLevel(LevelManager.Instance.HighestLevel);
+        this.ResetToolTransform();
+        LevelManager.Instance.OpenLastestLevel();
         this.textLevel.gameObject.SetActive(false);
 
         CameraMaster.Instance.TransitionToView(CameraMaster.View.FULL_SHOT);
 
         //Show interstitial ad
         AdmobManager.Instance.ShowInterstitialAd();
+    }
+
+    private void ResetToolTransform()
+    {
+        if (ToolManager.Instance.glasser.GetTool() != null)
+        {
+            ToolManager.Instance.glasser.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+        }
+        if (ToolManager.Instance.cleaner.GetTool() != null)
+        {
+            ToolManager.Instance.cleaner.GetTool().transform.position = GameManager.Instance.toolTransform.spawnTransform.position;
+        }
+        if (ToolManager.Instance.breaker.GetTool() != null)
+        {
+            ToolManager.Instance.breaker.GetTool().transform.position = GameManager.Instance.toolTransform.spawnBreakerTransform.position;
+            ToolManager.Instance.breaker.GetTool().transform.GetChild(0).transform.localPosition = Vector3.zero;
+        }
     }
 
     public void TakePhoto()

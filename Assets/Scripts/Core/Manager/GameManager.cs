@@ -45,8 +45,8 @@ public class GameManager : Singleton<GameManager>
 		// Game Intro
 
 		// Open level
-		//LevelManager.Instance.OpenLastestLevel();
-		LevelManager.Instance.OpenHighestLevel();
+		LevelManager.Instance.OpenLastestLevel();
+		//LevelManager.Instance.OpenHighestLevel();
 
 		//Show banner ad
 		AdmobManager.Instance.ShowBannerAd();
