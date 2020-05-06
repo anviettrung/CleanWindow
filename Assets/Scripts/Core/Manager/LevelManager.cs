@@ -183,7 +183,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OpenNextLevel()
     {
-        OpenLevel((lastestLevelIndex + 1) % levels.Count, true);
+        var next_level_index = lastestLevelIndex + 1;
+        OpenLevel((next_level_index) % levels.Count, true);
         UIManager.Instance.uIGiftBox.gameObject.SetActive(false);
         UIManager.Instance.watchAdsButton.gameObject.SetActive(false);
     }
