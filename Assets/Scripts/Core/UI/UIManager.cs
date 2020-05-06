@@ -266,6 +266,7 @@ public class UIManager : Singleton<UIManager>
     {
         this.watchAdsButton.gameObject.SetActive(false);
         this.nextButton.gameObject.SetActive(false);
+        this.uIGiftBox.StopAllCoroutines();
 
 #if UNITY_EDITOR
         this.ActionAfterWatchVideoAd();
