@@ -178,7 +178,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.productIds = new List<string>();
-        this.productIds.Add("product_0");
+        this.productIds.Add("com.lumic.wc.noads");
         Debug.Log(this.productIds[0]);
         var module = StandardPurchasingModule.Instance();
 
