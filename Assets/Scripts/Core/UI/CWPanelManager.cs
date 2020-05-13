@@ -18,12 +18,12 @@ public class CWPanelManager : Singleton<CWPanelManager>
 	public void OnOpenPanel(CWPanel panel)
 	{
 		HideAllPanelsExcept(panel);
-		panelCover.SetActive(true);
+		//panelCover.SetActive(true);
 	}
 
 	public void OnClosePanel(CWPanel panel)
 	{
-		panelCover.SetActive(false);
+		//panelCover.SetActive(false);
 	}
 
 	protected void HideAllPanelsExcept(CWPanel panel)

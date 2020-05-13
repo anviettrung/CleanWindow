@@ -13,7 +13,10 @@ public class UILerpAlpha : MonoBehaviour
         Color endColor = new Color(1f, 1f, 1f, 0f);
         Image image = this.GetComponent<Image>();
 
-        StartCoroutine(IEFadeOutAlpha(image, startColor, endColor, 1f));
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(IEFadeOutAlpha(image, startColor, endColor, 1f));
+        }
     }
 
     public void StartFadeOutAlphaByTextColor()
@@ -21,8 +24,10 @@ public class UILerpAlpha : MonoBehaviour
         Color startColor = new Color(1f, 1f, 1f, 1f);
         Color endColor = new Color(1f, 1f, 1f, 0f);
 
-        StartCoroutine(IEFadingByTextColor(startColor, endColor, 1f));
-
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(IEFadingByTextColor(startColor, endColor, 1f));
+        }
     }
 
     private IEnumerator IEFadeOutAlpha(Image image, Color startColor, Color endColor, float time)

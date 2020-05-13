@@ -69,7 +69,7 @@ public class UIGiftBox : MonoBehaviour
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
             UIManager.Instance.nextButtonForTest.gameObject.SetActive(true);
-        }, 1f));
+        }, 2f));
 
         //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         //{
