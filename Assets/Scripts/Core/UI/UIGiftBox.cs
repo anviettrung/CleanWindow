@@ -68,12 +68,17 @@ public class UIGiftBox : MonoBehaviour
 
         StartCoroutine(CoroutineUtils.DelaySeconds(() =>
         {
-            UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
+            UIManager.Instance.nextButtonForTest.gameObject.SetActive(true);
         }, 1f));
-        StartCoroutine(CoroutineUtils.DelaySeconds(() =>
-        {
-            UIManager.Instance.nextButton.gameObject.SetActive(true);
-        }, 1.5f));
+
+        //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        //{
+        //    UIManager.Instance.watchAdsButton.gameObject.SetActive(true);
+        //}, 1f));
+        //StartCoroutine(CoroutineUtils.DelaySeconds(() =>
+        //{
+        //    UIManager.Instance.nextButton.gameObject.SetActive(true);
+        //}, 1.5f));
     }
 
     public void ResetProgressGiftBox()

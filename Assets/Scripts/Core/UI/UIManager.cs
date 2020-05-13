@@ -44,6 +44,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Navigator button")]
     public Button nextButton;
     public Button watchAdsButton;
+    public Button nextButtonForTest;
 
     [Header("Top UI in Gameplay")]
     public List<UIShowStep> uIShowSteps;
@@ -254,12 +255,12 @@ public class UIManager : Singleton<UIManager>
     #region ADMOB & IAP
     public void OnClickRemoveAds()
     {
-        IAPManager.Instance.PurchaseProductIndex(0);
+        //IAPManager.Instance.PurchaseProductIndex(0);
     }
 
     public void OnClickRestorePurchase()
     {
-        IAPManager.Instance.RestorePurchased();
+        //IAPManager.Instance.RestorePurchased();
     }
 
     public void OnClickRateUs()
@@ -269,9 +270,9 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickWatchVideoReward()
     {
-        this.watchAdsButton.gameObject.SetActive(false);
-        this.nextButton.gameObject.SetActive(false);
-        this.uIGiftBox.StopAllCoroutines();
+        //this.watchAdsButton.gameObject.SetActive(false);
+        //this.nextButton.gameObject.SetActive(false);
+        //this.uIGiftBox.StopAllCoroutines();
 
 #if UNITY_EDITOR
         this.ActionAfterWatchVideoAd();
@@ -282,7 +283,7 @@ public class UIManager : Singleton<UIManager>
 
     private void ActionAfterWatchVideoAd()
     {
-        StartCoroutine(IEActionAfterWatchVideoAd(1f));
+        //StartCoroutine(IEActionAfterWatchVideoAd(1f));
     }
 
     private IEnumerator IEActionAfterWatchVideoAd(float time)

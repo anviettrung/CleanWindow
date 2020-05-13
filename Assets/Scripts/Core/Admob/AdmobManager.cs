@@ -17,7 +17,7 @@ public class AdmobManager : Singleton<AdmobManager>
 
     private void Start()
     {
-        this.InitAdmob();
+        //this.InitAdmob();
     }
 
     private void InitAdmob()
