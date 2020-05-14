@@ -75,6 +75,9 @@ public class LevelManager : Singleton<LevelManager>
     #region OPEN_LEVEL
     public void OpenLevel(int x, bool openAtStart)
     {
+        //Game analytic
+        GameAnalyticManager.Instance.StartLevel();
+
         //Show banner ad
         AdmobManager.Instance.ShowBannerAd();
 

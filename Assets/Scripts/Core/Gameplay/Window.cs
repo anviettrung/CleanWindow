@@ -196,6 +196,9 @@ public class Window : MonoBehaviour
                 onEnterStateComplete.Invoke();
                 LevelManager.Instance.LevelCompleted(data.KeyName);
 
+                //Game analytic
+                GameAnalyticManager.Instance.EndLevel();
+
                 break;
         }
 
