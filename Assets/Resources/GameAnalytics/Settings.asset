@@ -26,18 +26,18 @@ MonoBehaviour:
   UserMessagesFailed: 0
   CustomArea: 
   gameKey:
-  - '59bee1acb9e8d0d264b888dffe4f8678   '
+  - 59bee1acb9e8d0d264b888dffe4f8678
   secretKey:
   - a26b1467daa796774a682b2e01379e6a0448adce
   Build:
   - 0.1
   SelectedPlatformStudio:
-  - 
+  - ASMR - Cleaning Window
   SelectedPlatformGame:
-  - 
-  SelectedPlatformGameID: ffffffff
-  SelectedStudio: 00000000
-  SelectedGame: 00000000
+  - ASMR - Cleaning Window
+  SelectedPlatformGameID: 038d0100
+  SelectedStudio: 01000000
+  SelectedGame: 01000000
   NewVersion: 6.1.0
   Changes: '6.1.0
 
@@ -63,7 +63,7 @@ MonoBehaviour:
   SignUpOpen: 1
   StudioName: 
   GameName: CleanWindow
-  EmailGA: 
+  EmailGA: mrpia0k36@gmail.com
   IntroScreen: 0
   InfoLogEditor: 1
   InfoLogBuild: 1
@@ -77,7 +77,7 @@ MonoBehaviour:
   CustomDimensions03: []
   ResourceItemTypes: []
   ResourceCurrencies: []
-  LastCreatedGamePlatform: 0
+  LastCreatedGamePlatform: -1
   Platforms: 08000000
   CurrentInspectorState: 1
   ClosedHints: 
